@@ -3,10 +3,11 @@ class WishlistItem < ApplicationRecord
   belongs_to :item
 
   def self.build_index
-    items = WishlistItems.where(priority: 'active').map(&:item)
-    items.map do |item|
+    items = WishlistItem.where(priority: 'active').map(&:item)
+    items.uniq.map do |item|
       qtys = WishlistItem.where(priority: 'active', item_id: item.id).map(&:quantity)
       item.quantity = qtys.sum
+      item
     end
   end
 
