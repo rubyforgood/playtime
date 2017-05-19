@@ -9,6 +9,14 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <div class="primary-nav">
+      <%= render "partials/primary_nav" %>
+    </div>
+
+    <div class="current-view">
+      <%= yield %>
+    </div>
+
   </body>
 </html>
