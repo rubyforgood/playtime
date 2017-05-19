@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  root at: "wishlists_items#index"
+  root to: "wishlist_items#index"
   resources :items
 end
