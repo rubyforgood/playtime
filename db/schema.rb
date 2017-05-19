@@ -39,6 +39,9 @@ ActiveRecord::Schema.define(version: 20170519182820) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "amazon_user_id"
+    t.string "zipcode"
+    t.index ["amazon_user_id"], name: "index_users_on_amazon_user_id", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
