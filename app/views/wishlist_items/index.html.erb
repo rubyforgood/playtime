@@ -2,3 +2,32 @@
   <h1>Playtime Project</h1>
   <h3>Master Wishlist</h3>
 </div>
+
+<div class="master-wishlist">
+  <table class="wishlist-table">
+    <% @wishlist_items.each do |item| %>
+      <tr>
+        <th>
+          <a href="#{item.affliate_url}">
+            <img class="wishlist-item-image" src="#{item.image_url}" />
+          </a>
+        </th>
+        <th>
+          <p class="wishlist-item-price">
+            <%= item.price %>
+          </p>
+        </th>
+        <th>
+          <p class="wishlist-item-quantity">
+            <%= item.quantity %>
+          </p>
+        </th>
+        <th>
+          <p class="wishlist-item-staff-message">
+            <%= item.staff_message %>
+          </p>
+        </th>
+      </tr>
+    <% end %>
+  </table>
+</div>
