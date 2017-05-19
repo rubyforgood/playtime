@@ -33,10 +33,11 @@ ActiveRecord::Schema.define(version: 20170519170516) do
 
   create_table "users", force: :cascade do |t|
     t.text "name"
-    t.text "email"
-    t.boolean "admin"
+    t.text "email", null: false
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "wishlists", force: :cascade do |t|
