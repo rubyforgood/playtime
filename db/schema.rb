@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 20170519182820) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "wishlist_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.string "priority"
+    t.integer "wishlist_id"
+    t.integer "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "wishlists", force: :cascade do |t|
     t.text "name"
     t.datetime "created_at", null: false
