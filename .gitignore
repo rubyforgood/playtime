@@ -17,6 +17,11 @@
 /yarn-error.log
 
 .byebug_history
+<<<<<<< HEAD
 *.swp
 
+=======
+
+# Ignore secrets
+>>>>>>> Amazon products API integration
 .env

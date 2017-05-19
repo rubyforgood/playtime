@@ -1,0 +1,25 @@
+<div class>
+  <table class = 'table'>
+    <tbody>
+      <% @response["ItemSearchResponse"]["Items"]["Item"].each do |item| %>
+        <% item_price = item["OfferSummary"]["LowestNewPrice"]["FormattedPrice"] || '$0.00' %>
+        <% if item_price != '$0.00' %>
+          <tr>
+            <td>
+              <%= image_tag "#{item["SmallImage"]["URL"]}", width: "#{item["SmallImage"]["Width"]}", height: "#{item["SmallImage"]["Height"]}" %>
+            </td>
+            <td>
+              <%= link_to "#{item["ItemAttributes"]["Title"]}", "#{item["DetailPageURL"]}", :target => "_blank" %>
+            </td>
+            <td>
+              <%= item_price %>
+            </td>
+            <td>
+              Add to Cart
+            </td>
+          </tr>
+        <% end %>
+      <% end  %>
+    </tbody>
+  </table>
+</div>
