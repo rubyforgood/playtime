@@ -31,6 +31,16 @@
     <%= form.text_field :asin, id: :item_asin %>
   </div>
 
+  <div class="field">
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url, id: :item_image_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :staff_message %>
+    <%= form.text_area :staff_message, id: :item_staff_message %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
