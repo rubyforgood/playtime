@@ -1,23 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Amazon url:</strong>
+  <strong>Amazon Url:</strong>
   <%= @item.amazon_url %>
 </p>
 
 <p>
-  <strong>Associate url:</strong>
+  <strong>Associate Url:</strong>
   <%= @item.associate_url %>
 </p>
 
 <p>
-  <strong>Price cents:</strong>
+  <strong>Image Url:</strong>
+  <%= @item.image_url %>
+</p>
+
+<p>
+  <strong>Price:</strong>
   <%= @item.price_cents %>
 </p>
 
 <p>
-  <strong>Asin:</strong>
+  <strong>ASIN:</strong>
   <%= @item.asin %>
+</p>
+
+<p>
+  <strong>Staff Message:</strong>
+  <%= @item.staff_message %>
 </p>
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
