@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Amazon url:</strong>
+  <%= @item.amazon_url %>
+</p>
+
+<p>
+  <strong>Associate url:</strong>
+  <%= @item.associate_url %>
+</p>
+
+<p>
+  <strong>Price cents:</strong>
+  <%= @item.price_cents %>
+</p>
+
+<p>
+  <strong>Asin:</strong>
+  <%= @item.asin %>
+</p>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

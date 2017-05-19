@@ -1,0 +1,37 @@
+<%= form_with(model: item, local: true) do |form| %>
+  <% if item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :amazon_url %>
+    <%= form.text_field :amazon_url, id: :item_amazon_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :associate_url %>
+    <%= form.text_field :associate_url, id: :item_associate_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price_cents %>
+    <%= form.number_field :price_cents, id: :item_price_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :asin %>
+    <%= form.text_field :asin, id: :item_asin %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
