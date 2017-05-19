@@ -11,6 +11,4 @@ class WishlistItem < ApplicationRecord
     end
   end
 
-  def index_params
-  end
 end
