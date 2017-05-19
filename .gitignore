@@ -18,3 +18,5 @@
 
 .byebug_history
 *.swp
+
+.env

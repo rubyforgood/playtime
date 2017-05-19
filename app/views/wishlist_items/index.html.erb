@@ -8,9 +8,9 @@
     <% @wishlist_items.each do |item| %>
       <tr>
         <th>
-          <a href="#{item.affliate_url}">
-            <img class="wishlist-item-image" src="#{item.image_url}" />
-          </a>
+          <%= link_to item.affliate_url do %>
+            <%= image_tag item.image_url, class: "wishlist-item-image" %>
+          <% end %>
         </th>
         <th>
           <p class="wishlist-item-price">
