@@ -8,6 +8,7 @@
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
+  <%= mail_to @user.email, icon('envelope-o') %>
 </p>
 
 <p>

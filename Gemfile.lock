@@ -77,6 +77,8 @@ GEM
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
+    font-awesome-sass (4.7.0)
+      sass (>= 3.2)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hashie (3.5.5)
@@ -238,6 +240,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   dotenv-rails
+  font-awesome-sass
   httparty
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3.1)
