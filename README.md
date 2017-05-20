@@ -29,5 +29,5 @@ The team leads are currently compiling the tasks for this project. These will be
 
 ### Environment
 
-`AMAZON_CLIENT_ID`: for OAuth
-`AMAZON_CLIENT_SECRET`: for OAuth
+* `AMAZON_CLIENT_ID`: for OAuth
+* `AMAZON_CLIENT_SECRET`: for OAuth
