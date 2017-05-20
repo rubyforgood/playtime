@@ -29,4 +29,8 @@ class ApplicationController < ActionController::Base
   def site_manager?
     current_user.site_managers.any?
   end
+
+  def authenticate_admin
+    redirect_to root_url unless admin?
+  end
 end

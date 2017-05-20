@@ -73,7 +73,4 @@ class WishlistsController < ApplicationController
       params.require(:wishlist).permit(:name)
     end
 
-    def authenticate_admin
-      redirect_to root_url unless admin?
-    end
 end
