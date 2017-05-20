@@ -2,19 +2,7 @@
   <table class = 'table'>
     <tbody>
       <% @response.items.each do |item| %>
-        <% if item.price != '$0.00' %>
-          <tr>
-            <td>
-              <%= image_tag item.small_image_url, width: item.small_image_width, height: item.small_image_height %>
-            </td>
-            <td class="item_title">
-              <%= link_to item.title, item.detail_page_url, :target => "_blank" %>
-            </td>
-            <td>
-              <%= item.price %>
-            </td>
-          </tr>
-        <% end %>
+        <%= render 'items/item', item: item %>
       <% end  %>
     </tbody>
   </table>
