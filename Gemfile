@@ -7,7 +7,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use postgresql as the database for Active Record
@@ -18,23 +17,20 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# A gem to automate using jQuery with Rails
+gem 'jquery-rails', '~> 4.3.1'
+# The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web.
+gem 'bootstrap', '~> 4.0.0.alpha6'
+# Login with Amazon OAuth2 strategy for OmniAuth 1.0
 gem 'omniauth-amazon'
+# Makes http fun again! http://jnunemaker.github.com/httparty
 gem 'httparty'
-gem 'jquery-rails'
+# Helper for add social share feature in your Rails app. Twitter, Facebook, Weibo, Douban
 gem 'social-share-button'
 # most important gem for awesome debugging and awesome consoles
 gem 'pry'
@@ -44,17 +40,22 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
+  # WebDriver is a tool for writing automated tests of websites. It aims to mimic the behaviour of a real user, and as such interacts with the HTML of the application.
   gem 'selenium-webdriver'
+  # rspec-rails is a testing framework for Rails 3+.
   gem 'rspec-rails', '~> 3.5'
+  # A Ruby gem to load environment variables from `.env`.
   gem 'dotenv-rails'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
+  # The Listen gem listens to file modifications and notifies you about the changes. https://rubygems.org/gems/listen
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # This gem makes Spring watch the filesystem for changes using Listen rather than by polling the filesystem.
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 

@@ -1,0 +1,26 @@
+.container-fluid {
+  padding: 0;
+}
+
+.primary-nav nav {
+  background-color: #9b347d;
+  background-image: url(crayons-tips.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.primary-nav-logo {
+  height: 175px;
+}
+
+.primary-nav-links {
+  font-size: 18px;
+}
+
+.tagline {
+  float: right;
+  font-size: 16px;
+  width: 400px;
+  color: white;
+  text-align: center;
+}

@@ -1,16 +1,16 @@
-<div class="header">
-  <h1>Playtime Project</h1>
-  <h3>Master Wishlist</h3>
-</div>
-
 <div class="master-wishlist">
+  <div class="header">
+    <h1>Playtime Project</h1>
+    <h3>Master Wishlist</h3>
+  </div>
+
   <table class="wishlist-table">
     <% @wishlist_items.each do |item| %>
       <tr>
         <th>
-          <a href="#{item.affliate_url}">
-            <img class="wishlist-item-image" src="#{item.image_url}" />
-          </a>
+          <%= link_to item.affiliate_url do %>
+            <%= image_tag item.image_url, class: "wishlist-item-image" %>
+          <% end %>
         </th>
         <th>
           <p class="wishlist-item-price">
