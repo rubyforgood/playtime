@@ -25,6 +25,14 @@ The team leads are currently compiling the tasks for this project. These will be
 * Edit .env and add the values from your Amazon App page
 * Start your Rails app. You're ready to OAuth!
 
+
+### Getting Amazon Advertising API working locally
+* sign up to use the Advertising API [Amazon](https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html)
+* you will need to then need to add the following to your .env families
+** AWS_ACCESS_KEY: YOUR_ACCESS_KEY_GOES_HERE
+** AWS_SECRET_KEY: YOUR_SECRET_KEY_GOES_HERE
+** AWS_ASSOCIATES_TAG: playtim009-20
+
 ## Deploying
 
 ### Environment
