@@ -1,4 +1,59 @@
 module AWSAPIs
+  class SearchResponse
+    attr_reader :hash
+
+    def initialize(hash)
+      @hash = hash
+    end
+
+    def num_pages
+      hash["ItemSearchResponse"]["OperationRequest"]["Items"]["TotalPages"] || "1"
+    end
+
+    def next_page_link
+      hash["ItemSearchResponse"]["OperationRequest"]["Items"]["MoreSearchResultsUrl"]
+    end
+
+    def items
+      hash["ItemSearchResponse"]["Items"]["Item"].map { |h| Item.new(h) }
+    end
+  end
+
+  class Item
+    attr_reader :hash
+    def initialize(hash)
+      @hash = hash
+    end
+
+    def price
+      if hash["OfferSummary"].present?
+        hash["OfferSummary"]["LowestNewPrice"]["FormattedPrice"]
+      else
+        '$0.00'
+      end
+    end
+
+    def small_image_url
+      hash["SmallImage"]["URL"]
+    end
+
+    def small_image_width
+      hash["SmallImage"]["Width"]
+    end
+
+    def small_image_height
+      hash["SmallImage"]["Width"]
+    end
+
+    def title
+      hash["ItemAttributes"]["Title"]
+    end
+
+    def detail_page_url
+      hash["DetailPageURL"]
+    end
+  end
+
   class AmazonProductAPI
     require 'httparty'
     require 'time'
@@ -52,8 +107,7 @@ module AWSAPIs
     def self.search(query)
       @query = query
       url = "http://#{ENDPOINT}#{REQUEST_URI}?#{canonical_query_string}&Signature=#{URI.escape(signature, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"
-      results = HTTParty.get(url)
+      HTTParty.get(url)
     end
-
   end
 end
