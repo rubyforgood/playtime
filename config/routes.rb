@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get 'wishlist_items/index'
   root to: "wishlist_items#index"
   resources :wishlists
+
+  # Users
+  get 'users/export_csv', to: 'users#export_csv'
   resources :users, only: [:show, :index, :edit, :update, :destroy]
 
   # OAuth
@@ -10,7 +13,7 @@ Rails.application.routes.draw do
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
 
-  #item
+  # Items
   get '/items/search', to: 'items#search', as: 'search'
   get '/items/results', to: 'items#results', as: 'results'
   post '/items/search_amazon', to: 'items#search_amazon', as: 'search_amazon'

@@ -4,6 +4,15 @@ class User < ApplicationRecord
   has_many :site_managers
   has_many :wishlists, through: :site_managers
 
+  def self.generate_csv
+    CSV.generate do |csv|
+      csv << User.column_names
+      User.all.each do |user|
+        csv << user.attributes.values
+      end
+    end
+  end
+
   def self.find_or_create_from_amazon_hash!(hash)
     oauth_info = AmazonOAuthInfo.new(hash)
 

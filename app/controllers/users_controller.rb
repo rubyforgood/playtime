@@ -41,6 +41,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def export_csv
+    send_data User.generate_csv, filename: "user_data#{Time.now.to_i}.csv"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
