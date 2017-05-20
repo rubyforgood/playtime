@@ -34,6 +34,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'omniauth-amazon'
 gem 'httparty'
+gem 'jquery-rails'
+gem 'social-share-button'
 # most important gem for awesome debugging and awesome consoles
 gem 'pry'
 
@@ -44,6 +46,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.5'
+  gem 'dotenv-rails'
 end
 
 group :development do
