@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.4.1'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -16,6 +18,7 @@ gem 'jquery-rails', '~> 4.3.1'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'omniauth-amazon'
 gem 'httparty'
+gem 'social-share-button'
 gem 'pry'
 
 group :development, :test do
@@ -23,6 +26,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.5'
+  gem 'dotenv-rails'
 end
 
 group :development do
