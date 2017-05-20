@@ -13,12 +13,20 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def logout
+    reset_session
+    redirect_to '/'
+  end
+
   def logged_in?
     !current_user.nil?
   end
 
-  def logout
-    reset_session
-    redirect_to '/'
+  def admin?
+    current_user.admin?
+  end
+
+  def site_manager?
+    current_user.site_managers.any?
   end
 end
