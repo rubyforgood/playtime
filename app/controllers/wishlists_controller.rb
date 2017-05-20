@@ -1,5 +1,6 @@
 class WishlistsController < ApplicationController
   before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin, only: :new
 
   # GET /wishlists
   # GET /wishlists.json
@@ -70,5 +71,9 @@ class WishlistsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def wishlist_params
       params.require(:wishlist).permit(:name)
+    end
+
+    def authenticate_admin
+      redirect_to root_url unless admin?
     end
 end
