@@ -1,5 +1,8 @@
 class User < ApplicationRecord
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, presence: true
+
+  has_many :site_managers
+  has_many :wishlists, through: :site_managers
 
   def self.find_or_create_from_amazon_hash!(hash)
     oauth_info = AmazonOAuthInfo.new(hash)
@@ -12,6 +15,10 @@ class User < ApplicationRecord
       amazon_user_id: oauth_info.amazon_user_id,
       zipcode:        oauth_info.zipcode
     )
+  end
+
+  def can_manage?(wishlist)
+    admin? || wishlists.find_by_id(wishlist.id)
   end
 
   class AmazonOAuthInfo
