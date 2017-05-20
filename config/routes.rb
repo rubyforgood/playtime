@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
 
   #item
-  resources :items
   get '/items/search', to: 'items#search', as: 'search'
   get '/items/results', to: 'items#results', as: 'results'
   post '/items/search_amazon', to: 'items#search_amazon', as: 'search_amazon'
+  resources :items
 end
