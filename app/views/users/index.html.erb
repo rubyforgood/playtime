@@ -16,7 +16,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= user.email %></td>
+        <td><%= user.email %><%= mail_to user.email, icon('envelope-o') %></td>
         <td><%= user.admin %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
