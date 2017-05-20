@@ -1,0 +1,12 @@
+language: ruby
+rvm:
+  - 2.4.1
+cache: bundler
+services:
+  - postgresql
+before_script:
+  - cp config/database.yml.travis config/database.yml
+script:
+  - bundle exec rails db:setup RAILS_ENV=test
+  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rake
