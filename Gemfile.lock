@@ -212,6 +212,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara (~> 2.13)
+  httparty
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   omniauth-amazon
@@ -230,4 +231,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.13.6
+   1.14.6

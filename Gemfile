@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'omniauth-amazon'
-
+gem 'httparty'
 # most important gem for awesome debugging and awesome consoles
 gem 'pry'
 

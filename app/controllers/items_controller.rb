@@ -1,3 +1,6 @@
+require "amazon_product_api"
+include AWSAPIs
+
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
@@ -61,6 +64,13 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search_amazon
+    query = params[:query]
+    xml_response = AmazonProductAPI.search(query).body
+    @response = parse_response(xml_response)
+    render results_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
@@ -70,5 +80,10 @@ class ItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params.require(:item).permit(:amazon_url, :associate_url, :price_cents, :asin, :image_url, :staff_message)
+    end
+
+    def parse_response(response)
+      @response = Nokogiri::XML.parse(response)
+      @response = Hash.from_xml(@response.to_s)
     end
 end
