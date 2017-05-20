@@ -16,7 +16,9 @@ For any changes, please create a feature branch and open a PR for it when you fe
 
 ## Getting Started
 
-The team leads are currently compiling the tasks for this project. These will be made available soon. It is likely that we'll be doing a Rails build, but we are holding off on any design decisions until our team is assembled. We welcome you to join us. We need a wide variety of skillsets and experience levels. If you have any experience working with Amazon's API, it would be fantastic to have your help.
+### Seting up your dev env
+
+Copy .env.sample to .env and then follow the instructions below.
 
 ### Getting Amazon OAuth working locally
 
@@ -28,7 +30,7 @@ The team leads are currently compiling the tasks for this project. These will be
 
 ### Getting Amazon Advertising API working locally
 * sign up to use the Advertising API [Amazon](https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html)
-* you will need to then need to add the following to your .env families
+* you will need to then need to add the following to your .env (these fields are also in .env.sample)
 ** AWS_ACCESS_KEY: YOUR_ACCESS_KEY_GOES_HERE
 ** AWS_SECRET_KEY: YOUR_SECRET_KEY_GOES_HERE
 ** AWS_ASSOCIATES_TAG: playtim009-20
@@ -39,3 +41,6 @@ The team leads are currently compiling the tasks for this project. These will be
 
 * `AMAZON_CLIENT_ID`: for OAuth
 * `AMAZON_CLIENT_SECRET`: for OAuth
+* AWS_ACCESS_KEY: For Amazon search
+* AWS_SECRET_KEY: For Amazon search
+* AWS_ASSOCIATES_TAG: For generating affiliate links from search
