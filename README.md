@@ -17,3 +17,17 @@ For any changes, please create a feature branch and open a PR for it when you fe
 ## Getting Started
 
 The team leads are currently compiling the tasks for this project. These will be made available soon. It is likely that we'll be doing a Rails build, but we are holding off on any design decisions until our team is assembled. We welcome you to join us. We need a wide variety of skillsets and experience levels. If you have any experience working with Amazon's API, it would be fantastic to have your help.
+
+### Getting Amazon OAuth working locally
+
+* Create an Application in Amazon [here](https://github.com/wingrunr21/omniauth-amazon#prereqs)
+* Copy RAILS_ROOT/.env.sample to .env
+* Edit .env and add the values from your Amazon App page
+* Start your Rails app. You're ready to OAuth!
+
+## Deploying
+
+### Environment
+
+* `AMAZON_CLIENT_ID`: for OAuth
+* `AMAZON_CLIENT_SECRET`: for OAuth
