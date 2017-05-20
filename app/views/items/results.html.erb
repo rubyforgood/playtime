@@ -2,7 +2,7 @@
   <table class = 'table'>
     <tbody>
       <% @response["ItemSearchResponse"]["Items"]["Item"].each do |item| %>
-        <% item_price = item["OfferSummary"]["LowestNewPrice"]["FormattedPrice"] || '$0.00' %>
+        <% item_price = item["OfferSummary"].present? ? item["OfferSummary"]["LowestNewPrice"]["FormattedPrice"] : '$0.00' %>
         <% if item_price != '$0.00' %>
           <tr>
             <td>
@@ -13,9 +13,6 @@
             </td>
             <td>
               <%= item_price %>
-            </td>
-            <td>
-              Add to Cart
             </td>
           </tr>
         <% end %>
