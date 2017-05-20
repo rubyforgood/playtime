@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'wishlist_items/index'
   root to: "wishlist_items#index"
   resources :wishlists
+  resources :users, only: [:show, :index, :edit, :update, :destroy]
 
   # OAuth
   get '/auth/:provider/callback', to: 'sessions#create'
