@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '~> 4.3.1'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'omniauth-amazon'
+gem 'httparty'
 gem 'pry'
 
 group :development, :test do

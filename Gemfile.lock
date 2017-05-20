@@ -69,6 +69,8 @@ GEM
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hashie (3.5.5)
+    httparty (0.15.5)
+      multi_xml (>= 0.5.2)
     i18n (0.8.1)
     jbuilder (2.6.4)
       activesupport (>= 3.0.0)
@@ -222,6 +224,7 @@ DEPENDENCIES
   bootstrap (~> 4.0.0.alpha6)
   byebug
   capybara (~> 2.13)
+  httparty
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3.1)
   listen (>= 3.0.5, < 3.2)
@@ -241,4 +244,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.13.6
+   1.15.0
