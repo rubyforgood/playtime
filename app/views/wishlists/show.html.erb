@@ -1,17 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @wishlist.name %>
-</p>
+<h1><%= @wishlist.name %></h1>
 
-
-<strong>Site Managers:</strong>
-<% @site_managers.each do |user| %>
+<% if admin? %>
+<div id="site-managers">
+  <strong>Site Managers:</strong>
+  <% @site_managers.each do |user| %>
   <p>
     <%= user.name %>
   </p>
+  <% end %>
+
+  <%= link_to 'Edit', edit_wishlist_path(@wishlist) %> |
+  <%= link_to 'Back', wishlists_path %>
+</div>
 <% end %>
 
-<%= link_to 'Edit', edit_wishlist_path(@wishlist) %> |
-<%= link_to 'Back', wishlists_path %>
+
+<% if current_user.can_manage?(@wishlist) %>
+  <div>
+    <%= link_to 'Add to wishlist', search_path(@wishlist) %>
+  </div>
+<% end %>
+
+<table>
+  <tbody>
+    <% @wishlist.wishlist_items.each do |wishlist_item| %>
+      <%= render wishlist_item %>
+    <% end %>
+  </tbody>
+</table>
