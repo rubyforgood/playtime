@@ -3,16 +3,19 @@
 <h1><%= @wishlist.name %></h1>
 
 <% if admin? %>
-<strong>Site Managers:</strong>
-<% @site_managers.each do |user| %>
+<div id="site-managers">
+  <strong>Site Managers:</strong>
+  <% @site_managers.each do |user| %>
   <p>
     <%= user.name %>
   </p>
-<% end %>
+  <% end %>
+
+  <%= link_to 'Edit', edit_wishlist_path(@wishlist) %> |
+  <%= link_to 'Back', wishlists_path %>
+</div>
 <% end %>
 
-<%= link_to 'Edit', edit_wishlist_path(@wishlist) %> |
-<%= link_to 'Back', wishlists_path %>
 
 <% if current_user.can_manage?(@wishlist) %>
   <div>
