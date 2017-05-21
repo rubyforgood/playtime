@@ -2,7 +2,7 @@ class WishlistItem < ApplicationRecord
   belongs_to :wishlist
   belongs_to :item
 
-  delegate :amazon_url, :price_cents, :asin, :image_url, :image_width, :image_height, :name, :staff_message, to: :item
+  delegate :amazon_url, :price_cents, :asin, :image_url, :image_width, :image_height, :name, to: :item
 
   def self.build_index
     items = WishlistItem.where("priority != 'inactive'").map(&:item)

@@ -1,6 +1,7 @@
 class WishlistsController < ApplicationController
   before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin, only: [:new, :destroy, :update]
+  helper_method :get_site_managers
 
   # GET /wishlists
   # GET /wishlists.json
@@ -88,5 +89,13 @@ class WishlistsController < ApplicationController
     def update_site_managers
       @wishlist.site_managers = []
       create_site_managers
+    end
+
+    def get_site_managers(wishlist)
+      users = Array.new
+      wishlist.site_managers.each do |manager|
+        users.push(@users.find(manager.user_id).name)
+      end
+      return users.to_sentence
     end
 end

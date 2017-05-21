@@ -1,35 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h2 class = "purple"><%= @wishlist.name %></h2>
+  
+  <% if current_user.can_manage?(@wishlist) %>
+    <div>
+      <%= link_to 'Add to wishlist', search_path(@wishlist) %>
+    </div>
+  <% end %>  
 
-<h1><%= @wishlist.name %></h1>
-
-<% if admin? %>
-<div id="site-managers">
-  <strong>Site Managers:</strong>
-  <% @site_managers.each do |user| %>
-  <p>
-    <%= user.name %>
-  </p>
+  <% @wishlist.wishlist_items.each do |wishlist_item| %>
+    <% item = @items.find(wishlist_item.item_id) %>
+    <div class="card">
+      <div class="card-block">
+        <img class="card-img-left" src="<%= item.image_url %>">
+        <h4 class="card-title"><a href="<%= item.amazon_url %>"><%= item.name %></a></h4>
+        <p><strong>Staff Message:</strong>
+        <span class="card-text"><%= wishlist_item.staff_message %></span></p>
+        <p><strong><span class="padding-right">Quantity: <%= wishlist_item.quantity %></span> Price: <%= number_to_currency(item.price_cents/100.00) %></p></strong>
+        <td><%= link_to 'Edit', edit_wishlist_items_path(wishlist_item.id) if admin? || site_manager? %></td>
+        <td><%= link_to 'Destroy', wishlist_items_path(wishlist_item.id), method: :delete, data: { confirm: 'Are you sure?' } if admin? %></td>
+      </div>
+    </div>
   <% end %>
-
-  <%= link_to 'Edit', edit_wishlist_path(@wishlist) %> |
   <%= link_to 'Back', wishlists_path %>
 </div>
-<% end %>
-
-<% if current_user.can_manage?(@wishlist) %>
-  <% render "shared/search" %>
-<% end %>
-
-<% if current_user.can_manage?(@wishlist) %>
-  <div>
-    <%= link_to 'Add to wishlist', search_path(@wishlist) %>
-  </div>
-<% end %>
-
-<table>
-  <tbody>
-    <% @wishlist.wishlist_items.each do |wishlist_item| %>
-      <%= render wishlist_item %>
-    <% end %>
-  </tbody>
-</table>
