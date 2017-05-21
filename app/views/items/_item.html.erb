@@ -1,0 +1,13 @@
+<% if item.price != '$0.00' %>
+<tr>
+  <td>
+    <%= image_tag item.small_image_url, width: item.small_image_width, height: item.small_image_height %>
+  </td>
+  <td>
+    <%= link_to item.title, item.detail_page_url, :target => "_blank" %>
+  </td>
+  <td>
+    <%= item.price %>
+  </td>
+</tr>
+<% end %>

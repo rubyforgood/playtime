@@ -66,8 +66,9 @@ class ItemsController < ApplicationController
 
   def search_amazon
     query = params[:query]
-    xml_response = AmazonProductAPI.search(query).body
-    @response = parse_response(xml_response)
+    page  = params[:page] || 1
+    xml_response = AmazonProductAPI.search(query, page).body
+    @response = SearchResponse.new(parse_response(xml_response))
     render results_path
   end
 

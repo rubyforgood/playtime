@@ -1,4 +1,57 @@
 module AWSAPIs
+  class SearchResponse
+    attr_reader :hash
+
+    def initialize(hash)
+      @hash = hash
+    end
+
+    def num_pages
+      (hash.dig("ItemSearchResponse", "Items", "TotalPages") || "1").to_i
+    end
+
+    def items
+      hash.dig("ItemSearchResponse", "Items", "Item").map { |h| Item.new(h) }
+    end
+  end
+
+  class Item
+    attr_reader :hash
+    def initialize(hash)
+      @hash = hash
+    end
+
+    def price
+      if hash["OfferSummary"].present?
+        hash.dig("OfferSummary", "LowestNewPrice", "FormattedPrice")
+      else
+        '$0.00'
+      end
+    end
+
+    def small_image_url
+      hash.dig("SmallImage", "URL")
+    rescue
+      ""
+    end
+
+    def small_image_width
+      hash.dig("SmallImage", "Width") || ""
+    end
+
+    def small_image_height
+      hash.dig("SmallImage", "Height") || ""
+    end
+
+    def title
+      hash.dig("ItemAttributes", "Title")
+    end
+
+    def detail_page_url
+      hash["DetailPageURL"]
+    end
+  end
+
   class AmazonProductAPI
     require 'httparty'
     require 'time'
@@ -22,8 +75,9 @@ module AWSAPIs
         "AWSAccessKeyId" => ENV["AWS_ACCESS_KEY"],
         "AssociateTag" => ENV["AWS_ASSOCIATES_TAG"],
         "SearchIndex" => "All",
-        "Keywords" => "#{@query}",
-        "ResponseGroup" => "ItemAttributes,Offers,Images"
+        "Keywords" => @query.to_s,
+        "ResponseGroup" => "ItemAttributes,Offers,Images",
+        "ItemPage" => @page_num.to_s
       }
 
       # Set current timestamp if not set
@@ -49,11 +103,11 @@ module AWSAPIs
     end
 
     # Generate the signed URL
-    def self.search(query)
+    def self.search(query, page_num = 1)
       @query = query
+      @page_num = page_num
       url = "http://#{ENDPOINT}#{REQUEST_URI}?#{canonical_query_string}&Signature=#{URI.escape(signature, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"
-      results = HTTParty.get(url)
+      HTTParty.get(url)
     end
-
   end
 end
