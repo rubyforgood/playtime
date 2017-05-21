@@ -11,15 +11,18 @@ class WishlistsController < ApplicationController
   # GET /wishlists/1
   # GET /wishlists/1.json
   def show
+    @site_managers = @wishlist.users
   end
 
   # GET /wishlists/new
   def new
     @wishlist = Wishlist.new
+    @site_managers = User.where(site_manager: true)
   end
 
   # GET /wishlists/1/edit
   def edit
+    @site_managers = User.where(site_manager: true)
   end
 
   # POST /wishlists
@@ -29,6 +32,7 @@ class WishlistsController < ApplicationController
 
     respond_to do |format|
       if @wishlist.save
+        create_site_managers
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully created.' }
         format.json { render :show, status: :created, location: @wishlist }
       else
@@ -42,6 +46,7 @@ class WishlistsController < ApplicationController
   # PATCH/PUT /wishlists/1.json
   def update
     respond_to do |format|
+      update_site_managers
       if @wishlist.update(wishlist_params)
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully updated.' }
         format.json { render :show, status: :ok, location: @wishlist }
@@ -73,4 +78,14 @@ class WishlistsController < ApplicationController
       params.require(:wishlist).permit(:name)
     end
 
+    def create_site_managers
+      params['wishlist']['site_manager'].each do |user_id, value|
+        @wishlist.site_managers.create(user_id: user_id.to_i) if value == '1'
+      end
+    end
+
+    def update_site_managers
+      @wishlist.site_managers = []
+      create_site_managers
+    end
 end
