@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
   helper_method [:current_user=, :current_user, :logged_in?, :admin?, :site_manager?]
+  before_action :all_wishlists
 
   private
 
@@ -32,5 +32,9 @@ class ApplicationController < ActionController::Base
 
   def authenticate_admin
     redirect_to root_url unless admin?
+  end
+
+  def all_wishlists
+    @all_wishlists = Wishlist.all
   end
 end

@@ -18,4 +18,8 @@ Rails.application.routes.draw do
   get '/items/results', to: 'items#results', as: 'results'
   post '/items/search_amazon', to: 'items#search_amazon', as: 'search_amazon'
   resources :items
+
+  #wishlists
+  resources :wishlists
+
 end

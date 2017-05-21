@@ -1,9 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @wishlist.name %>
-</p>
+  <h2><%= @wishlist.name %></h2>
 
-<%= link_to 'Edit', edit_wishlist_path(@wishlist) %> |
-<%= link_to 'Back', wishlists_path %>
+  @wishlist.wishlist_items each do |item|
+    <div class="card">
+      <div class="card-block">
+        <img class="card-img-left" src="...">
+        <a href="item.amazon_url"><h4 class="card-title">item.name </h4></a>
+        <span class="card-subtitle mb-2 text-muted">Staff Message: </span>
+        <p class="card-text">item.staff_message</p>
+        <p class="mb-2">Quantity: WishlistItem.quantity</p>
+        <p class="mb-2">Price: item.price</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+  end
+
+  <%= link_to 'Edit', edit_wishlist_path(@wishlist) %> |
+  <%= link_to 'Back', wishlists_path %>
+</div>

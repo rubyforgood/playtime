@@ -1,8 +1,7 @@
 @import "playtime/primary-nav";
 
 body {
-  background-color: #0084ad;
-  color: #fff;
+  color: #000;
   font-family: 'PT Sans', Helvetica, Arial, Lucida, sans-serif;
 }
 
@@ -11,4 +10,9 @@ body {
 }
 .item_title a {
   color: #fff;
+}
+
+.container {
+  max-width: 80%;
+  margin: auto;
 }
