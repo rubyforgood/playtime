@@ -16,11 +16,12 @@ class WishlistsController < ApplicationController
   # GET /wishlists/new
   def new
     @wishlist = Wishlist.new
-    @user = User.where(site_manger: true)
+    @users = User.where(site_manager: true)
   end
 
   # GET /wishlists/1/edit
   def edit
+    @users = User.where(site_manager: true)
   end
 
   # POST /wishlists
@@ -30,6 +31,7 @@ class WishlistsController < ApplicationController
 
     respond_to do |format|
       if @wishlist.save
+        create_site_managers
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully created.' }
         format.json { render :show, status: :created, location: @wishlist }
       else
@@ -74,4 +76,9 @@ class WishlistsController < ApplicationController
       params.require(:wishlist).permit(:name)
     end
 
+    def create_site_managers
+      params['wishlist']['site_manager'].values.each do |user_id|
+        @wishlist.site_managers.create(user_id: user_id.to_i)
+      end
+    end
 end
