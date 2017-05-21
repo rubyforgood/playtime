@@ -45,6 +45,7 @@ class WishlistsController < ApplicationController
   # PATCH/PUT /wishlists/1.json
   def update
     respond_to do |format|
+      update_site_managers
       if @wishlist.update(wishlist_params)
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully updated.' }
         format.json { render :show, status: :ok, location: @wishlist }
@@ -77,6 +78,13 @@ class WishlistsController < ApplicationController
     end
 
     def create_site_managers
+      params['wishlist']['site_manager'].values.each do |user_id|
+        @wishlist.site_managers.create(user_id: user_id.to_i)
+      end
+    end
+
+    def update_site_managers
+      @wishlist.site_managers = []
       params['wishlist']['site_manager'].values.each do |user_id|
         @wishlist.site_managers.create(user_id: user_id.to_i)
       end
