@@ -1,0 +1,5 @@
+<div class="dropdown-menu" aria-labelledby="dropdown04">
+  <% Wishlist.all.each do |wishlist| %>
+  <%= link_to wishlist.name,  wishlist_path(wishlist), class: "dropdown-item" %>
+  <% end %>
+</div>

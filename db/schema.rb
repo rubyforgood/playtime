@@ -23,7 +23,9 @@ ActiveRecord::Schema.define(version: 20170521151159) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_url"
-    t.text "staff_message"
+    t.integer "image_height"
+    t.integer "image_width"
+    t.text "name", null: false
   end
 
   create_table "pledges", force: :cascade do |t|
@@ -60,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170521151159) do
     t.integer "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "staff_message"
   end
 
   create_table "wishlists", force: :cascade do |t|

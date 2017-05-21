@@ -16,6 +16,17 @@
     <%= form.text_area :name, id: :wishlist_name %>
   </div>
 
+  <%= form.fields_for :site_manager do |n_form| %>
+    <div class="field">
+      <%= n_form.label 'Site Manager:' %>
+      </br>
+      <% @site_managers.each do |user| %>
+        <%= n_form.label user.name %>
+        <%= n_form.check_box user.id, checked: user.can_manage?(@wishlist)  %>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
