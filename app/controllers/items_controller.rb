@@ -70,7 +70,7 @@ class ItemsController < ApplicationController
     page  = params[:page] || 1
     xml_response = AmazonProductAPI.search(query, page).body
     @response = SearchResponse.new(parse_response(xml_response))
-    render results_path #(@wishlist)
+    render results_path
   end
 
   private
