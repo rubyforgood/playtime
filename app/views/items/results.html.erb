@@ -8,7 +8,7 @@
             <td>
               <%= image_tag "#{item["SmallImage"]["URL"]}", width: "#{item["SmallImage"]["Width"]}", height: "#{item["SmallImage"]["Height"]}" %>
             </td>
-            <td>
+            <td class="item_title">
               <%= link_to "#{item["ItemAttributes"]["Title"]}", "#{item["DetailPageURL"]}", :target => "_blank" %>
             </td>
             <td>
