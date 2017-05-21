@@ -18,6 +18,14 @@
             <% end %>
           </div>
         </li>
+	<% if logged_in? && admin? %>
+        <li class="nav-item">
+          <%= link_to "Users", users_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Pledges", pledges_path, class: "nav-link" %>
+        </li>
+	<% end %>
         <li class="nav-item">
     	  <% if !logged_in? %>
       	    <%= link_to "Log In", signin_path, class: "nav-link" %>
