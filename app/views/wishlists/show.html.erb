@@ -1,13 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @wishlist.name %></h1>
+<h1>#{@wishlist.name}</h1>
 
-<%= if admin? %>
+<% if admin? %>
 <strong>Site Managers:</strong>
 <% @site_managers.each do |user| %>
   <p>
     <%= user.name %>
   </p>
+<% end %>
 <% end %>
 
 <%= link_to 'Edit', edit_wishlist_path(@wishlist) %> |
