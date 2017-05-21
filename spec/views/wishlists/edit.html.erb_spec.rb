@@ -5,6 +5,9 @@ RSpec.describe "wishlists/edit", type: :view do
     @wishlist = assign(:wishlist, Wishlist.create!(
       :name => "MyText"
     ))
+    @site_managers = assign(:site_mangers, [User.create!(
+      email: 'email@email.com', site_manager: true
+    )])
   end
 
   it "renders the edit wishlist form" do

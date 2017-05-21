@@ -20,7 +20,7 @@
     <div class="field">
       <%= n_form.label 'Site Manager:' %>
       </br>
-      <% @site_mangers.each do |user| %>
+      <% @site_managers.each do |user| %>
         <%= n_form.label user.name %>
         <%= n_form.check_box user.id, checked: user.can_manage?(@wishlist)  %>
       <% end %>
