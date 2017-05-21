@@ -7,15 +7,11 @@ module AWSAPIs
     end
 
     def num_pages
-      hash["ItemSearchResponse"]["OperationRequest"]["Items"]["TotalPages"] || "1"
-    end
-
-    def next_page_link
-      hash["ItemSearchResponse"]["OperationRequest"]["Items"]["MoreSearchResultsUrl"]
+      (hash.dig("ItemSearchResponse", "Items", "TotalPages") || "1").to_i
     end
 
     def items
-      hash["ItemSearchResponse"]["Items"]["Item"].map { |h| Item.new(h) }
+      hash.dig("ItemSearchResponse", "Items", "Item").map { |h| Item.new(h) }
     end
   end
 
@@ -27,26 +23,28 @@ module AWSAPIs
 
     def price
       if hash["OfferSummary"].present?
-        hash["OfferSummary"]["LowestNewPrice"]["FormattedPrice"]
+        hash.dig("OfferSummary", "LowestNewPrice", "FormattedPrice")
       else
         '$0.00'
       end
     end
 
     def small_image_url
-      hash["SmallImage"]["URL"]
+      hash.dig("SmallImage", "URL")
+    rescue
+      ""
     end
 
     def small_image_width
-      hash["SmallImage"]["Width"]
+      hash.dig("SmallImage", "Width") || ""
     end
 
     def small_image_height
-      hash["SmallImage"]["Width"]
+      hash.dig("SmallImage", "Height") || ""
     end
 
     def title
-      hash["ItemAttributes"]["Title"]
+      hash.dig("ItemAttributes", "Title")
     end
 
     def detail_page_url
@@ -77,8 +75,9 @@ module AWSAPIs
         "AWSAccessKeyId" => ENV["AWS_ACCESS_KEY"],
         "AssociateTag" => ENV["AWS_ASSOCIATES_TAG"],
         "SearchIndex" => "All",
-        "Keywords" => "#{@query}",
-        "ResponseGroup" => "ItemAttributes,Offers,Images"
+        "Keywords" => @query.to_s,
+        "ResponseGroup" => "ItemAttributes,Offers,Images",
+        "ItemPage" => @page_num.to_s
       }
 
       # Set current timestamp if not set
@@ -104,8 +103,9 @@ module AWSAPIs
     end
 
     # Generate the signed URL
-    def self.search(query)
+    def self.search(query, page_num = 1)
       @query = query
+      @page_num = page_num
       url = "http://#{ENDPOINT}#{REQUEST_URI}?#{canonical_query_string}&Signature=#{URI.escape(signature, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"
       HTTParty.get(url)
     end
