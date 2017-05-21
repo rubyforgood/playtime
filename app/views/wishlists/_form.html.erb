@@ -22,7 +22,7 @@
       </br>
       <% @users.each do |user| %>
         <%= n_form.label user.name %>
-        <%= n_form.radio_button user.name, user.id %>
+        <%= n_form.radio_button user.name, user.id, checked: user.can_manage?(@wishlist)  %>
       <% end %>
     </div>
   <% end %>
