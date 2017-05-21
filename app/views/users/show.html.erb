@@ -16,5 +16,10 @@
   <%= @user.admin %>
 </p>
 
+<p>
+  <strong>Site Manager:</strong>
+  <%= @user.site_manager %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
