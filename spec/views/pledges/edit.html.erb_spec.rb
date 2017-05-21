@@ -4,7 +4,7 @@ RSpec.describe "pledges/edit", type: :view do
 
   before(:each) do
     @pledge = assign(:pledge, Pledge.create!(
-      item: Item.create!,
+      item: Item.create!(name: 'test'),
       user: User.create!(email: 'email@email.com')
     ))
   end
