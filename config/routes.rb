@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pledges
   get 'wishlist_items/index'
   root to: "wishlist_items#index"
   resources :wishlists
