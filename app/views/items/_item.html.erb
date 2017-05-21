@@ -1,5 +1,7 @@
 <% if item.price != '$0.00' %>
 <tr>
+  <%= form_tag wishlist_wishlist_items_path(@wishlist) do %>
+  <%=  hidden_field_tag 'amazon_url', item.detail_page_url %>
   <td>
     <%= image_tag item.small_image_url, width: item.small_image_width, height: item.small_image_height %>
   </td>
@@ -9,5 +11,12 @@
   <td>
     <%= item.price %>
   </td>
+  <td>
+    <%= select_tag "qty", options_for_select(Array(0..20)) %>
+  </td>
+  <td>
+    <%= submit_tag "Add" %>
+  </td>
+  <% end %>
 </tr>
 <% end %>

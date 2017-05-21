@@ -12,6 +12,7 @@ class WishlistsController < ApplicationController
   # GET /wishlists/1.json
   def show
     @site_managers = @wishlist.users
+    @wishlist = Wishlist.find(params[:id])
   end
 
   # GET /wishlists/new

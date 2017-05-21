@@ -3,6 +3,7 @@ include AWSAPIs
 
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_wishlist, only: [:search, :search_amazon, :results]
 
   # GET /items
   # GET /items.json
@@ -69,13 +70,17 @@ class ItemsController < ApplicationController
     page  = params[:page] || 1
     xml_response = AmazonProductAPI.search(query, page).body
     @response = SearchResponse.new(parse_response(xml_response))
-    render results_path
+    render results_path #(@wishlist)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
+    end
+
+    def set_wishlist
+      @wishlist = Wishlist.find(params[:wishlist_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
