@@ -11,17 +11,18 @@ class WishlistsController < ApplicationController
   # GET /wishlists/1
   # GET /wishlists/1.json
   def show
+    @site_managers = @wishlist.users
   end
 
   # GET /wishlists/new
   def new
     @wishlist = Wishlist.new
-    @users = User.where(site_manager: true)
+    @site_mangers = User.where(site_manager: true)
   end
 
   # GET /wishlists/1/edit
   def edit
-    @users = User.where(site_manager: true)
+    @site_mangers = User.where(site_manager: true)
   end
 
   # POST /wishlists
