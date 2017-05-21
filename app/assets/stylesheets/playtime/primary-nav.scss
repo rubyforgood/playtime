@@ -17,6 +17,20 @@
   font-size: 18px;
 }
 
+.navbar-nav a {
+  color: #fff !important;
+}
+
+.dropdown-menu {
+  background-color: rgba(155, 52, 125, .75);
+  border-radius: 15px;
+}
+
+.dropdown-menu a:hover {
+    background-color: rgba(155, 52, 125, .75);
+    font-weight: bold;
+}
+
 .tagline {
   float: right;
   font-size: 16px;

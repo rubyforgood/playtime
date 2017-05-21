@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   resources :wishlists do
     resources :wishlist_items, only: [:create]
   end
+
+  resource :wishlist_items
+
   get '/wishlists/:wishlist_id/items/search', to: 'items#search', as: 'search'
   get '/items/results', to: 'items#results', as: 'results'
   post '/wishlists/:wishlist_id/items/search_amazon', to: 'items#search_amazon', as: 'search_amazon'

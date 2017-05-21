@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
   helper_method [:current_user=, :current_user, :logged_in?, :admin?, :site_manager?]
+  before_action :get_wishlists, :get_items, :get_users
 
   private
 
@@ -32,5 +32,17 @@ class ApplicationController < ActionController::Base
 
   def authenticate_admin
     redirect_to root_url unless admin?
+  end
+
+  def get_wishlists
+    @all_wishlists = Wishlist.all
+  end
+
+  def get_items
+    @items = Item.all
+  end
+
+  def get_users
+    @users = User.all
   end
 end
