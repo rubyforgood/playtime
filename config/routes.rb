@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :wishlists
 
   # Pledges
+  get 'pledges/export_csv', to: 'pledges#export_csv'
   resources :pledges
 
   # Users
