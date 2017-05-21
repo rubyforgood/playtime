@@ -11,14 +11,26 @@ module AWSAPIs
     end
 
     def items
-      hash.dig("ItemSearchResponse", "Items", "Item").map { |h| Item.new(h) }
+      hash.dig("ItemSearchResponse", "Items", "Item").map { |h| SearchItem.new(h) }
     end
   end
 
-  class Item
+  class SearchItem
     attr_reader :hash
     def initialize(hash)
       @hash = hash
+    end
+
+    def asin
+      hash["ASIN"]
+    end
+
+    def price_cents
+      hash.dig("ItemAttributes", "ListPrice", "Amount").to_i
+    end
+
+    def associates_url
+      detail_page_url
     end
 
     def price
