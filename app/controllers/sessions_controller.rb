@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-#    redirect_to root_url, :notice => 'Signed out!'
   end
 
   def create
