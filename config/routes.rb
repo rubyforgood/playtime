@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  resources :pledges
+
   get 'wishlist_items/index'
   root to: "wishlist_items#index"
   resources :wishlists
+
+  # Pledges
+  resources :pledges
 
   # Users
   get 'users/export_csv', to: 'users#export_csv'
