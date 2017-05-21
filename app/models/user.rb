@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def can_manage?(wishlist)
-    admin? || wishlists.find_by_id(wishlist.id)
+    admin? || wishlists.exists?(wishlist.id)
   end
 
   class AmazonOAuthInfo
