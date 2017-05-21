@@ -1,6 +1,12 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
   <h2 class = "purple"><%= @wishlist.name %></h2>
+  
+  <% if current_user.can_manage?(@wishlist) %>
+    <div>
+      <%= link_to 'Add to wishlist', search_path(@wishlist) %>
+    </div>
+  <% end %>  
 
   <% @wishlist.wishlist_items.each do |wishlist_item| %>
     <% item = @items.find(wishlist_item.item_id) %>
