@@ -16,6 +16,9 @@
 </div>
 <% end %>
 
+<% if current_user.can_manage?(@wishlist) %>
+  <% render "shared/search" %>
+<% end %>
 
 <% if current_user.can_manage?(@wishlist) %>
   <div>
