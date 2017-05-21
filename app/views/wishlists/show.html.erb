@@ -1,12 +1,12 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
   <h2 class = "purple"><%= @wishlist.name %></h2>
-  
-  <% if current_user.can_manage?(@wishlist) %>
+
+  <% if logged_in? && current_user.can_manage?(@wishlist) %>
     <div>
       <%= link_to 'Add to wishlist', search_path(@wishlist) %>
     </div>
-  <% end %>  
+  <% end %>
 
   <% @wishlist.wishlist_items.each do |wishlist_item| %>
     <% item = @items.find(wishlist_item.item_id) %>
@@ -17,8 +17,8 @@
         <p><strong>Staff Message:</strong>
         <span class="card-text"><%= wishlist_item.staff_message %></span></p>
         <p><strong><span class="padding-right">Quantity: <%= wishlist_item.quantity %></span> Price: <%= number_to_currency(item.price_cents/100.00) %></p></strong>
-        <td><%= link_to 'Edit', edit_wishlist_items_path(wishlist_item.id) if admin? || site_manager? %></td>
-        <td><%= link_to 'Destroy', wishlist_items_path(wishlist_item.id), method: :delete, data: { confirm: 'Are you sure?' } if admin? %></td>
+        <td><%= link_to 'Edit', edit_wishlist_items_path(wishlist_item.id) if logged_in? && (admin? || site_manager?) %></td>
+        <td><%= link_to 'Destroy', wishlist_items_path(wishlist_item.id), method: :delete, data: { confirm: 'Are you sure?' } if logged_in? && admin? %></td>
       </div>
     </div>
   <% end %>
