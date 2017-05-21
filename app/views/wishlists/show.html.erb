@@ -5,5 +5,13 @@
   <%= @wishlist.name %>
 </p>
 
+
+<strong>Site Managers:</strong>
+<% @site_managers.each do |user| %>
+  <p>
+    <%= user.name %>
+  </p>
+<% end %>
+
 <%= link_to 'Edit', edit_wishlist_path(@wishlist) %> |
 <%= link_to 'Back', wishlists_path %>
