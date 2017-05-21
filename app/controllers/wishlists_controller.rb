@@ -78,15 +78,13 @@ class WishlistsController < ApplicationController
     end
 
     def create_site_managers
-      params['wishlist']['site_manager'].values.each do |user_id|
-        @wishlist.site_managers.create(user_id: user_id.to_i)
+      params['wishlist']['site_manager'].each do |user_id, value|
+        @wishlist.site_managers.create(user_id: user_id.to_i) if value == '1'
       end
     end
 
     def update_site_managers
       @wishlist.site_managers = []
-      params['wishlist']['site_manager'].values.each do |user_id|
-        @wishlist.site_managers.create(user_id: user_id.to_i)
-      end
+      create_site_managers
     end
 end

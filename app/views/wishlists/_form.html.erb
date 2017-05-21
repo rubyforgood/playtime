@@ -18,11 +18,11 @@
 
   <%= form.fields_for :site_manager do |n_form| %>
     <div class="field">
-      <%= n_form.label 'Site Manager' %>
+      <%= n_form.label 'Site Manager:' %>
       </br>
       <% @users.each do |user| %>
         <%= n_form.label user.name %>
-        <%= n_form.radio_button user.name, user.id, checked: user.can_manage?(@wishlist)  %>
+        <%= n_form.check_box user.id, checked: user.can_manage?(@wishlist)  %>
       <% end %>
     </div>
   <% end %>
