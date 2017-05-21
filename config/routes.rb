@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get '/wishlists/:wishlist_id/items/search', to: 'items#search', as: 'search'
   get '/items/results', to: 'items#results', as: 'results'
   post '/wishlists/:wishlist_id/items/search_amazon', to: 'items#search_amazon', as: 'search_amazon'
+  # User
+  get 'users/export_csv', to: 'users#export_csv'
+  resources :users, only: [:show, :index, :edit, :update, :destroy]
+
 
   # OAuth
   get '/auth/:provider/callback', to: 'sessions#create'
