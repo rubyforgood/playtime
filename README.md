@@ -10,17 +10,21 @@
 
 The goal of this application is to allow supporters to donate toys and other items that help advance the work of Playtime Project's work in family shelters throughout DC. This application will allow donors to view the organization's Amazon wish lists, add items, track contributions, and aid staff in following up with donors.
 
-## Contribution policy
+## Join the Team
+
+This application is a work in progress, and we encourage you to jump in! To get started, check out [our Trello board](https://trello.com/b/xpw13CUv) to see what issues are currently in the pipeline. Get in touch with [@micahbales](https://github.com/micahbales) for more details.
+
+### Contribution Policy
 
 For any changes, please create a feature branch and open a PR for it when you feel it's ready to merge. Even if there's no real disagreement about a PR, at least one other person on the team needs to look over a PR before merging. The purpose of this review requirement is to ensure shared knowledge of the app and its changes and to take advantage of the benefits of working together changes without any single person being a bottleneck to making progress.
 
 ## Getting Started
 
-### Seting up your dev env
+### Seting Up Your Dev Env
 
 Copy .env.sample to .env and then follow the instructions below.
 
-### Getting Amazon OAuth working locally
+### Getting Amazon OAuth Working Locally
 
 * Create an Application in Amazon [here](https://github.com/wingrunr21/omniauth-amazon#prereqs)
 * Copy RAILS_ROOT/.env.sample to .env
@@ -28,7 +32,7 @@ Copy .env.sample to .env and then follow the instructions below.
 * Start your Rails app. You're ready to OAuth!
 
 
-### Getting Amazon Advertising API working locally
+### Getting Amazon Advertising API Working Locally
 * sign up to use the Advertising API [Amazon](https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html)
 * you will need to then need to add the following to your .env (these fields are also in .env.sample)
 ** AWS_ACCESS_KEY: YOUR_ACCESS_KEY_GOES_HERE
