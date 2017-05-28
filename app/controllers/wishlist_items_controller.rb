@@ -1,6 +1,6 @@
 class WishlistItemsController < ApplicationController
   def index
-    @wishlist_items = WishlistItem.build_index
+    @wishlist_items = WishlistItem.all
   end
 
   def create

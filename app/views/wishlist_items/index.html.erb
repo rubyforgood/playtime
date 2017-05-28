@@ -1,33 +1,7 @@
-<div class="master-wishlist">
+<div class="container">
   <div class="header">
-    <h1>Playtime Project</h1>
-    <h3>Master Wishlist</h3>
+    <h2 class="purple">Are you a hero of play?</h2>
+    <p>We believe that play is a human right that all children deserve, regardless of housing status. Become a hero of play and combine your powers with Playtime's healing programs!</p>
   </div>
-
-  <table class="wishlist-table">
-    <% @wishlist_items.each do |item| %>
-      <tr>
-        <th>
-          <%= link_to item.associate_url do %>
-            <%= image_tag item.image_url, class: "wishlist-item-image" %>
-          <% end %>
-        </th>
-        <th>
-          <p class="wishlist-item-price">
-            <%= item.price_cents %>
-          </p>
-        </th>
-        <th>
-          <p class="wishlist-item-quantity">
-            <%= item.quantity %>
-          </p>
-        </th>
-        <th>
-          <p class="wishlist-item-staff-message">
-            <%= item.staff_message %>
-          </p>
-        </th>
-      </tr>
-    <% end %>
-  </table>
+  <%= render "partials/wishlist_items" %>
 </div>

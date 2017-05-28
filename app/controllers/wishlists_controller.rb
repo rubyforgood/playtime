@@ -14,6 +14,7 @@ class WishlistsController < ApplicationController
   def show
     @site_managers = @wishlist.users
     @wishlist = Wishlist.find(params[:id])
+    @wishlist_items = @wishlist.wishlist_items
   end
 
   # GET /wishlists/new
