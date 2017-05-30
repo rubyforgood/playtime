@@ -8,19 +8,7 @@
     </div>
   <% end %>
 
-  <% @wishlist.wishlist_items.each do |wishlist_item| %>
-    <% item = @items.find(wishlist_item.item_id) %>
-    <div class="card">
-      <div class="card-block">
-        <img class="card-img-left" src="<%= item.image_url %>">
-        <h4 class="card-title"><a href="<%= item.amazon_url %>"><%= item.name %></a></h4>
-        <p><strong>Staff Message:</strong>
-        <span class="card-text"><%= wishlist_item.staff_message %></span></p>
-        <p><strong><span class="padding-right">Quantity: <%= wishlist_item.quantity %></span> Price: <%= number_to_currency(item.price_cents/100.00) %></p></strong>
-        <td><%= link_to 'Edit', edit_wishlist_items_path(wishlist_item.id) if logged_in? && (admin? || site_manager?) %></td>
-        <td><%= link_to 'Destroy', wishlist_items_path(wishlist_item.id), method: :delete, data: { confirm: 'Are you sure?' } if logged_in? && admin? %></td>
-      </div>
-    </div>
-  <% end %>
+  <%= render "partials/wishlist_items" %>
+
   <%= link_to 'Back', wishlists_path %>
 </div>

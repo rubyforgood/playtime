@@ -15,7 +15,7 @@
     <tbody>
       <% @wishlists.each do |wishlist| %>
         <tr>
-          <td colspan="4"><%= wishlist.name %></td>
+          <td colspan="4"><%= link_to "#{wishlist.name}", wishlist_path(wishlist.id) %></td>
           <td colspan="4"><%= get_site_managers(wishlist) %></td>
           <td><%= link_to 'Edit', edit_wishlist_path(wishlist) if admin? %></td>
           <td><%= link_to 'Destroy', wishlist, method: :delete, data: { confirm: 'Are you sure?' } if admin? %></td>

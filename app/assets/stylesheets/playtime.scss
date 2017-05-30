@@ -29,19 +29,33 @@ a{
   margin: auto;
 }
 
+.header {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
 .card-img-left {
   border-bottom-left-radius: calc(.25rem - 1px);
   border-top-left-radius: calc(.25rem - 1px);
   float: left;
   padding-right: 1em;
-  width: 200px;
-  height: 224px;
+  width: 150px;
+  height: 168px;
 }
 
 .card-title a{
   color: #0084ad;
 }
 
+.card {
+  border-left: none;
+  border-right: none;
+}
+
 .padding-right {
   padding-right: 25px;
+}
+
+.float-right {
+  float: right;
 }
