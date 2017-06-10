@@ -9,7 +9,7 @@
       <p><strong><span class="padding-right">Quantity: <%= wishlist_item.quantity %></span> Price: <%= number_to_currency(item.price_cents/100.00) %></p></strong>
       <%= link_to 'Edit', edit_wishlist_items_path(wishlist_item.id) if logged_in? && (admin? || site_manager?) %>
       <%= link_to 'Destroy', wishlist_items_path(wishlist_item.id), method: :delete, data: { confirm: 'Are you sure?' } if logged_in? && admin? %>
-      <%= button_to "Purchase Item", "#{item.amazon_url}", class:"btn btn-primary float-right" if !admin? && !site_manager? %>
+      <%= button_to "Purchase Item", "#{item.amazon_url}", class:"btn btn-primary float-right" %>
     </div>
   </div>
 <% end %>
