@@ -1,40 +1,84 @@
 <div class="container-fluid">
   <nav class="navbar bg-faded rounded navbar-toggleable-md primary-nav">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#containerNavbar" aria-controls="containerNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler navbar-toggler-right"
+            type="button"
+            data-toggle="collapse"
+            data-target="#containerNavbar"
+            aria-controls="containerNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="/"><%= image_tag "HCPP_white_logo.png", class: "primary-nav-logo" %></a>
+
+
+    <!-- Logo -->
+
+    <a class="navbar-brand" href="/">
+      <%= image_tag "HCPP_white_logo.png", class: "primary-nav-logo" %>
+    </a>
+
+
+    <!-- Primary Nav Bar -->
 
     <div class="collapse navbar-collapse primary-nav-links" id="containerNavbar">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/">
+            Home<span class="sr-only">(current)</span>
+          </a>
         </li>
+
+        <!-- Wishlists Dropdown -->
+
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wishlists</a>
+          <a class="nav-link dropdown-toggle"
+             data-toggle="dropdown"
+             aria-haspopup="true"
+             aria-expanded="false">Wishlists</a>
+
           <div class="dropdown-menu">
             <% @all_wishlists.each do |wishlist| %>
-              <a class="dropdown-item" href="/wishlists/<%= wishlist.id %>"><%= wishlist.name %></a>
+              <%= link_to wishlist.name, wishlist_path(wishlist),
+                                         class: "dropdown-item" %>
             <% end %>
           </div>
         </li>
-	<% if logged_in? && admin? %>
+
+        <!-- Admin Submenu -->
+
+        <% if logged_in? && admin? %>
+          <li class="nav-item">
+            <%= link_to "Users", users_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Pledges", pledges_path, class: "nav-link" %>
+          </li>
+        <% end %>
+
+        <!-- Log In/Out -->
+
         <li class="nav-item">
-          <%= link_to "Users", users_path, class: "nav-link" %>
+          <% if !logged_in? %>
+            <%= link_to "Log In", signin_path, class: "nav-link" %>
+          <% else %>
+            <%= link_to "Log Out", signout_path, class: "nav-link" %>
+          <% end %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Pledges", pledges_path, class: "nav-link" %>
-        </li>
-	<% end %>
-        <li class="nav-item">
-    	  <% if !logged_in? %>
-      	    <%= link_to "Log In", signin_path, class: "nav-link" %>
-    	  <% else %>
-    	    <%= link_to "Log Out", signout_path, class: "nav-link" %>
-    	  <% end %>
-    	</li>
       </ul>
+
+      <!-- Logged-In User Greeting -->
+
+      <% if logged_in? %>
+        <span class="navbar-text">
+          Hello, <%= current_user.display_name %>
+        </span>
+      <% end %>
     </div>
+    <!-- //END NAV BAR -->
+
+
+    <!-- Tagline -->
+
     <div class="tagline">
       <p>Families Deserve Housing. Children Deserve Play.</p>
     </div>

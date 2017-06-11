@@ -5,6 +5,7 @@
 # project features.
 
 require "rails_helper"
+require "support/omniauth"
 
 feature "Wishlists:" do
   context "As a guest" do
@@ -42,19 +43,6 @@ feature "Pledges:" do
     scenario "I can view a list of pledges"
     scenario "I can view the details of a specific pledge"
     scenario "I can export pledges as a CSV file"
-  end
-end
-
-feature "Sessions:" do
-  context "As a guest" do
-    context "using my existing Amazon login credentials" do
-      scenario "I can create an account"
-      scenario "I can log into an existing account"
-    end
-  end
-
-  context "As a logged-in user" do
-    scenario "I can log out of my account"
   end
 end
 

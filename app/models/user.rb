@@ -45,6 +45,10 @@ class User < ApplicationRecord
     admin? || wishlists.exists?(wishlist.id)
   end
 
+  def display_name
+    name || email
+  end
+
   class AmazonOAuthInfo
     attr_reader :hash
 
