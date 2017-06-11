@@ -47,6 +47,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   # A Ruby gem to load environment variables from `.env`.
   gem 'dotenv-rails'
+  # Fixtures replacement. Read more: http://www.rubydoc.info/gems/factory_girl/
+  gem 'factory_girl_rails', '~> 4.8'
 end
 
 group :development do
@@ -58,6 +60,13 @@ group :development do
   gem 'spring'
   # This gem makes Spring watch the filesystem for changes using Listen rather than by polling the filesystem.
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  # Allows you to launch a debugging snapshot in your browser during Capybara tests
+  gem 'launchy', '~> 2.4.3'
+  # A set of strategies for cleaning your database (ensuring a clean slate during tests)
+  gem 'database_cleaner', '~> 1.6.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
