@@ -1,30 +1,3 @@
+require 'support/helpers/session_helpers'
+
 OmniAuth.config.test_mode = true
-
-# Helper Methods
-
-module Helpers
-  module OmniAuthHelpers
-    def setup_amazon_omniauth(email: "user@example.com", **custom_params)
-      OmniAuth.config.mock_auth[:amazon] = OmniAuth::AuthHash.new({
-        provider: "amazon",
-        info: { email: email },
-        extra: { postal_code: 54321 },
-      }.merge(custom_params))
-    end
-
-    def reset_amazon_omniauth
-      OmniAuth.config.mock_auth[:amazon] = nil
-    end
-
-    def login(email: "user@example.com", role: nil, **custom_params)
-      create(:admin, email: email) if role == :admin
-      create(:site_manager, email: email) if role == :site_manager
-      setup_amazon_omniauth(email: email, **custom_params)
-
-      visit "/"
-      click_link "Log In"
-    end
-  end
-end
-
-RSpec.configure { |c| c.include Helpers::OmniAuthHelpers }

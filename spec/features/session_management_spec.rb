@@ -4,11 +4,8 @@ require "support/omniauth"
 feature "Session Management:" do
   context "As a guest" do
     context "using my existing Amazon login credentials" do
-      around(:each) do |example|
-        setup_amazon_omniauth(email: "user@example.com")
-        example.run
-        reset_amazon_omniauth
-      end
+      before(:each) { setup_amazon_omniauth(email: "user@example.com") }
+      after(:each)  { reset_amazon_omniauth }
 
       scenario "I can create an account" do
         visit "/"
@@ -27,11 +24,8 @@ feature "Session Management:" do
   end
 
   context "As a logged-in user" do
-    around(:each) do |example|
-      login(email: "user@example.com")
-      example.run
-      reset_amazon_omniauth
-    end
+    before(:each) { login(email: "user@example.com") }
+    after(:each)  { reset_amazon_omniauth }
 
     scenario "I can log out of my account" do
       click_link "Log Out"
