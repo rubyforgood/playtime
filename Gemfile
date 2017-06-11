@@ -60,6 +60,8 @@ group :development do
   gem 'spring'
   # This gem makes Spring watch the filesystem for changes using Listen rather than by polling the filesystem.
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # Annotate model/model spec/factory files with the database schema
+  gem 'annotate', '~> 2.7'
 end
 
 group :test do
