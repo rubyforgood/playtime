@@ -16,5 +16,21 @@
 FactoryGirl.define do
   factory :user do
     sequence :email { |n| "user#{n}@example.com" }
+
+    factory :admin do
+      admin true
+    end
+
+    factory :user_with_sites do
+      transient do
+        site_count 1
+      end
+
+      after(:create) do |user, evaluator|
+        evaluator.site_count.times do
+          user.site_managers.create! wishlist: create(:wishlist)
+        end
+      end
+    end
   end
 end
