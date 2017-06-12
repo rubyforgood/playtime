@@ -5,21 +5,6 @@
 # project features.
 
 require "rails_helper"
-require "support/omniauth"
-
-feature "Wishlists:" do
-  context "As a guest" do
-    scenario "I can see a list of wishlists"
-    scenario "I can see the details of a wishlist"
-    # scenario "I can share a wishlist on my social media accounts"
-  end
-
-  context "As an admin" do
-    scenario "I can create a new wishlist"
-    scenario "I can update an existing wishlist"
-    scenario "I can delete a wishlist"
-  end
-end
 
 feature "Items:" do
   context "As a guest" do

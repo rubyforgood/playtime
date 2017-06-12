@@ -36,10 +36,10 @@
              aria-haspopup="true"
              aria-expanded="false">Wishlists</a>
 
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" id="wishlists">
             <% @all_wishlists.each do |wishlist| %>
               <%= link_to wishlist.name, wishlist_path(wishlist),
-                                         class: "dropdown-item" %>
+                                         class: "wishlist dropdown-item" %>
             <% end %>
           </div>
         </li>
@@ -47,11 +47,17 @@
         <!-- Admin Submenu -->
 
         <% if logged_in? && admin? %>
-          <li class="nav-item">
-            <%= link_to "Users", users_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Pledges", pledges_path, class: "nav-link" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"
+               data-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false">Admin Tools</a>
+
+            <div class="dropdown-menu" id="admin-tools">
+              <%= link_to "Users", users_path, class: "dropdown-item" %>
+              <%= link_to "Pledges", pledges_path, class: "dropdown-item" %>
+              <%= link_to "New Wishlist", new_wishlist_path, class: "dropdown-item" %>
+            </div>
           </li>
         <% end %>
 

@@ -1,5 +1,8 @@
-<h1>New Wishlist</h1>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h2 class = "purple">New Wishlist</h2>
 
-<%= render 'form', wishlist: @wishlist %>
+  <%= render 'form', wishlist: @wishlist %>
 
-<%= link_to 'Back', wishlists_path %>
+  <%= link_to 'Back to Wishlist', @wishlist %>
+</div>
