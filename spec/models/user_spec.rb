@@ -9,7 +9,7 @@ describe User do
   end
 
   describe "who is a site manager" do
-    before { user.site_managers.create!(wishlist: wishlist) }
+    before { SiteManager.create!(user: user, wishlist: wishlist) }
 
     it "can manage their site's wishlist" do
       expect(user.can_manage?(wishlist)).to be_truthy
