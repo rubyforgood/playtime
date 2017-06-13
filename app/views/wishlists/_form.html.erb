@@ -11,23 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_area :name, id: :wishlist_name %>
+  <div class="form-group">
+    <%= form.label 'Wish List Name', class: "group-label" %></br>
+    <%= form.text_field :name, id: :wishlist_name, class: "text-field-md" %>
   </div>
 
-  <%= form.fields_for :site_manager do |n_form| %>
-    <div class="field">
-      <%= n_form.label 'Site Manager:' %>
+  <%= form.fields_for :site_manager do |site_manager_form| %>
+    <div class="form-group">
+      <%= site_manager_form.label 'Site Manager:', class: "group-label" %>
       </br>
       <% @site_managers.each do |user| %>
-        <%= n_form.label user.name %>
-        <%= n_form.check_box user.id, checked: user.can_manage?(@wishlist)  %>
+        <%= site_manager_form.label user.name %>
+        <%= site_manager_form.check_box user.id, checked: user.can_manage?(@wishlist), class: "checkbox"  %></br>
       <% end %>
     </div>
   <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn submit" %>
   </div>
 <% end %>

@@ -15,7 +15,7 @@ RSpec.describe "wishlists/edit", type: :view do
 
     assert_select "form[action=?][method=?]", wishlist_path(@wishlist), "post" do
 
-      assert_select "textarea[name=?]", "wishlist[name]"
+      assert_select "input[name=?]", "wishlist[name]"
     end
   end
 end
