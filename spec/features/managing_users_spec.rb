@@ -45,15 +45,17 @@ feature "Managing Users:" do
     end
 
     scenario "I can delete a user account" do
+      create(:user) # so we're not deleting our own account
+
       click_link "Users"
       users = find_all(".user")
-      within(users.first) do
+      within(users.last) do
         click_link "Destroy"
       end
 
       expect(page).to have_text "User was successfully destroyed."
       expect(current_path).to eq users_path
-      expect(find_all(".user").count).to eq 2
+      expect(find_all(".user").count).to eq 3
     end
 
     scenario "I can export the list of users to a CSV file" do
