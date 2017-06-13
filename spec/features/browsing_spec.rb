@@ -46,7 +46,5 @@ feature "Browsing the site:" do
     end
 
     # scenario "I can share a wishlist on my social media accounts"
-    # scenario "I can purchase a wish list item"
-    # scenario "I can confirm that an item was purchased"
   end
 end

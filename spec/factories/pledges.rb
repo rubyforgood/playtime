@@ -9,13 +9,9 @@
 #  updated_at :datetime         not null
 #
 
-require "active_record_csv_generator"
-
-class Pledge < ApplicationRecord
-  belongs_to :item
-  belongs_to :user
-
-  def self.generate_csv(csv_generator: ActiveRecordCSVGenerator.new(self))
-    csv_generator.generate
+FactoryGirl.define do
+  factory :pledge do
+    item
+    user
   end
 end
