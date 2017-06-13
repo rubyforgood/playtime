@@ -1,8 +1,11 @@
 <div class="container">
-  <p id="notice"><%= notice %></p>
-  <h2 class = "purple">New Wishlist</h2>
+  <div class="header">
+    <p id="notice"><%= notice %></p>
+    <h2 class="purple">Create Wish List</h1>
 
-  <%= render 'form', wishlist: @wishlist %>
+    <h3>Wish List Information</h3>
 
-  <%= link_to 'Back to Wishlist', @wishlist %>
+    <%= render 'form', wishlist: @wishlist %>
+
+  </div>
 </div>

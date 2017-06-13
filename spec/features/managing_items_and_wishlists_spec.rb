@@ -24,7 +24,7 @@ feature "Managing items and wishlists:" do
 
     scenario "I can create a new wishlist" do
       click_link "New Wishlist"
-      fill_in("Name", with: "VA General")
+      fill_in("wishlist_name", with: "VA General")
       click_button "Create Wishlist"
 
       expect(page).to have_text "Wishlist was successfully created."
@@ -35,7 +35,7 @@ feature "Managing items and wishlists:" do
       click_link "DC General"
       dc_general_path = current_path
       click_link "Edit Wishlist"
-      fill_in("Name", with: "VA General")
+      fill_in("wishlist_name", with: "VA General")
       click_button "Update Wishlist"
 
       expect(current_path).to eq dc_general_path
@@ -77,7 +77,8 @@ feature "Managing items and wishlists:" do
       within ".wishlist-item-tools" do
         click_link "Edit"
       end
-      fill_in("Staff message", with: "Adorable protector of the night!")
+      fill_in("wishlist_item_staff_message",
+              with: "Adorable protector of the night!")
       click_button "Update Wishlist item"
 
       expect(page).to have_text "Wishlist item was successfully updated."

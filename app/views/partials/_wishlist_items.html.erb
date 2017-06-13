@@ -25,7 +25,7 @@
           </span>
           Price:
           <% if wishlist_item.price_cents %>
-            <%= number_to_currency(wishlist_item.price_cents / 100.00) %>
+            <%= number_to_currency(item.price_cents / 100.00) %>
           <% else %>
             "Unknown"
           <% end %>
@@ -44,7 +44,7 @@
       <% end %>
 
       <!-- Pledge Actions -->
-      <%= button_to "Purchase Item", "#{item.amazon_url}", class:"btn btn-primary float-right" if !admin? && !site_manager? %>
+      <%= button_to "Purchase Item", "#{item.amazon_url}", class:"btn btn-primary float-right" %>
     </div>
   </div>
 <% end %>
