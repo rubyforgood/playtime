@@ -1,6 +1,6 @@
 class WishlistsController < ApplicationController
   before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin, only: [:new, :destroy, :update]
+  before_action :authenticate_admin, except: [:index, :show]
   helper_method :get_site_managers
 
   # GET /wishlists
@@ -13,7 +13,6 @@ class WishlistsController < ApplicationController
   # GET /wishlists/1.json
   def show
     @site_managers = @wishlist.users
-    @wishlist = Wishlist.find(params[:id])
     @wishlist_items = @wishlist.wishlist_items
   end
 
