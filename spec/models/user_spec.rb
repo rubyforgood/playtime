@@ -64,7 +64,7 @@ describe User do
     end
 
     describe "when the user is a site manager" do
-      subject(:site_manager) { create(:user_with_sites) }
+      subject(:site_manager) { create(:user, :with_sites) }
 
       context "when they own the specified wishlist" do
         let(:their_wishlist) { subject.wishlists.first }

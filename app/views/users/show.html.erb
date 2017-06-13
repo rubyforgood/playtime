@@ -1,25 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h2 class = "purple"><%= @user.display_name %></h2>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+  <div id="user-details">
+    <p>
+      <strong>Name:</strong>
+      <%= @user.name %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-  <%= mail_to @user.email, icon('envelope-o') %>
-</p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+      <%= mail_to @user.email, icon('envelope-o') %>
+    </p>
 
-<p>
-  <strong>Admin:</strong>
-  <%= @user.admin %>
-</p>
+    <p>
+      <strong>Admin:</strong>
+      <%= @user.admin? %>
+    </p>
 
-<p>
-  <strong>Site Manager:</strong>
-  <%= @user.site_manager %>
-</p>
+    <p>
+      <strong>Site Manager:</strong>
+      <%= @user.site_manager? %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+      <% if @user.site_manager? %>
+        <ul id="user-wishlists">
+          <% @user.wishlists.each do |wishlist| %>
+            <li class="user-wishlist">
+              <%= link_to wishlist.name, wishlist %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </p>
+  </div>
+
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', users_path %>
+</div>
