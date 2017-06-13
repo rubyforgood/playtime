@@ -1,4 +1,6 @@
 class WishlistItemsController < ApplicationController
+  before_action :set_wishlist_item, only: [:edit, :update, :destroy]
+
   def index
     @wishlist_items = WishlistItem.all
   end
@@ -23,4 +25,38 @@ class WishlistItemsController < ApplicationController
     redirect_to wishlist_path(@wishlist), notice: "Added #{@item.name}"
   end
 
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @wishlist_item.update(wishlist_item_params)
+        format.html { redirect_to @wishlist_item.wishlist, notice: 'Wishlist item was successfully updated.' }
+        format.json { render :show, status: :ok, location: @wishlist_item.wishlist }
+      else
+        format.html { render :edit }
+        format.json { render json: @wishlist_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    wishlist = @wishlist_item.wishlist
+    @wishlist_item.destroy
+    respond_to do |format|
+      format.html { redirect_to wishlist, notice: 'Item was successfully removed from wishlist.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def set_wishlist_item
+    @wishlist_item = WishlistItem.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def wishlist_item_params
+    params.require(:wishlist_item).permit(:quantity, :priority, :staff_message)
+  end
 end

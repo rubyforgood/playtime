@@ -1,0 +1,14 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h2 class = "purple">
+    Editing "<%= @wishlist_item.name %>"
+    <small>for <%= @wishlist_item.wishlist.name %></small>
+  </h2>
+
+  <%= render 'form', wishlist_item: @wishlist_item %>
+
+  <%= link_to 'Back to Wishlist', @wishlist_item.wishlist %> |
+  <%= link_to 'Remove', wishlist_item_path(@wishlist_item),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
+</div>

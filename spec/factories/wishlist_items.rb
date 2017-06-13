@@ -12,14 +12,9 @@
 #  staff_message :text
 #
 
-describe WishlistItem do
-  describe "without an associated wishlist" do
-    subject { build(:wishlist_item, wishlist: nil) }
-    it { should_not be_valid }
-  end
-
-  describe "without an associated item" do
-    subject { build(:wishlist_item, item: nil) }
-    it { should_not be_valid }
+FactoryGirl.define do
+  factory :wishlist_item do
+    wishlist
+    item
   end
 end

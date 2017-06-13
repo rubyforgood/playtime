@@ -22,6 +22,31 @@ feature "Browsing the site:" do
       expect(current_path).to eq wishlist_path(st_josephs)
     end
 
+    context "when there are wishlist items" do
+      before do
+        create(:item, :on_a_wishlist, wishlist: dc_general, name: "BatCorgi!")
+        create(:item, :on_a_wishlist, wishlist: st_josephs, name: "Puzzles")
+      end
+
+      scenario "I can see a list of items across all wishlists" do
+        visit "/"
+
+        expect(page).to have_text "BatCorgi!"
+        expect(page).to have_text "Puzzles"
+        expect(page).to have_button "Purchase Item"
+      end
+
+      scenario "I can see a list of items for a given wishlist" do
+        visit "/"
+        click_link "DC General"
+
+        expect(page).to have_text "BatCorgi!"
+        expect(page).to_not have_text "Puzzles"
+      end
+    end
+
     # scenario "I can share a wishlist on my social media accounts"
+    # scenario "I can purchase a wish list item"
+    # scenario "I can confirm that an item was purchased"
   end
 end
