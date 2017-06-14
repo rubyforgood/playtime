@@ -1,29 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h2 class = "purple">Pledges</h2>
 
-<h1>Pledges</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @pledges.each do |pledge| %>
+  <table id="pledges">
+    <thead>
       <tr>
-        <td><%= pledge.item_id %></td>
-        <td><%= pledge.user_id ? pledge.user.name : 'anonymous'%></td>
-        <td><%= link_to 'Show', pledge %></td>
-        <td><%= link_to 'Edit', edit_pledge_path(pledge) %></td>
-        <td><%= link_to 'Destroy', pledge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Item</th>
+        <th>User</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @pledges.each do |pledge| %>
+        <tr class="pledge">
+          <td><%= link_to pledge.item.name, pledge.item %></td>
+          <td><%= link_to pledge.user.display_name, pledge.user %></td>
+          <td><%= link_to 'Show', pledge %></td>
+          <td><%= link_to 'Edit', edit_pledge_path(pledge) %></td>
+          <td><%= link_to 'Destroy', pledge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'Export CSV', '/pledges/export_csv', method: :get %>
+  <br>
+
+  <%= link_to 'Export CSV', '/pledges/export_csv', method: :get %>
+</div>

@@ -15,10 +15,18 @@
 #  name          :text             not null
 #
 
-class Item < ApplicationRecord
-  has_many :wishlist_items
-  has_many :wishlists, through: :wishlist_items
-  attr_accessor :quantity
+FactoryGirl.define do
+  factory :item do
+    name "Louis the Corgi"
 
-  validates :name, presence: true
+    trait :on_a_wishlist do
+      transient do
+        wishlist nil
+      end
+
+      after(:create) do |item, evaluator|
+        item.wishlists << evaluator.wishlist
+      end
+    end
+  end
 end

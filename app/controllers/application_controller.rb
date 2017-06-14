@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def site_manager?
-    current_user.try(:site_managers.try(:any?))
+    current_user.try(:site_managers).try(:any?)
   end
 
   def authenticate_admin

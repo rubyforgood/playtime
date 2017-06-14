@@ -1,6 +1,6 @@
 class WishlistsController < ApplicationController
   before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin, only: [:new, :destroy, :update]
+  before_action :authenticate_admin, except: [:index, :show]
   helper_method :get_site_managers
 
   # GET /wishlists
@@ -13,7 +13,6 @@ class WishlistsController < ApplicationController
   # GET /wishlists/1.json
   def show
     @site_managers = @wishlist.users
-    @wishlist = Wishlist.find(params[:id])
     @wishlist_items = @wishlist.wishlist_items
   end
 
@@ -65,7 +64,7 @@ class WishlistsController < ApplicationController
   def destroy
     @wishlist.destroy
     respond_to do |format|
-      format.html { redirect_to wishlists_url, notice: 'Wishlist was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Wishlist was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -82,7 +81,10 @@ class WishlistsController < ApplicationController
     end
 
     def create_site_managers
-      params['wishlist']['site_manager'].each do |user_id, value|
+      site_managers = params['wishlist']['site_manager']
+      return unless site_managers
+
+      site_managers.each do |user_id, value|
         @wishlist.site_managers.create(user_id: user_id.to_i) if value == '1'
       end
     end

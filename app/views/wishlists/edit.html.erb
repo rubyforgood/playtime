@@ -1,6 +1,8 @@
-<h1>Editing Wishlist</h1>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h2 class = "purple">Editing Wishlist: <%= @wishlist.name %></h2>
 
-<%= render 'form', wishlist: @wishlist %>
+  <%= render 'form', wishlist: @wishlist %>
 
-<%= link_to 'Show', @wishlist %> |
-<%= link_to 'Back', wishlists_path %>
+  <%= link_to 'Back to Wishlist', @wishlist %>
+</div>

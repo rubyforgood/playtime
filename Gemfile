@@ -47,17 +47,30 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   # A Ruby gem to load environment variables from `.env`.
   gem 'dotenv-rails'
+  # Fixtures replacement. Read more: http://www.rubydoc.info/gems/factory_girl/
+  gem 'factory_girl_rails', '~> 4.8'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
+  # Annotate model/model spec/factory files with the database schema
+  gem 'annotate', '~> 2.7'
   # The Listen gem listens to file modifications and notifies you about the changes. https://rubygems.org/gems/listen
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   # This gem makes Spring watch the filesystem for changes using Listen rather than by polling the filesystem.
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # Implements the `rspec` command for Spring, allowing for faster test loading
+  gem 'spring-commands-rspec', '~> 1.0'
+end
+
+group :test do
+  # Allows you to launch a debugging snapshot in your browser during Capybara tests
+  gem 'launchy', '~> 2.4.3'
+  # A set of strategies for cleaning your database (ensuring a clean slate during tests)
+  gem 'database_cleaner', '~> 1.6.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

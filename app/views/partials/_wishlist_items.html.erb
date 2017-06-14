@@ -1,14 +1,49 @@
 <% @wishlist_items.each do |wishlist_item| %>
   <% item = @items.find(wishlist_item.item_id) %>
-  <div class="card">
+
+  <div class="wishlist-item card">
     <div class="card-block">
+      <!-- Card Image -->
       <img class="card-img-left" src="<%= item.image_url %>">
-      <h4 class="card-title"><a href="<%= item.amazon_url %>"><%= item.name %></a></h4>
-      <p><strong>Staff Message:</strong>
-      <span class="card-text"><%= wishlist_item.staff_message %></span></p>
-      <p><strong><span class="padding-right">Quantity: <%= wishlist_item.quantity %></span> Price: <%= number_to_currency(item.price_cents/100.00) %></p></strong>
-      <%= link_to 'Edit', edit_wishlist_items_path(wishlist_item.id) if logged_in? && (admin? || site_manager?) %>
-      <%= link_to 'Destroy', wishlist_items_path(wishlist_item.id), method: :delete, data: { confirm: 'Are you sure?' } if logged_in? && admin? %>
+
+      <!-- Card Title -->
+      <h4 class="card-title">
+        <%= link_to item.name, item.amazon_url %>
+      </h4>
+
+      <!-- Staff Message -->
+      <p>
+        <strong>Staff Message:</strong>
+        <span class="card-text"><%= wishlist_item.staff_message %></span>
+      </p>
+
+      <!-- Item Details -->
+      <p>
+        <strong>
+          <span class="padding-right">
+            Quantity: <%= wishlist_item.quantity %>
+          </span>
+          Price:
+          <% if wishlist_item.price_cents %>
+            <%= number_to_currency(item.price_cents / 100.00) %>
+          <% else %>
+            "Unknown"
+          <% end %>
+        </strong>
+      </p>
+
+
+      <!-- Action Links -->
+
+      <!-- Wishlist Item Actions -->
+      <% if logged_in? && (admin? || site_manager?) %>
+        <div class="wishlist-item-tools">
+          <%= link_to 'Edit', edit_wishlist_item_path(wishlist_item) %>
+          <%= link_to 'Remove', wishlist_item_path(wishlist_item), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      <% end %>
+
+      <!-- Pledge Actions -->
       <%= button_to "Purchase Item", "#{item.amazon_url}", class:"btn btn-primary float-right" %>
     </div>
   </div>
