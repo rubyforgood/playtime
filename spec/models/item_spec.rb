@@ -15,9 +15,11 @@
 #  name          :text             not null
 #
 
-class Item < ApplicationRecord
-  has_many :wishlist_items
-  has_many :wishlists, through: :wishlist_items
+require "rails_helper"
 
-  validates :name, presence: true
+describe Item do
+  describe "without a name" do
+    subject { build(:item, name: nil) }
+    it { should_not be_valid }
+  end
 end
