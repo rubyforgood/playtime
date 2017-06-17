@@ -5,12 +5,12 @@
   <%= hidden_field_tag 'amazon_url', item.detail_page_url %>
   <%= hidden_field_tag 'price_cents', item.price_cents %>
   <%= hidden_field_tag 'asin', item.asin %>
-  <%= hidden_field_tag 'image_url', item.small_image_url %>
-  <%= hidden_field_tag 'image_width', item.small_image_width %>
-  <%= hidden_field_tag 'image_height', item.small_image_height %>
+  <%= hidden_field_tag 'image_url', item.image_url %>
+  <%= hidden_field_tag 'image_width', item.image_width %>
+  <%= hidden_field_tag 'image_height', item.image_height %>
   <td>
-    <% if item.small_image_url %>
-    <%= image_tag item.small_image_url, width: item.small_image_width, height: item.small_image_height %>
+    <% if item.image_url %>
+    <%= image_tag item.image_url, width: item.image_width, height: item.image_height %>
     <% end %>
   </td>
   <td>

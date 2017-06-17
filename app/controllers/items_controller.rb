@@ -1,6 +1,4 @@
 require "amazon_product_api"
-require "amazon_product_api_client"
-include AWSAPIs
 
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
@@ -69,9 +67,10 @@ class ItemsController < ApplicationController
   def search_amazon
     query = params[:query]
     page  = params[:page] || 1
-    amazon_client = AmazonProductAPIClient.new(query: query, page_num: page)
+    amazon_client = AmazonProductAPI::HTTPClient.new(query: query,
+                                                     page_num: page)
     xml_response = amazon_client.search.body
-    @response = SearchResponse.new(parse_response(xml_response))
+    @response = AmazonProductAPI::SearchResponse.new(parse_response(xml_response))
     render results_path
   end
 

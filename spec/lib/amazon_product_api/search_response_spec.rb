@@ -1,18 +1,18 @@
-require "amazon_product_api"
+require "amazon_product_api/search_response"
 
-describe AWSAPIs::SearchResponse do
+describe AmazonProductAPI::SearchResponse do
   let(:response_hash) do
     {
       "ItemSearchResponse" => {
         "Items" => {
           "TotalPages" => "5",
-          "Item" => ["Item 1", "Item 2", "Item 3"]
+          "Item" => [{}, {}, {}]
         }
       }
     }
   end
-  let(:blank_response) { AWSAPIs::SearchResponse.new({}) }
-  let(:full_response)  { AWSAPIs::SearchResponse.new(response_hash) }
+  let(:blank_response) { AmazonProductAPI::SearchResponse.new({}) }
+  let(:full_response)  { AmazonProductAPI::SearchResponse.new(response_hash) }
 
   describe "#num_pages" do
     context "no page number is present" do
@@ -37,8 +37,9 @@ describe AWSAPIs::SearchResponse do
     context "when items are returned" do
       subject(:items) { full_response.items(item_class: mock_item_class) }
 
-      it "should contain the correct number of items" do
-        expect(items.length).to eq 3
+      it "should create the correct number of new items" do
+        expect(mock_item_class).to receive(:new).exactly(3).times
+        items
       end
     end
   end

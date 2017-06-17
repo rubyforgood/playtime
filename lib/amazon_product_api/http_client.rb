@@ -1,5 +1,9 @@
-module AWSAPIs
-  class AmazonProductAPIClient
+module AmazonProductAPI
+  # Responsible for building and executing the query to the Amazon Product API.
+  #
+  # Any logic relating to endpoints, building the query string, authentication
+  # signatures, etc. should live in this class.
+  class HTTPClient
     require 'httparty'
     require 'time'
     require 'uri'

@@ -1,8 +1,8 @@
-require "amazon_product_api_client"
+require "amazon_product_api/http_client"
 
-describe AWSAPIs::AmazonProductAPIClient do
+describe AmazonProductAPI::HTTPClient do
   let(:client) {
-    AWSAPIs::AmazonProductAPIClient.new(query: "corgi", page_num: 1)
+    AmazonProductAPI::HTTPClient.new(query: "corgi", page_num: 1)
   }
 
   describe "#url" do
@@ -27,13 +27,13 @@ describe AWSAPIs::AmazonProductAPIClient do
     context "when no query term was provided" do
       it "should raise an InvalidQueryError" do
         client.query = nil
-        expect { client.url }.to raise_error AWSAPIs::InvalidQueryError
+        expect { client.url }.to raise_error AmazonProductAPI::InvalidQueryError
       end
     end
 
     context "when no page number was provided" do
       it "should default to page 1" do
-        client = AWSAPIs::AmazonProductAPIClient.new(query: "corgi")
+        client = AmazonProductAPI::HTTPClient.new(query: "corgi")
         expect(client.url).to include "ItemPage=1"
       end
     end
@@ -41,7 +41,7 @@ describe AWSAPIs::AmazonProductAPIClient do
     context "when the page number is set to nil" do
       it "should raise an InvalidQueryError" do
         client.page_num = nil
-        expect { client.url }.to raise_error AWSAPIs::InvalidQueryError
+        expect { client.url }.to raise_error AmazonProductAPI::InvalidQueryError
       end
     end
   end
