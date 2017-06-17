@@ -27,12 +27,22 @@ module AmazonProductAPI
       image.height
     end
 
-    alias_method :associates_url, :detail_page_url
+    def valid?
+      price != "$0.00"
+    end
+
+    def has_valid_image?
+      image.valid?
+    end
 
     private
 
     attr_reader :image
   end
 
-  WebImage = Struct.new(:url, :width, :height)
+  WebImage = Struct.new(:url, :width, :height) do
+    def valid?
+      url.present?
+    end
+  end
 end
