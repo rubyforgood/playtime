@@ -15,7 +15,7 @@
     <% end %>
   <% end %>
 
-  <table class = 'table'>
+  <table class="table" id="search-results">
     <tbody>
       <% @response.items.each do |item| %>
         <%= render 'items/item', item: item %>

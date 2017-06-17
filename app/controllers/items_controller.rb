@@ -90,7 +90,7 @@ class ItemsController < ApplicationController
     end
 
     def parse_response(response)
-      @response = Nokogiri::XML.parse(response)
-      @response = Hash.from_xml(@response.to_s)
+      response = Nokogiri::XML.parse(response)
+      Hash.from_xml(response.to_s)
     end
 end
