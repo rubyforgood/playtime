@@ -1,3 +1,5 @@
+require "amazon_product_api/search_response"
+
 module AmazonProductAPI
   # Responsible for building and executing the query to the Amazon Product API.
   #
@@ -36,8 +38,14 @@ module AmazonProductAPI
       "&Signature=#{uri_escape(signature)}" # signature
     end
 
+    # Performs the search query and returns the resulting SearchResponse
+    def search_response(http: HTTParty)
+      response = get(http: http)
+      SearchResponse.new parse_response(response)
+    end
+
     # Send the HTTP request
-    def search(http: HTTParty)
+    def get(http: HTTParty)
       http.get(url)
     end
 
@@ -46,6 +54,10 @@ module AmazonProductAPI
 
 
     attr_reader :query, :page_num
+
+    def parse_response(response)
+      Hash.from_xml(response.body)
+    end
 
     def uri_escape(phrase)
       URI.escape(phrase.to_s, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))

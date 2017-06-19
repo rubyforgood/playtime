@@ -2,7 +2,7 @@ require "amazon_product_api/http_client"
 
 describe AmazonProductAPI::HTTPClient do
   let(:client) {
-    AmazonProductAPI::HTTPClient.new(query: "corgi", page_num: 1)
+    AmazonProductAPI::HTTPClient.new(query: "corgi", page_num: 5)
   }
 
   describe "#url" do
@@ -13,7 +13,7 @@ describe AmazonProductAPI::HTTPClient do
     it { should start_with "http://webservices.amazon.com/onca/xml" }
     it { should include "AWSAccessKeyId=aws_access_key" }
     it { should include "AssociateTag=aws_associates_tag" }
-    it { should include "ItemPage=1" }
+    it { should include "ItemPage=5" }
     it { should include "Keywords=corgi" }
     it { should include "Operation=ItemSearch" }
     it { should include "ResponseGroup=ItemAttributes%2COffers%2CImages" }
@@ -46,12 +46,18 @@ describe AmazonProductAPI::HTTPClient do
     end
   end
 
-  describe "#search" do
+  describe "#get" do
     let(:http_double) { double("http") }
 
     it "should make a `get` request to the specified http library" do
       expect(http_double).to receive(:get).with(String)
-      client.search(http: http_double)
+      client.get(http: http_double)
     end
+  end
+
+  describe "#search_response", :external do
+    subject { AmazonProductAPI::HTTPClient.new(query: "corgi").search_response }
+    it { should be_a AmazonProductAPI::SearchResponse }
+    it { should respond_to :items }
   end
 end
