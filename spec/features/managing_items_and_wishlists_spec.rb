@@ -60,17 +60,41 @@ feature "Managing items and wishlists:" do
 
     # Items
 
-    scenario "I can add a new item to any wishlist" do
-      skip "Implementation requires a working Amazon Product API setup"
-
+    scenario "I can search Amazon for items to add", :external do
       click_link "DC General"
-      within "#wishlist-actions" do
-        click_link "Add to Wishlist"
-      end
-      fill_in "search_field", with: "doggo"
+      click_link "Add to Wishlist"
+      fill_in "search_field", with: "corgi"
+      click_button "Search Amazon"
 
-      fail "Not fully implemented"
+      within("#search-results") do
+        results = find_all(".item")
+
+        # values from saved search response (see fixtures)
+        expect(results.count).to eq 10
+        expect(page).to have_text "Corgi Socks"
+        expect(page).to have_text "Corgi Butt"
+      end
     end
+
+    scenario "I can add a new item to the wishlist", :external do
+      click_link "DC General"
+      click_link "Add to Wishlist"
+      fill_in "search_field", with: "corgi"
+      click_button "Search Amazon"
+
+      # add new item
+      within("#search-results") do
+        within(find_all(".item").first) do
+          fill_in("staff_message", with: "More corgi things!")
+          select("18", from: "qty")
+          click_button "Add"
+        end
+      end
+
+      expect(page).to have_text "More corgi things!"
+      expect(page).to have_text "Quantity: 18"
+    end
+    # context "when the Amazon service is down"
 
     scenario "I can edit any wishlist item" do
       click_link "DC General"

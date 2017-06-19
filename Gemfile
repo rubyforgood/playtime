@@ -71,6 +71,8 @@ group :test do
   gem 'launchy', '~> 2.4.3'
   # A set of strategies for cleaning your database (ensuring a clean slate during tests)
   gem 'database_cleaner', '~> 1.6.1'
+  # Library for stubbing and setting expectations on HTTP requests in Ruby.
+  gem 'webmock', '~> 3.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

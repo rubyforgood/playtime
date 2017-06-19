@@ -8,20 +8,22 @@
 
       <!-- Card Title -->
       <h4 class="card-title">
-        <%= link_to item.name, item.amazon_url %>
+        <%= link_to item.name, item.amazon_url || "#" %>
       </h4>
 
       <!-- Staff Message -->
-      <p>
-        <strong>Staff Message:</strong>
-        <span class="card-text"><%= wishlist_item.staff_message %></span>
-      </p>
+      <% if wishlist_item.staff_message %>
+        <p>
+          <strong>Staff Message:</strong>
+          <span class="card-text"><%= wishlist_item.staff_message %></span>
+        </p>
+      <% end %>
 
       <!-- Item Details -->
       <p>
         <strong>
           <span class="padding-right">
-            Quantity: <%= wishlist_item.quantity %>
+            Quantity: <%= wishlist_item.quantity || 0 %>
           </span>
           Price:
           <% if wishlist_item.price_cents %>
