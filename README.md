@@ -242,4 +242,8 @@ For changes to `.env` to take effect, you'll need to restart your server.
 
   # Code for generating affiliate links from search (same for everyone)
   AWS_ASSOCIATES_TAG="playtim009-20"
+
+  # Default rack env and port (same for everyone)
+  RACK_ENV="development"
+  PORT=3000
   ```
