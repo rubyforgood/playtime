@@ -6,27 +6,24 @@ module AmazonProductAPI
   # Any logic relating to endpoints, building the query string, authentication
   # signatures, etc. should live in this class.
   class HTTPClient
-    require 'httparty'
-    require 'time'
-    require 'uri'
-    require 'openssl'
-    require 'base64'
-
-    # Environment config
-    AWS_ACCESS_KEY = ENV["AWS_ACCESS_KEY"]
-    AWS_SECRET_KEY = ENV["AWS_SECRET_KEY"]
-    AWS_ASSOCIATES_TAG = ENV["AWS_ASSOCIATES_TAG"]
+    require "httparty"
+    require "time"
+    require "uri"
+    require "openssl"
+    require "base64"
 
     # The region you are interested in
     ENDPOINT = "webservices.amazon.com"
     REQUEST_URI = "/onca/xml"
 
-
+    attr_reader :env
     attr_writer :query, :page_num
 
-    def initialize(query:, page_num: 1)
+    def initialize(query:, page_num: 1, env: ENV)
       @query = query
       @page_num = page_num
+      @env = env
+      assign_env_vars
     end
 
     # Generate the signed URL
@@ -53,7 +50,19 @@ module AmazonProductAPI
     private
 
 
-    attr_reader :query, :page_num
+    attr_reader :query, :page_num, :aws_credentials
+
+    def assign_env_vars
+      @aws_credentials = AWSCredentials.new(env["AWS_ACCESS_KEY"],
+                                            env["AWS_SECRET_KEY"],
+                                            env["AWS_ASSOCIATES_TAG"])
+      unless aws_credentials.present?
+        msg = "Environment variables AWS_ACCESS_KEY, AWS_SECRET_KEY, and " \
+              "AWS_ASSOCIATES_TAG are required values. Please make sure " \
+              "they're set."
+        fail InvalidQueryError, msg
+      end
+    end
 
     def parse_response(response)
       Hash.from_xml(response.body)
@@ -67,8 +76,8 @@ module AmazonProductAPI
       params = {
         "Service"         => "AWSECommerceService",
         "Operation"       => "ItemSearch",
-        "AWSAccessKeyId"  => AWS_ACCESS_KEY,
-        "AssociateTag"    => AWS_ASSOCIATES_TAG,
+        "AWSAccessKeyId"  => aws_credentials.access_key,
+        "AssociateTag"    => aws_credentials.associate_tag,
         "SearchIndex"     => "All",
         "Keywords"        => query.to_s,
         "ResponseGroup"   => "ItemAttributes,Offers,Images",
@@ -76,7 +85,7 @@ module AmazonProductAPI
       }
 
       # Set current timestamp if not set
-      params["Timestamp"] = Time.now.gmtime.iso8601 if !params.key?("Timestamp")
+      params["Timestamp"] ||= Time.now.gmtime.iso8601
       params
     end
 
@@ -98,9 +107,16 @@ module AmazonProductAPI
     end
 
     def digest_with_key(string)
-      OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'),
-                           AWS_SECRET_KEY,
+      OpenSSL::HMAC.digest(OpenSSL::Digest.new("sha256"),
+                           aws_credentials.secret_key,
                            string)
+    end
+  end
+
+  # Wrapper object to store/verify AWS credentials
+  AWSCredentials = Struct.new(:access_key, :secret_key, :associate_tag) do
+    def present?
+      access_key && secret_key && associate_tag
     end
   end
 
