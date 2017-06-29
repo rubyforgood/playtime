@@ -20,6 +20,8 @@ gem 'uglifier', '>= 1.3.0'
 
 # A Ruby gem to load environment variables from `.env`.
 gem 'dotenv-rails'
+# Logs production errors to an external service
+gem 'rollbar'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

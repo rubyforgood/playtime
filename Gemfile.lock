@@ -179,6 +179,8 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    rollbar (2.15.0)
+      multi_json
     rspec-core (3.6.0)
       rspec-support (~> 3.6.0)
     rspec-expectations (3.6.0)
@@ -275,6 +277,7 @@ DEPENDENCIES
   pry
   puma (~> 3.7)
   rails (~> 5.1.1)
+  rollbar
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   selenium-webdriver
