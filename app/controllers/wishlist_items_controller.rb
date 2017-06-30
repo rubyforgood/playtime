@@ -1,5 +1,6 @@
 class WishlistItemsController < ApplicationController
   before_action :set_wishlist_item, only: [:edit, :update, :destroy]
+  skip_before_action :authenticate_admin, only: [:index, :show]
 
   def index
     @wishlist_items = WishlistItem.all

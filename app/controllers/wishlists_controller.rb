@@ -1,6 +1,6 @@
 class WishlistsController < ApplicationController
   before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin, except: [:index, :show]
+  skip_before_action :authenticate_admin, only: [:index, :show]
   helper_method :get_site_managers
 
   def index

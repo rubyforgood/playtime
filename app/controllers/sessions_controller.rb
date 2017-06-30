@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :authenticate_admin
+
   def new
     if logged_in?
       redirect_to '/'
@@ -13,14 +15,16 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_or_create_from_amazon_hash!(auth_hash)
-
     self.current_user = @user
+
     redirect_to '/'
   end
 
   def failure
-    puts "Authentication error: #{params[:message].humanize}"
-    redirect_to root_url, :alert => "Authentication error: #{params[:message].humanize}"
+    msg = "Authentication error: #{params[:message].humanize}"
+
+    Rails.logger.info(msg)
+    redirect_to root_url, alert: msg
   end
 
   protected

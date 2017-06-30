@@ -1,6 +1,5 @@
 class PledgesController < ApplicationController
   before_action :set_pledge, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin
 
   def index
     @pledges = Pledge.all
