@@ -1,6 +1,6 @@
 <% if item.valid? %>
   <tr class="item">
-    <%= form_tag wishlist_wishlist_items_path(@wishlist) do %>
+    <%= form_tag wishlist_wishlist_items_path(wishlist: @wishlist) do %>
     <%= hidden_field_tag 'name', item.title %>
     <%= hidden_field_tag 'amazon_url', item.detail_page_url %>
     <%= hidden_field_tag 'price_cents', item.price_cents %>
