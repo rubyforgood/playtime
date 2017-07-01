@@ -37,7 +37,7 @@
              aria-expanded="false">Wishlists</a>
 
           <div class="dropdown-menu" id="wishlists">
-            <% @all_wishlists.each do |wishlist| %>
+            <% @wishlists.each do |wishlist| %>
               <%= link_to wishlist.name, wishlist_path(wishlist),
                                          class: "wishlist dropdown-item" %>
             <% end %>
@@ -46,7 +46,7 @@
 
         <!-- Admin Submenu -->
 
-        <% if logged_in? && admin? %>
+        <% if current_user.admin? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle"
                data-toggle="dropdown"
@@ -64,17 +64,17 @@
         <!-- Log In/Out -->
 
         <li class="nav-item">
-          <% if !logged_in? %>
-            <%= link_to "Log In", signin_path, class: "nav-link" %>
-          <% else %>
+          <% if current_user.logged_in? %>
             <%= link_to "Log Out", signout_path, class: "nav-link" %>
+          <% else %>
+            <%= link_to "Log In", signin_path, class: "nav-link" %>
           <% end %>
         </li>
       </ul>
 
       <!-- Logged-In User Greeting -->
 
-      <% if logged_in? %>
+      <% if current_user.logged_in? %>
         <span class="navbar-text">
           Hello, <%= current_user.display_name %>
         </span>

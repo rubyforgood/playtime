@@ -1,5 +1,5 @@
 <% @wishlist_items.each do |wishlist_item| %>
-  <% item = @items.find(wishlist_item.item_id) %>
+  <% item = wishlist_item.item %>
 
   <div class="wishlist-item card">
     <div class="card-block">
@@ -38,7 +38,7 @@
       <!-- Action Links -->
 
       <!-- Wishlist Item Actions -->
-      <% if logged_in? && (admin? || site_manager?) %>
+      <% if current_user.can_manage?(wishlist_item.wishlist) %>
         <div class="wishlist-item-tools">
           <%= link_to 'Edit', edit_wishlist_item_path(wishlist_item) %>
           <%= link_to 'Remove', wishlist_item_path(wishlist_item), method: :delete, data: { confirm: 'Are you sure?' } %>

@@ -15,10 +15,16 @@
     <tbody>
       <% @wishlists.each do |wishlist| %>
         <tr>
-          <td colspan="4"><%= link_to "#{wishlist.name}", wishlist_path(wishlist.id) %></td>
+          <td colspan="4"><%= link_to "#{wishlist.name}",
+                                      wishlist_path(wishlist.id) %></td>
           <td colspan="4"><%= get_site_managers(wishlist) %></td>
-          <td><%= link_to 'Edit', edit_wishlist_path(wishlist) if admin? %></td>
-          <td><%= link_to 'Destroy', wishlist, method: :delete, data: { confirm: 'Are you sure?' } if admin? %></td>
+
+          <% if current_user.admin? %>
+            <td><%= link_to 'Edit', edit_wishlist_path(wishlist) %></td>
+            <td><%= link_to 'Destroy', wishlist,
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
@@ -26,5 +32,5 @@
 
 <br>
 
-<%= link_to 'New Wishlist', new_wishlist_path if admin? %>
+<%= link_to 'New Wishlist', new_wishlist_path if current_user.admin? %>
 </div>

@@ -2,7 +2,7 @@
   <p id="notice"><%= notice %></p>
   <h2 class = "purple"><%= @wishlist.name %></h2>
 
-  <% if logged_in? && current_user.can_manage?(@wishlist) %>
+  <% if current_user.can_manage?(@wishlist) %>
     <div id="wishlist-actions">
       <%= link_to 'Add to Wishlist', search_path(@wishlist) %> |
       <%= link_to 'Edit Wishlist', edit_wishlist_path(@wishlist) %> |

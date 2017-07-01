@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate_admin
 
   def new
-    if logged_in?
+    if current_user.logged_in?
       redirect_to '/'
     else
       redirect_to '/auth/amazon'
@@ -10,12 +10,13 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout
+    reset_session
+    redirect_to '/'
   end
 
   def create
-    @user = User.find_or_create_from_amazon_hash!(auth_hash)
-    self.current_user = @user
+    user = User.find_or_create_from_amazon_hash!(auth_hash)
+    session[:user_id] = user.id
 
     redirect_to '/'
   end
@@ -27,9 +28,8 @@ class SessionsController < ApplicationController
     redirect_to root_url, alert: msg
   end
 
-  protected
-
-  def auth_hash
-    request.env['omniauth.auth']
-  end
+  private
+    def auth_hash
+      request.env['omniauth.auth']
+    end
 end

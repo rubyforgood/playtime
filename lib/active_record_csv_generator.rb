@@ -1,3 +1,9 @@
+##
+# Generates CSV from ActiveRecord model attributes
+#
+# This generator is not customizable–when given a resource, it will take all
+# attributes as columns and dump all records into the CSV.
+#
 class ActiveRecordCSVGenerator
   def initialize(resource)
     @resource = resource

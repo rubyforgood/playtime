@@ -1,3 +1,4 @@
+##
 # Initializes an admin user from ENV
 #
 # The purpose of this class is to isolate the behavior required by the
