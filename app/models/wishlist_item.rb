@@ -4,12 +4,12 @@
 #
 #  id            :integer          not null, primary key
 #  quantity      :integer
-#  priority      :string
 #  wishlist_id   :integer
 #  item_id       :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  staff_message :text
+#  priority      :integer          default("low"), not null
 #
 
 class WishlistItem < ApplicationRecord
@@ -17,7 +17,14 @@ class WishlistItem < ApplicationRecord
   belongs_to :item
   has_many :pledges
 
-  delegate :amazon_url, :price_cents, :asin, :image_url, :image_width, :image_height, :name, to: :item
+  delegate :amazon_url, :price_cents, :asin, :name,
+           :image_url, :image_width, :image_height,
+           to: :item
+
+  enum priority: [:low, :medium, :high, :inactive]
+  validates :priority, presence: true
+
+  scope :active, -> { where.not(priority: :inactive) }
 
   def self.build_index
     items = WishlistItem.where("priority != 'inactive'").map(&:item)

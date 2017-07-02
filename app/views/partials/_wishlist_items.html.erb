@@ -23,7 +23,10 @@
       <p>
         <strong>
           <span class="padding-right">
-            Quantity: <%= wishlist_item.quantity || 0 %>
+            Quantity: <%= wishlist_item.quantity %>
+          </span>
+          <span class="padding-right">
+            Priority: <%= wishlist_item.priority %>
           </span>
           Price:
           <% if wishlist_item.price_cents %>

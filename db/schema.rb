@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170702045052) do
+ActiveRecord::Schema.define(version: 20170702123334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,12 +61,12 @@ ActiveRecord::Schema.define(version: 20170702045052) do
 
   create_table "wishlist_items", force: :cascade do |t|
     t.integer "quantity"
-    t.string "priority"
     t.integer "wishlist_id"
     t.integer "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "staff_message"
+    t.integer "priority", default: 0, null: false
     t.index ["item_id"], name: "index_wishlist_items_on_item_id"
     t.index ["wishlist_id"], name: "index_wishlist_items_on_wishlist_id"
   end
