@@ -3,7 +3,7 @@
 # Table name: wishlist_items
 #
 #  id            :integer          not null, primary key
-#  quantity      :integer
+#  quantity      :integer          default(0), not null
 #  wishlist_id   :integer
 #  item_id       :integer
 #  created_at    :datetime         not null
@@ -22,7 +22,10 @@ class WishlistItem < ApplicationRecord
            to: :item
 
   enum priority: [:low, :medium, :high, :inactive]
+
   validates :priority, presence: true
+  validates :quantity, presence: true,
+                       numericality: { greater_than_or_equal_to: 0 }
 
   scope :active, -> { where.not(priority: :inactive) }
 
