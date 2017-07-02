@@ -22,7 +22,7 @@ class User < ApplicationRecord
   validates :amazon_user_id, uniqueness: true,
                              allow_blank: true
 
-  has_many :site_managers
+  has_many :site_managers, dependent: :destroy
   has_many :wishlists, through: :site_managers
 
   def can_manage?(wishlist)

@@ -9,9 +9,10 @@
 #
 
 class Wishlist < ApplicationRecord
-  has_many :site_managers
+  has_many :site_managers, dependent: :destroy
   has_many :users, through: :site_managers
-  has_many :wishlist_items
+
+  has_many :wishlist_items, dependent: :destroy
   has_many :items, through: :wishlist_items
 
   validates :name, presence: true,
