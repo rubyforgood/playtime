@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170521151159) do
+ActiveRecord::Schema.define(version: 20170702043759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,10 +29,11 @@ ActiveRecord::Schema.define(version: 20170521151159) do
   end
 
   create_table "pledges", force: :cascade do |t|
-    t.integer "item_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "wishlist_item_id"
+    t.index ["wishlist_item_id"], name: "index_pledges_on_wishlist_item_id"
   end
 
   create_table "site_managers", force: :cascade do |t|
@@ -71,4 +72,5 @@ ActiveRecord::Schema.define(version: 20170521151159) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "pledges", "wishlist_items"
 end

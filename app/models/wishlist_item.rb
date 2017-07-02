@@ -15,6 +15,7 @@
 class WishlistItem < ApplicationRecord
   belongs_to :wishlist
   belongs_to :item
+  has_many :pledges
 
   delegate :amazon_url, :price_cents, :asin, :image_url, :image_width, :image_height, :name, to: :item
 
