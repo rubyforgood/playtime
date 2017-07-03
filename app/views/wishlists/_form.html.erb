@@ -16,14 +16,28 @@
     <%= form.text_field :name, id: :wishlist_name, class: "text-field-md" %>
   </div>
 
-  <%= form.fields_for :site_manager do |site_manager_form| %>
-    <div class="form-group">
-      <%= site_manager_form.label 'Site Manager:', class: "group-label" %>
-      </br>
-      <% @site_managers.each do |user| %>
-        <%= site_manager_form.label user.name %>
-        <%= site_manager_form.check_box user.id, checked: user.can_manage?(@wishlist), class: "checkbox"  %></br>
-      <% end %>
+  <%= form.fields_for :user do |user_form| %>
+    <div class="form-group" id="wishlist_users">
+      <%= user_form.label 'Site Managers:', class: "group-label" %>
+
+      <p>
+        <strong>Admins:</strong> (can manage all wishlists)
+        <% User.admin.each do |admin| %>
+          <input type="checkbox" checked disabled readonly />
+          <%= admin.display_name %>
+        <% end %>
+      </p>
+
+      <p>
+        <strong>Site Managers:</strong><br />
+          <%= form.collection_check_boxes :user_ids, User.all, :id, :display_name do |b|
+            b.label(class: "checkbox-inline") {
+              b.check_box(id: "user-#{b.object.id}") + b.text
+            }
+          end
+          %>
+        <br />
+      </p>
     </div>
   <% end %>
 

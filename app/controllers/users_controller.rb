@@ -15,6 +15,10 @@ class UsersController < ApplicationController
   end
 
   def update
+    if wishlist_ids = params[:user][:wishlist_ids]
+      @user.wishlist_ids = wishlist_ids
+    end
+
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
@@ -36,6 +40,11 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :admin, :site_manager)
+    end
+
+    def wishlists_from_params
+      wishlist_ids = params[:user][:wishlist_ids].map(&:to_i)
+      wishlists = Wishlist.where(id: wishlist_ids)
     end
 
     def export_csv

@@ -15,7 +15,7 @@
 
     <tbody>
       <% @users.each do |user| %>
-        <tr class="user">
+        <tr class="user" id="user-<%= user.id %>">
           <td><%= user.name %></td>
           <td><%= user.email %><%= mail_to user.email, icon('envelope-o') %></td>
           <td><%= user.admin? %></td>

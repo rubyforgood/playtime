@@ -25,6 +25,8 @@ class User < ApplicationRecord
   has_many :site_managers, dependent: :destroy
   has_many :wishlists, through: :site_managers
 
+  scope :admin, -> { where(admin: true) }
+
   def can_manage?(wishlist)
     admin? || wishlists.exists?(wishlist.id)
   end

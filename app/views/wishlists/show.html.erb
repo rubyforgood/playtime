@@ -11,7 +11,12 @@
     </div>
   <% end %>
 
+  <p id="site-managers">
+    <strong>Site Managers:</strong>
+    <%= @wishlist.users.map(&:display_name).join(", ") %>
+  </p>
+
   <%= render "partials/wishlist_items" %>
 
-  <%= link_to 'Back', wishlists_path %>
+  <%= link_to 'Back', root_path %>
 </div>
