@@ -149,7 +149,23 @@ account or login locally:
     # ...
     ```
 
-4. Start your rails app with `rails server`. You're ready to OAuth!
+4. *(Optional: Setting up your admin account)* If you want your development
+   account to be an admin, you can set that up by setting the admin environment
+   variables:
+
+   ```bash
+   # .env
+   ADMIN_NAME="your name"
+   ADMIN_AMAZON_EMAIL="the email you use for your amazon.com account"
+   ```
+
+   Next, run `rake users:initialize_admin`. If you've already logged in, your
+   account will be promoted to an admin. If you haven't, your new admin account
+   will be created.
+
+   You can also change your user role by using `rails console`.
+
+5. Start your rails app with `rails server`. You're ready to OAuth!
 
 [Amazon OAuth Instructions]: https://github.com/wingrunr21/omniauth-amazon#prereqs
 
@@ -242,4 +258,12 @@ For changes to `.env` to take effect, you'll need to restart your server.
 
   # Code for generating affiliate links from search (same for everyone)
   AWS_ASSOCIATES_TAG="playtim009-20"
+
+  # Default rack env and port (same for everyone)
+  RACK_ENV="development"
+  PORT=3000
+
+  # Admin account details for `rake users:initialize_admin`
+  ADMIN_NAME="your name"
+  ADMIN_EMAIL="the email you use for your amazon.com account"
   ```

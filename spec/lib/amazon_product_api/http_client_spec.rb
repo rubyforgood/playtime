@@ -2,13 +2,39 @@ require "amazon_product_api/http_client"
 
 describe AmazonProductAPI::HTTPClient do
   let(:client) {
-    AmazonProductAPI::HTTPClient.new(query: "corgi", page_num: 5)
+    env = {
+      "AWS_ACCESS_KEY" => "aws_access_key",
+      "AWS_SECRET_KEY" => "aws_secret_key",
+      "AWS_ASSOCIATES_TAG" => "aws_associates_tag",
+    }
+    AmazonProductAPI::HTTPClient.new(query: "corgi", page_num: 5, env: env)
   }
+
+  context "when credentials are not present" do
+    it "throws an error" do
+      expect { AmazonProductAPI::HTTPClient.new(query: "anything", env: {}) }
+        .to raise_error(AmazonProductAPI::InvalidQueryError,
+          "Environment variables AWS_ACCESS_KEY, AWS_SECRET_KEY, and " +
+          "AWS_ASSOCIATES_TAG are required values. Please make sure they're set."
+        )
+    end
+  end
+
+  describe "#env" do
+    before {
+      allow(ENV).to receive(:[]).with("AWS_ACCESS_KEY") { "" }
+      allow(ENV).to receive(:[]).with("AWS_SECRET_KEY") { "" }
+      allow(ENV).to receive(:[]).with("AWS_ASSOCIATES_TAG") { "" }
+    }
+    subject { AmazonProductAPI::HTTPClient.new(query: "anything").env }
+
+    it "defaults to the ENV object" do
+      expect(subject).to be ENV
+    end
+  end
 
   describe "#url" do
     subject(:url) { client.url }
-
-    # Check url components (secrets in .env.test)
 
     it { should start_with "http://webservices.amazon.com/onca/xml" }
     it { should include "AWSAccessKeyId=aws_access_key" }

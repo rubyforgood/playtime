@@ -18,6 +18,10 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
+# A Ruby gem to load environment variables from `.env`.
+gem 'dotenv-rails'
+# Logs production errors to an external service
+gem 'rollbar'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -45,8 +49,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   # rspec-rails is a testing framework for Rails 3+.
   gem 'rspec-rails', '~> 3.5'
-  # A Ruby gem to load environment variables from `.env`.
-  gem 'dotenv-rails'
   # Fixtures replacement. Read more: http://www.rubydoc.info/gems/factory_girl/
   gem 'factory_girl_rails', '~> 4.8'
 end

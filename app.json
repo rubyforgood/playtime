@@ -1,0 +1,68 @@
+{
+  "name": "playtime",
+  "scripts": {
+    "postdeploy": "bin/review_app_setup"
+  },
+  "env": {
+    "ADMIN_AMAZON_EMAIL": {
+      "required": true
+    },
+    "ADMIN_NAME": {
+      "required": true
+    },
+    "AMAZON_CLIENT_ID": {
+      "required": true
+    },
+    "AMAZON_CLIENT_SECRET": {
+      "required": true
+    },
+    "AWS_ACCESS_KEY": {
+      "required": true
+    },
+    "AWS_ASSOCIATES_TAG": {
+      "required": true
+    },
+    "AWS_SECRET_KEY": {
+      "required": true
+    },
+    "LANG": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_LOG_TO_STDOUT": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "ROLLBAR_ACCESS_TOKEN": {
+      "required": true
+    },
+    "ROLLBAR_ENDPOINT": {
+      "required": true
+    },
+    "ROLLBAR_ENV": "review",
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
