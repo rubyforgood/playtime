@@ -1,9 +1,11 @@
 class PledgesController < ApplicationController
   before_action :set_pledge, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin
 
   def index
-    @pledges = Pledge.all
+    respond_to do |format|
+      format.html { @pledges = Pledge.all }
+      format.csv  { export_csv }
+    end
   end
 
   def show
@@ -39,10 +41,6 @@ class PledgesController < ApplicationController
     redirect_to pledges_url, notice: 'Pledge was successfully destroyed.'
   end
 
-  def export_csv
-    send_data(Pledge.generate_csv, filename: "pledge_data#{Time.now.to_i}.csv")
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pledge
@@ -52,5 +50,9 @@ class PledgesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def pledge_params
       params.require(:pledge).permit(:item_id, :user_id)
+    end
+
+    def export_csv
+      send_data(Pledge.generate_csv, filename: "pledge_data#{Time.now.to_i}.csv")
     end
 end

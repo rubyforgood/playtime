@@ -14,7 +14,7 @@
     <tbody>
       <% @pledges.each do |pledge| %>
         <tr class="pledge">
-          <td><%= link_to pledge.item.name, pledge.item %></td>
+          <td><%= pledge.item.name %></td>
           <td><%= link_to pledge.user.display_name, pledge.user %></td>
           <td><%= link_to 'Show', pledge %></td>
           <td><%= link_to 'Edit', edit_pledge_path(pledge) %></td>
@@ -26,5 +26,5 @@
 
   <br>
 
-  <%= link_to 'Export CSV', '/pledges/export_csv', method: :get %>
+  <%= link_to 'Export CSV', pledges_path(format: :csv) %>
 </div>

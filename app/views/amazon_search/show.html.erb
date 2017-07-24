@@ -1,14 +1,16 @@
 <div class>
   <% page = (params[:page] || 1).to_i %>
+
   <% if page > 1 %>
-    <%= form_tag search_amazon_path(page: page - 1, query: params[:query]), id: 'prev_page' do %>
+    <%= form_tag wishlist_amazon_search_path(page: page - 1, query: params[:query]), method: :get, id: 'prev_page' do %>
       <%= hidden_field_tag 'query', params[:query] %>
       <%= hidden_field_tag 'page', page - 1 %>
       <span id="prev_link" onclick="$('#prev_page').submit()">Prev Page</span>
     <% end %>
   <% end %>
+
   <% if page < @response.num_pages - 1 %>
-    <%= form_tag search_amazon_path(page: page + 1, query: params[:query]), id: 'next_page' do %>
+    <%= form_tag wishlist_amazon_search_path(page: page + 1, query: params[:query]), method: :get, id: 'next_page' do %>
       <%= hidden_field_tag 'query', params[:query] %>
       <%= hidden_field_tag 'page', page + 1 %>
       <span id="next_link" onclick="$('#next_page').submit()">Next Page</span>

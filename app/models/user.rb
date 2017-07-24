@@ -33,6 +33,10 @@ class User < ApplicationRecord
     name || email
   end
 
+  def logged_in?
+    true
+  end
+
   def self.generate_csv(csv_generator: ActiveRecordCSVGenerator.new(self))
     csv_generator.generate
   end
