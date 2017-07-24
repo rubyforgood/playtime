@@ -4,10 +4,12 @@
 
   <% if current_user.can_manage?(@wishlist) %>
     <div id="wishlist-actions">
-      <%= link_to 'Add to Wishlist', new_wishlist_amazon_search_path(@wishlist) %> |
-      <%= link_to 'Edit Wishlist', edit_wishlist_path(@wishlist) %> |
-      <%= link_to 'Destroy', @wishlist, method: :delete,
-                                        data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Add to Wishlist', new_wishlist_amazon_search_path(@wishlist) %>
+      <% if current_user.admin? %>
+        | <%= link_to 'Edit Wishlist', edit_wishlist_path(@wishlist) %>
+        | <%= link_to 'Destroy', @wishlist, method: :delete,
+                                          data: { confirm: 'Are you sure?' } %>
+      <% end %>
     </div>
   <% end %>
 

@@ -60,40 +60,20 @@ feature "Managing items and wishlists:" do
       expect(page).not_to have_text "Another item."
     end
 
-    scenario "I can update my wishlist" do
-      visit wishlist_path(wishlist)
-      click_link "Edit Wishlist"
-      fill_in("wishlist_name", with: "VA General")
-      click_button "Update Wishlist"
-
-      expect(current_path).to eq wishlist_path(wishlist)
-      expect(page).to have_text "Wishlist was successfully updated."
-      expect(page).to have_text "VA General"
-    end
-
-    scenario "I can delete my wishlist" do
+    scenario "I cannot delete my wishlist" do
       visit wishlist_path(wishlist)
 
+      visit wishlist_path(wishlist)
       within "#wishlist-actions" do
-        click_link "Destroy"
-      end
-
-      expect(current_path).to eq root_path
-      expect(page).to have_text "Wishlist was successfully destroyed."
-
-      within "#wishlists" do
-        expect(page).not_to have_link wishlist.name
-        expect(find_all(".wishlist").count).to eq 2
+        expect(page).not_to have_link "Destroy"
       end
     end
 
-    scenario "I cannot edit someone else's wishlist" do
-      dc_general = Wishlist.find_by(name: "DC General")
-
-      visit wishlist_path(dc_general)
+    scenario "I cannot edit my wishlist" do
+      visit wishlist_path(wishlist)
       expect(page).not_to have_link "Edit Wishlist"
 
-      visit edit_wishlist_path(dc_general)
+      visit edit_wishlist_path(wishlist)
       expect(current_path).to eq root_path
       expect(page).to have_text "You are not authorized to view that page."
     end

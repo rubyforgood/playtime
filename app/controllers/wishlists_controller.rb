@@ -1,9 +1,6 @@
 class WishlistsController < ApplicationController
   before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
-
-  skip_before_action :authenticate_admin, except: [:new, :create]
-  before_action -> { authenticate_site_manager(wishlist_id: :id) },
-    only: [:edit, :update, :destroy]
+  skip_before_action :authenticate_admin, only: [:show]
 
   def show
     @site_managers = @wishlist.users

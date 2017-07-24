@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe WishlistsController, :focus do
+describe WishlistsController do
 
   # This should return the minimal set of attributes required to create a valid
   # Wishlist. As you add validations to Wishlist, be sure to
@@ -90,10 +90,16 @@ describe WishlistsController, :focus do
       include_context "site manager"
 
       context "for their wishlist" do
-        it "returns a success response" do
+        it "DOES NOT return a success response" do
           get :edit, params: {id: site_manager_wishlist.to_param},
                      session: site_manager_session
-          expect(response).to be_success
+          expect(response).not_to be_success
+        end
+
+        it "redirects to the root url" do
+          get :edit, params: {id: site_manager_wishlist.to_param},
+                     session: site_manager_session
+          expect(response).to redirect_to root_url
         end
       end
 
@@ -217,34 +223,24 @@ describe WishlistsController, :focus do
       include_context "site manager"
 
       context "for their wishlist" do
-        context "with valid params" do
-          let(:new_attributes) { {name: "Annandale General"} }
+        let(:new_attributes) { {name: "Annandale General"} }
 
-          it "updates the requested wishlist" do
-            put :update, params: {id: site_manager_wishlist.to_param,
-                                  wishlist: new_attributes},
-                         session: site_manager_session
-            site_manager_wishlist.reload
-            expect(site_manager_wishlist.name).to eq "Annandale General"
-          end
-
-          it "redirects to the wishlist" do
-            put :update, params: {id: site_manager_wishlist.to_param,
-                                  wishlist: valid_attributes},
-                         session: site_manager_session
-            expect(response).to redirect_to(site_manager_wishlist)
-          end
+        it "DOES NOT update the wishlist" do
+          name = site_manager_wishlist.name
+          put :update, params: {id: site_manager_wishlist.to_param,
+                                wishlist: new_attributes},
+                       session: site_manager_session
+          site_manager_wishlist.reload
+          expect(site_manager_wishlist.name).to eq name
         end
 
-        context "with invalid params" do
-          it "returns a success response (i.e. to display the 'edit' template)" do
-            put :update, params: {id: site_manager_wishlist.to_param,
-                                  wishlist: invalid_attributes},
-                         session: site_manager_session
-            expect(response).to be_success
-          end
+        it "DOES NOT return a success response" do
+          put :update, params: {id: site_manager_wishlist.to_param,
+                                wishlist: valid_attributes},
+                       session: site_manager_session
+          expect(response).not_to be_successful
         end
-      end
+    end
 
       context "for a foreign wishlist" do
         let(:new_attributes) { {name: "Annandale General"} }
@@ -327,11 +323,11 @@ describe WishlistsController, :focus do
       include_context "site manager"
 
       context "for their wishlist" do
-        it "destroys the requested wishlist" do
+        it "DOES NOT destroy the requested wishlist" do
           expect {
             delete :destroy, params: {id: site_manager_wishlist.to_param},
                              session: site_manager_session
-          }.to change(Wishlist, :count).by(-1)
+          }.not_to change(Wishlist, :count)
         end
 
         it "redirects to the root url" do
