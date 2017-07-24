@@ -20,10 +20,20 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_admin
-      redirect_to root_url unless current_user.admin?
+      user_not_authorized unless current_user.admin?
+    end
+
+    def authenticate_site_manager(wishlist_id: :wishlist_id)
+      @wishlist = @wishlist_item.try(:wishlist) ||
+        Wishlist.find_by(id: params[wishlist_id])
+      user_not_authorized unless current_user.can_manage?(@wishlist)
     end
 
     def set_wishlists
       @wishlists = Wishlist.all
+    end
+
+    def user_not_authorized
+      redirect_to root_url, notice: "You are not authorized to view that page."
     end
 end

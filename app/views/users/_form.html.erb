@@ -11,27 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :user_name %>
+    <%= form.text_field:name, id: :user_name, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :email %>
-    <%= form.text_field :email, id: :user_email %>
+    <%= form.text_field:email, id: :user_email, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="checkbox">
     <%= form.label :admin %>
     <%= form.check_box :admin, id: :user_admin %>
   </div>
 
-  <div class="field">
-    <%= form.label :site_manager %>
-    <%= form.check_box :site_manager, id: :user_site_manager %>
+  <div class="form-group" id="user_wishlists">
+    <%= form.label :wishlists %>
+    <%= form.collection_check_boxes :wishlist_ids, Wishlist.all, :id, :name do |b|
+      b.label(class: "checkbox-inline") {
+        b.check_box(id: "wishlist-#{b.object.id}") + b.text
+      }
+    end
+    %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -20,10 +20,9 @@
     </p>
 
     <p>
-      <strong>Site Manager:</strong>
-      <%= @user.site_manager? %>
+      <strong>Managed Wishlists:</strong>
 
-      <% if @user.site_manager? %>
+      <% if @user.wishlists.any? %>
         <ul id="user-wishlists">
           <% @user.wishlists.each do |wishlist| %>
             <li class="user-wishlist">

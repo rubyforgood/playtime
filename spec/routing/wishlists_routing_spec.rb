@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.describe WishlistsController, type: :routing do
   describe "routing" do
 
-    it "routes to #index" do
-      expect(:get => "/wishlists").to route_to("wishlists#index")
-    end
-
     it "routes to #new" do
       expect(:get => "/wishlists/new").to route_to("wishlists#new")
     end

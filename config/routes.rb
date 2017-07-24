@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :pledges
 
   # Wishlists & Items
-  resources :wishlists do
+  resources :wishlists, except: [:index] do
     resources :wishlist_items, shallow: true,
                                only: [:create, :edit, :update, :destroy]
     resource :amazon_search,   controller: :amazon_search,

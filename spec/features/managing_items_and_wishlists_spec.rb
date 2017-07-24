@@ -8,12 +8,75 @@ feature "Managing items and wishlists:" do
   end
 
   context "As a site manager" do
-    before(:each) { login(as: :site_manager) }
+    before(:each) { login(as: :site_manager, email: "site_manager@example.com") }
     after(:each)  { reset_amazon_omniauth }
 
-    # scenario "I can add a new item to my wishlist"
-    # scenario "I can edit a wishlist item on my wishlist"
-    # scenario "I can remove an item from my wishlist"
+    let(:site_manager) { User.find_by(email: "site_manager@example.com") }
+    let(:wishlist) { site_manager.wishlists.first }
+
+    scenario "I can add a new item to my wishlist", :external do
+      visit wishlist_path(wishlist)
+      click_link "Add to Wishlist"
+      fill_in "search_field", with: "corgi"
+      click_button "Search Amazon"
+
+      # add new item
+      within("#search-results") do
+        within(find_all(".item").first) do
+          fill_in("staff_message", with: "More corgi things!")
+          select("18", from: "qty")
+          click_button "Add"
+        end
+      end
+
+      expect(page).to have_text "More corgi things!"
+      expect(page).to have_text "Quantity: 18"
+    end
+
+    scenario "I can edit a wishlist item on my wishlist" do
+      create(:wishlist_item, wishlist: wishlist)
+
+      visit wishlist_path(wishlist)
+      within ".wishlist-item-tools" do
+        click_link "Edit"
+      end
+      fill_in("wishlist_item_staff_message",
+              with: "Adorable protector of the night!")
+      click_button "Update Wishlist item"
+
+      expect(page).to have_text "Wishlist item was successfully updated."
+      expect(page).to have_text "Adorable protector of the night!"
+    end
+
+    scenario "I can remove an item from my wishlist" do
+      create(:wishlist_item, wishlist: wishlist, staff_message: "Another item.")
+      visit wishlist_path(wishlist)
+
+      within ".wishlist-item-tools" do
+        click_link "Remove"
+      end
+
+      expect(page).to have_text "Item was successfully removed from wishlist."
+      expect(page).not_to have_text "Another item."
+    end
+
+    scenario "I cannot delete my wishlist" do
+      visit wishlist_path(wishlist)
+
+      visit wishlist_path(wishlist)
+      within "#wishlist-actions" do
+        expect(page).not_to have_link "Destroy"
+      end
+    end
+
+    scenario "I cannot edit my wishlist" do
+      visit wishlist_path(wishlist)
+      expect(page).not_to have_link "Edit Wishlist"
+
+      visit edit_wishlist_path(wishlist)
+      expect(current_path).to eq root_path
+      expect(page).to have_text "You are not authorized to view that page."
+    end
   end
 
   context "As an admin" do
@@ -55,6 +118,38 @@ feature "Managing items and wishlists:" do
       within "#wishlists" do
         expect(page).not_to have_link "DC General"
         expect(find_all(".wishlist").count).to eq 1
+      end
+    end
+
+    # Site Managers
+
+    scenario "I can add site managers when I'm creating a wishlist" do
+      u = create(:user, name: "Sally Ride")
+      visit new_wishlist_path
+
+      fill_in "wishlist_name", with: "VA General"
+      within "#wishlist_users" do
+        check "user-#{u.id}"
+      end
+      click_button "Create Wishlist"
+
+      within "#site-managers" do
+        expect(page).to have_text "Sally Ride"
+      end
+    end
+
+    scenario "I can add site managers to a wishlist" do
+      u = create(:user, name: "Sally Ride")
+      click_link "DC General"
+      click_link "Edit Wishlist"
+
+      within "#wishlist_users" do
+        check "user-#{u.id}"
+      end
+      click_button "Update Wishlist"
+
+      within "#site-managers" do
+        expect(page).to have_text "Sally Ride"
       end
     end
 

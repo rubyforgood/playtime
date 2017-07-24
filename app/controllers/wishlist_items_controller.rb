@@ -1,13 +1,14 @@
 class WishlistItemsController < ApplicationController
   before_action :set_wishlist_item, only: [:edit, :update, :destroy]
-  skip_before_action :authenticate_admin, only: [:index, :show]
+
+  skip_before_action :authenticate_admin
+  before_action :authenticate_site_manager, except: [:index]
 
   def index
     @wishlist_items = WishlistItem.all
   end
 
   def create
-    @wishlist = Wishlist.find(params[:wishlist_id])
     @item =
       Item.find_by_asin(params[:asin]) ||
       Item.create!(
