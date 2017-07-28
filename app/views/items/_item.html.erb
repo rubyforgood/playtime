@@ -1,41 +1,41 @@
 <% if item.valid? %>
   <tr class="item">
     <%= form_tag wishlist_wishlist_items_path(wishlist: @wishlist) do %>
-    <%= hidden_field_tag 'name', item.title %>
-    <%= hidden_field_tag 'amazon_url', item.detail_page_url %>
-    <%= hidden_field_tag 'price_cents', item.price_cents %>
-    <%= hidden_field_tag 'asin', item.asin %>
-    <%= hidden_field_tag 'image_url', item.image_url %>
-    <%= hidden_field_tag 'image_width', item.image_width %>
-    <%= hidden_field_tag 'image_height', item.image_height %>
+      <%= hidden_field_tag 'name', item.title %>
+      <%= hidden_field_tag 'amazon_url', item.detail_page_url %>
+      <%= hidden_field_tag 'price_cents', item.price_cents %>
+      <%= hidden_field_tag 'asin', item.asin %>
+      <%= hidden_field_tag 'image_url', item.image_url %>
+      <%= hidden_field_tag 'image_width', item.image_width %>
+      <%= hidden_field_tag 'image_height', item.image_height %>
 
-    <td>
-      <% if item.has_valid_image? %>
-        <%= image_tag item.image_url, width: item.image_width,
-                                      height: item.image_height %>
-      <% end %>
-    </td>
+      <td>
+        <% if item.has_valid_image? %>
+          <%= image_tag item.image_url, width: item.image_width,
+                                        height: item.image_height %>
+        <% end %>
+      </td>
 
-    <td>
-      <%= link_to item.title, item.detail_page_url, target: "_blank" %>
-    </td>
-    <td>
-      <%= item.price %>
-    </td>
+      <td>
+        <%= link_to item.title, item.detail_page_url, target: "_blank" %>
+      </td>
+      <td>
+        <%= item.price %>
+      </td>
 
-    <td>
-      <%= text_field_tag "staff_message" %>
-    </td>
-    <td>
-      <%= select_tag "qty", options_for_select(Array(0..20)) %>
-    </td>
-    <td>
-      <%= select_tag "priority", options_for_select(WishlistItem.priorities.keys) %>
-    </td>
+      <td>
+        <%= text_field_tag "staff_message" %>
+      </td>
+      <td>
+        <%= select_tag "qty", options_for_select(Array(0..20)) %>
+      </td>
+      <td>
+        <%= select_tag "priority", options_for_select(WishlistItem.priorities.keys) %>
+      </td>
 
-    <td>
-      <%= submit_tag "Add" %>
-    </td>
+      <td>
+        <%= submit_tag "Add" %>
+      </td>
     <% end %>
   </tr>
 <% end %>

@@ -2,6 +2,7 @@ class PledgesController < ApplicationController
   before_action :set_pledge, only: [:show, :edit, :update, :destroy]
 
   def index
+    authorize Pledge
     respond_to do |format|
       format.html { @pledges = Pledge.all }
       format.csv  { export_csv }
@@ -9,16 +10,20 @@ class PledgesController < ApplicationController
   end
 
   def show
+    authorize @pledge
   end
 
   def new
+    authorize Pledge
     @pledge = Pledge.new
   end
 
   def edit
+    authorize @pledge
   end
 
   def create
+    authorize Pledge
     @pledge = Pledge.new(pledge_params)
 
     if @pledge.save
@@ -29,6 +34,7 @@ class PledgesController < ApplicationController
   end
 
   def update
+    authorize @pledge
     if @pledge.update(pledge_params)
       redirect_to @pledge, notice: 'Pledge was successfully updated.'
     else
@@ -37,6 +43,7 @@ class PledgesController < ApplicationController
   end
 
   def destroy
+    authorize @pledge
     @pledge.destroy
     redirect_to pledges_url, notice: 'Pledge was successfully destroyed.'
   end

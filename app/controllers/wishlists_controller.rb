@@ -1,22 +1,25 @@
 class WishlistsController < ApplicationController
   before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_admin, only: [:show]
 
   def show
+    skip_authorization
     @site_managers = @wishlist.users
     @wishlist_items = @wishlist.wishlist_items
   end
 
   def new
+    authorize Wishlist
     @wishlist = Wishlist.new
     @admins = User.admin
   end
 
   def edit
+    authorize @wishlist
     @admins = User.admin
   end
 
   def create
+    authorize Wishlist
     @wishlist = Wishlist.new(wishlist_params)
     attach_site_managers
 
@@ -28,6 +31,7 @@ class WishlistsController < ApplicationController
   end
 
   def update
+    authorize @wishlist
     attach_site_managers
     if @wishlist.update(wishlist_params)
       redirect_to @wishlist, notice: 'Wishlist was successfully updated.'
@@ -37,6 +41,7 @@ class WishlistsController < ApplicationController
   end
 
   def destroy
+    authorize @wishlist
     @wishlist.destroy
     redirect_to root_path, notice: 'Wishlist was successfully destroyed.'
   end
