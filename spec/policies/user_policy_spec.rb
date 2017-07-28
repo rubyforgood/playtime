@@ -1,0 +1,76 @@
+require 'rails_helper'
+
+describe UserPolicy do
+  subject { described_class }
+
+  permissions :index? do
+    it "denies access to guests" do
+      expect(subject).not_to permit(GuestUser.new, User)
+    end
+
+    it "denies access to users" do
+      expect(subject).not_to permit(build(:user), User)
+    end
+
+    it "grants access to admins" do
+      expect(subject).to permit(build(:admin), User)
+    end
+  end
+
+  permissions :show? do
+    it "denies access to guests" do
+      expect(subject).not_to permit(GuestUser.new, create(:user))
+    end
+
+    it "denies access to users" do
+      expect(subject).not_to permit(build(:user), create(:user))
+    end
+
+    it "denies access to the given user" do
+      user = create(:user)
+      expect(subject).not_to permit(user, user)
+    end
+
+    it "grants access to admins" do
+      expect(subject).to permit(build(:admin), create(:user))
+    end
+  end
+
+  permissions :update? do
+    it "denies access to guests" do
+      expect(subject).not_to permit(GuestUser.new, build(:user))
+    end
+
+    it "denies access to users" do
+      expect(subject).not_to permit(build(:user), build(:user))
+    end
+
+    it "denies access to the given user" do
+      user = build(:user)
+      expect(subject).not_to permit(user, user)
+    end
+
+    it "grants access to admins" do
+      expect(subject).to permit(build(:admin), build(:user))
+    end
+  end
+
+  permissions :destroy? do
+    it "denies access to guests" do
+      expect(subject).not_to permit(GuestUser.new, build(:user))
+    end
+
+    it "denies access to users" do
+      expect(subject).not_to permit(build(:user), build(:user))
+    end
+
+    it "denies access to the given user" do
+      user = build(:user)
+      expect(subject).not_to permit(user, user)
+    end
+
+    it "grants access to admins" do
+      expect(subject).to permit(build(:admin), build(:user))
+    end
+  end
+end

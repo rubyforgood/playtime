@@ -1,15 +1,16 @@
 class WishlistItemsController < ApplicationController
   before_action :set_wishlist_item, only: [:edit, :update, :destroy]
 
-  skip_before_action :authenticate_admin
-  before_action :authenticate_site_manager, except: [:index]
-
   def index
+    skip_authorization
     @wishlist_items = WishlistItem.all
   end
 
   def create
-    @item =
+    @wishlist = Wishlist.find(params[:wishlist_id])
+    authorize @wishlist.wishlist_items.build
+
+    item =
       Item.find_by_asin(params[:asin]) ||
       Item.create!(
         asin: params[:asin],
@@ -20,17 +21,20 @@ class WishlistItemsController < ApplicationController
         image_height: params[:image_height],
         name: params[:name])
     @wishlist_item = @wishlist.wishlist_items.create!(
-      item: @item,
+      item: item,
       quantity: params[:qty],
       staff_message: params[:staff_message])
 
-    redirect_to wishlist_path(@wishlist), notice: "Added #{@item.name}"
+    redirect_to wishlist_path(@wishlist), notice: "Added #{item.name}"
   end
 
   def edit
+    authorize @wishlist_item
   end
 
   def update
+    authorize @wishlist_item
+
     if @wishlist_item.update(wishlist_item_params)
       redirect_to @wishlist_item.wishlist, notice: 'Wishlist item was successfully updated.'
     else
@@ -39,6 +43,8 @@ class WishlistItemsController < ApplicationController
   end
 
   def destroy
+    authorize @wishlist_item
+
     wishlist = @wishlist_item.wishlist
     @wishlist_item.destroy
 

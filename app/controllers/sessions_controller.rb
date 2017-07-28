@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_admin
+  before_action :skip_authorization
 
   def new
     if current_user.logged_in?

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
+    authorize User
     respond_to do |format|
       format.html { @users = User.all }
       format.csv  { export_csv }
@@ -9,12 +10,15 @@ class UsersController < ApplicationController
   end
 
   def show
+    authorize @user
   end
 
   def edit
+    authorize @user
   end
 
   def update
+    authorize @user
     if wishlist_ids = params[:user][:wishlist_ids]
       @user.wishlist_ids = wishlist_ids
     end
@@ -27,6 +31,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    authorize @user
     @user.destroy
     redirect_to users_url, notice: 'User was successfully destroyed.'
   end
