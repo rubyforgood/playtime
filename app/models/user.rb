@@ -23,6 +23,7 @@ class User < ApplicationRecord
                              allow_blank: true
 
   has_many :site_managers
+  has_many :pledges
   has_many :wishlists, through: :site_managers
 
   def can_manage?(wishlist)

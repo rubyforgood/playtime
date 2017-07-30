@@ -77,6 +77,7 @@
       <% if logged_in? %>
         <span class="navbar-text">
           Hello, <%= current_user.display_name %>
+          <%= link_to "Dashboard", dashboard_path(current_user) %>
         </span>
       <% end %>
     </div>

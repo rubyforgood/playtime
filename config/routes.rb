@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   # Users
   get 'users/export_csv', to: 'users#export_csv'
   resources :users, only: [:show, :index, :edit, :update, :destroy]
-
+  get '/dashboard', to: 'dashboard#show' 
 
   # OAuth
   get '/auth/:provider/callback', to: 'sessions#create'
