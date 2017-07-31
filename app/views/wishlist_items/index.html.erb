@@ -1,5 +1,10 @@
 <div class="container">
-  <p id="notice"><%= notice %></p>
+  <% if notice %>
+    <div class="alert alert-success alert-dismissable">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+      <p id="notice"><%= notice %></p>
+    </div>
+  <% end %>
   <div class="header">
     <h2 class="purple">Are you a hero of play?</h2>
     <p>We believe that play is a human right that all children deserve, regardless of housing status. Become a hero of play and combine your powers with Playtime's healing programs!</p>
