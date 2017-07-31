@@ -11,6 +11,7 @@ a{
 }
 
 h2{
+  margin-top: 25px;
   margin-bottom: 50px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
@@ -71,6 +72,16 @@ h3 {
   float: right;
 }
 
+.alert {
+  margin: 10px;
+}
+
+#notice {
+  font-size: 18px;
+  padding: 10px 0 0 0;
+  text-align: center;
+}
+
 // FORMS //
 .group-label {
   font-size: 1.25rem;
@@ -82,5 +93,5 @@ h3 {
 
 .submit {
   color: #fff;
-  background-color: #0084ad; 
+  background-color: #0084ad;
 }
