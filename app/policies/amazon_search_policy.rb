@@ -17,14 +17,3 @@ class AmazonSearchPolicy
 
   attr_reader :user, :wishlist, :amazon_search
 end
-
-# Required for AmazonSearchPolicy
-#
-# The AmazonSearchController is a modelless, nested controller under Wishlist.
-# Because it's not associated with a model, we're missing the context for the
-# parent wishlist. This encapsulates that context.
-#
-# For more information, see:
-#   https://github.com/elabs/pundit#headless-policies
-#
-NestedWishlistContext = Struct.new(:user, :wishlist)
