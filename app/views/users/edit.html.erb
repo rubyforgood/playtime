@@ -4,6 +4,14 @@
 
   <%= render 'form', user: @user %>
 
-  <%= link_to 'Show', @user %> |
-  <%= link_to 'Back', users_path %>
+  <%= link_to 'Delete Account', @user, method: :delete,
+                                       class: "btn btn-danger",
+                                       data: { confirm: "Are you sure? There's no going back!" } %>
+
+  <div>
+    <%= link_to 'Show', @user %>
+    <% if current_user.admin? %>
+      | <%= link_to 'Back', users_path %>
+    <% end %>
+  </div>
 </div>

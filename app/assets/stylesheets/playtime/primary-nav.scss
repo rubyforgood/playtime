@@ -17,8 +17,12 @@
   font-size: 18px;
 }
 
-.navbar-nav a, .navbar-text {
-  color: #fff !important;
+.navbar-nav a, .navbar-text, .nav-item {
+  color: #fff;
+}
+
+.primary-nav .navbar-text {
+  a { color: #fff; }
 }
 
 .dropdown-menu {

@@ -26,9 +26,9 @@ describe UserPolicy do
       expect(subject).not_to permit(build(:user), create(:user))
     end
 
-    it "denies access to the given user" do
+    it "grants access to the given user" do
       user = create(:user)
-      expect(subject).not_to permit(user, user)
+      expect(subject).to permit(user, user)
     end
 
     it "grants access to admins" do
@@ -45,9 +45,9 @@ describe UserPolicy do
       expect(subject).not_to permit(build(:user), build(:user))
     end
 
-    it "denies access to the given user" do
+    it "grants access to the given user" do
       user = build(:user)
-      expect(subject).not_to permit(user, user)
+      expect(subject).to permit(user, user)
     end
 
     it "grants access to admins" do
@@ -64,9 +64,9 @@ describe UserPolicy do
       expect(subject).not_to permit(build(:user), build(:user))
     end
 
-    it "denies access to the given user" do
+    it "grants access to the given user" do
       user = build(:user)
-      expect(subject).not_to permit(user, user)
+      expect(subject).to permit(user, user)
     end
 
     it "grants access to admins" do

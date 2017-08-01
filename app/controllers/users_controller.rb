@@ -33,7 +33,13 @@ class UsersController < ApplicationController
   def destroy
     authorize @user
     @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+
+    if current_user == @user
+      reset_session
+      redirect_to root_url, notice: 'You have successfully deleted your account.'
+    else
+      redirect_to users_url, notice: 'User was successfully destroyed.'
+    end
   end
 
   private
