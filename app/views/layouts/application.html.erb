@@ -15,6 +15,15 @@
       <%= render "partials/primary_nav" %>
     </div>
 
+    <div class="flash-alerts">
+      <% if notice %>
+        <div class="alert alert-success alert-dismissable">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+          <span class="notice"><%= notice %></span>
+        </div>
+      <% end %>
+    </div>
+
     <div class="current-view">
       <%= yield %>
     </div>

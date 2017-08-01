@@ -72,14 +72,17 @@ h3 {
   float: right;
 }
 
-.alert {
-  margin: 10px;
-}
+.flash-alerts {
+  display: flex;
+  justify-content: center;
 
-#notice {
-  font-size: 18px;
-  padding: 10px 0 0 0;
-  text-align: center;
+  .alert {  
+    font-size: 18px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 75%;
+  }
 }
 
 // FORMS //
