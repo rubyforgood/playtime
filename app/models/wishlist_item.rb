@@ -21,11 +21,9 @@ class WishlistItem < ApplicationRecord
            :image_url, :image_width, :image_height,
            to: :item
 
-  enum priority: [:low, :medium, :high, :inactive]
+  enum priority: [:low, :medium, :high]
 
   validates :priority, presence: true
   validates :quantity, presence: true,
                        numericality: { greater_than_or_equal_to: 0 }
-
-  scope :active, -> { where.not(priority: :inactive) }
 end
