@@ -33,6 +33,14 @@ feature "Managing items and wishlists:" do
       expect(page).to have_text "Quantity: 18"
     end
 
+    scenario "My search can't be blank", :external do
+      visit wishlist_path(wishlist)
+      click_link "Add to Wishlist"
+      click_button "Search Amazon"
+
+      expect(page).to have_text "query can't be blank"
+    end
+
     scenario "I can edit a wishlist item on my wishlist" do
       create(:wishlist_item, wishlist: wishlist)
 
