@@ -16,7 +16,7 @@ module Helpers
 
     def login(email: "user@example.com", as: nil, **custom_params)
       create(:admin, email: email) if as == :admin
-      create(:site_manager, email: email) if as == :site_manager
+      create(:user, :with_sites, email: email) if as == :site_manager
       setup_amazon_omniauth(email: email, **custom_params)
 
       visit "/"

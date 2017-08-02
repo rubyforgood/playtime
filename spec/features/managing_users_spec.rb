@@ -82,5 +82,48 @@ feature "Managing Users:" do
     end
 
     # scenario "I can assign a user to be Site Manager of a wishlist"
+    scenario "I can assign a user as an admin" do
+      visit users_path
+      within find_all(".user").first do
+        click_link "Edit"
+      end
+      check "user_admin"
+      click_button "Update User"
+
+      expect(page).to have_text "Admin: true"
+    end
+
+    scenario "I can assign a user as a site manager for a wishlist" do
+      dc_tech = create(:wishlist, name: "DC General")
+      jh = create(:wishlist, name: "Joseph's House")
+      visit users_path
+
+      within find_all(".user").first do
+        click_link "Edit"
+      end
+      within "#user_wishlists" do
+        check "wishlist-#{dc_tech.id}"
+        check "wishlist-#{jh.id}"
+      end
+      click_button "Update User"
+
+      within "#user-wishlists" do
+        expect(page).to have_link "DC General"
+        expect(page).to have_link "Joseph's House"
+      end
+    end
+
+    scenario "I can unassign a user as a site manager for a wishlist" do
+      user = create(:user, :with_sites, site_count: 2)
+      wishlist = user.wishlists.first
+      visit edit_user_path(user)
+
+      within "#user_wishlists" do
+        uncheck "wishlist-#{wishlist.id}"
+      end
+      click_button "Update User"
+
+      expect(find_all(".user-wishlist").count).to eq 1
+    end
   end
 end

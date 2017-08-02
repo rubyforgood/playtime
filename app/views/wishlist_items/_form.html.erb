@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :priority %>
-    <%= form.text_field :priority, id: :wishlist_item_priority %>
+    <%= form.select :priority, WishlistItem.priorities.keys, id: :wishlist_item_priority %>
   </div>
 
   <div class="field">

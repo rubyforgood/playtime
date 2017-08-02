@@ -2,12 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "wishlists/edit", type: :view do
   before(:each) do
-    @wishlist = assign(:wishlist, Wishlist.create!(
-      :name => "MyText"
-    ))
-    @site_managers = assign(:site_mangers, [User.create!(
-      email: 'email@email.com', site_manager: true
-    )])
+    @wishlist = assign(:wishlist, create(:wishlist, name: "DC General"))
+    @users = assign(:site_mangers, [create(:user)])
   end
 
   it "renders the edit wishlist form" do

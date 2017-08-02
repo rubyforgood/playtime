@@ -1,9 +1,0 @@
-<div class = 'form center-form'>
-  <% @wishlist ||= Wishlist.find_by_id(params[:wishlist_id]) %>
-  <%= form_tag(search_amazon_path(wishlist_id: @wishlist.id)) do %>
-    <div class="form-group">
-      <%= text_field_tag :query, params[:query], id: 'search_field', class: 'form-control', placeholder: "type keyword(s) here" %>
-      </div>
-    <%= submit_tag "Search Amazon", class: 'btn form-btn' %>
-  <% end %>
-</div>

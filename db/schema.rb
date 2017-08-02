@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170521151159) do
+ActiveRecord::Schema.define(version: 20170702132602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,10 +29,12 @@ ActiveRecord::Schema.define(version: 20170521151159) do
   end
 
   create_table "pledges", force: :cascade do |t|
-    t.integer "item_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "wishlist_item_id"
+    t.index ["user_id"], name: "index_pledges_on_user_id"
+    t.index ["wishlist_item_id"], name: "index_pledges_on_wishlist_item_id"
   end
 
   create_table "site_managers", force: :cascade do |t|
@@ -40,6 +42,8 @@ ActiveRecord::Schema.define(version: 20170521151159) do
     t.integer "wishlist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_site_managers_on_user_id"
+    t.index ["wishlist_id"], name: "index_site_managers_on_wishlist_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,13 +60,15 @@ ActiveRecord::Schema.define(version: 20170521151159) do
   end
 
   create_table "wishlist_items", force: :cascade do |t|
-    t.integer "quantity"
-    t.string "priority"
+    t.integer "quantity", default: 0, null: false
     t.integer "wishlist_id"
     t.integer "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "staff_message"
+    t.integer "priority", default: 0, null: false
+    t.index ["item_id"], name: "index_wishlist_items_on_item_id"
+    t.index ["wishlist_id"], name: "index_wishlist_items_on_wishlist_id"
   end
 
   create_table "wishlists", force: :cascade do |t|
@@ -71,4 +77,10 @@ ActiveRecord::Schema.define(version: 20170521151159) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "pledges", "users"
+  add_foreign_key "pledges", "wishlist_items"
+  add_foreign_key "site_managers", "users"
+  add_foreign_key "site_managers", "wishlists"
+  add_foreign_key "wishlist_items", "items"
+  add_foreign_key "wishlist_items", "wishlists"
 end

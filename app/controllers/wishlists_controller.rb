@@ -1,31 +1,29 @@
 class WishlistsController < ApplicationController
   before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin, except: [:index, :show]
-  helper_method :get_site_managers
-
-  def index
-    @wishlists = Wishlist.all
-  end
 
   def show
+    skip_authorization
     @site_managers = @wishlist.users
     @wishlist_items = @wishlist.wishlist_items
   end
 
   def new
+    authorize Wishlist
     @wishlist = Wishlist.new
-    @site_managers = User.where(site_manager: true)
+    @admins = User.admin
   end
 
   def edit
-    @site_managers = User.where(site_manager: true)
+    authorize @wishlist
+    @admins = User.admin
   end
 
   def create
+    authorize Wishlist
     @wishlist = Wishlist.new(wishlist_params)
+    attach_site_managers
 
     if @wishlist.save
-      create_site_managers
       redirect_to @wishlist, notice: 'Wishlist was successfully created.'
     else
       render :new
@@ -33,7 +31,8 @@ class WishlistsController < ApplicationController
   end
 
   def update
-    update_site_managers
+    authorize @wishlist
+    attach_site_managers
     if @wishlist.update(wishlist_params)
       redirect_to @wishlist, notice: 'Wishlist was successfully updated.'
     else
@@ -42,6 +41,7 @@ class WishlistsController < ApplicationController
   end
 
   def destroy
+    authorize @wishlist
     @wishlist.destroy
     redirect_to root_path, notice: 'Wishlist was successfully destroyed.'
   end
@@ -57,25 +57,8 @@ class WishlistsController < ApplicationController
       params.require(:wishlist).permit(:name)
     end
 
-    def create_site_managers
-      site_managers = params['wishlist']['site_manager']
-      return unless site_managers
-
-      site_managers.each do |user_id, value|
-        @wishlist.site_managers.create(user_id: user_id.to_i) if value == '1'
-      end
-    end
-
-    def update_site_managers
-      @wishlist.site_managers = []
-      create_site_managers
-    end
-
-    def get_site_managers(wishlist)
-      users = Array.new
-      wishlist.site_managers.each do |manager|
-        users.push(@users.find(manager.user_id).name)
-      end
-      return users.to_sentence
+    def attach_site_managers
+      return unless user_ids = params['wishlist']['user_ids']
+      @wishlist.user_ids = user_ids.delete_if(&:blank?).map(&:to_i)
     end
 end

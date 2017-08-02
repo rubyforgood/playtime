@@ -2,18 +2,18 @@
 #
 # Table name: pledges
 #
-#  id         :integer          not null, primary key
-#  item_id    :integer
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  wishlist_item_id :integer
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 describe Pledge do
-  describe "without an associated item" do
-    subject { build(:pledge, item: nil) }
+  describe "without an associated wishlist item" do
+    subject { build(:pledge, wishlist_item: nil) }
     it { should_not be_valid }
   end
 

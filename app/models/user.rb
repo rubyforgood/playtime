@@ -22,9 +22,11 @@ class User < ApplicationRecord
   validates :amazon_user_id, uniqueness: true,
                              allow_blank: true
 
-  has_many :site_managers
   has_many :pledges
+  has_many :site_managers, dependent: :destroy
   has_many :wishlists, through: :site_managers
+
+  scope :admin, -> { where(admin: true) }
 
   def can_manage?(wishlist)
     admin? || wishlists.exists?(wishlist.id)
@@ -32,6 +34,10 @@ class User < ApplicationRecord
 
   def display_name
     name || email
+  end
+
+  def logged_in?
+    true
   end
 
   def self.generate_csv(csv_generator: ActiveRecordCSVGenerator.new(self))

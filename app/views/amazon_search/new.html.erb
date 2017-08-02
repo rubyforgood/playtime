@@ -1,0 +1,10 @@
+<div class = "form center-form">
+  <%= form_tag wishlist_amazon_search_path(wishlist: @wishlist), method: :get do %>
+    <div class="form-group">
+      <%= text_field_tag :query, params[:query], id: "search_field",
+                                                 class: "form-control",
+                                                 placeholder: "type keyword(s) here" %>
+    </div>
+    <%= submit_tag "Search Amazon", class: "btn form-btn" %>
+  <% end %>
+</div>

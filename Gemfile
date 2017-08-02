@@ -38,6 +38,7 @@ gem 'httparty'
 gem 'social-share-button'
 # most important gem for awesome debugging and awesome consoles
 gem 'pry'
+gem 'pundit'
 
 gem 'font-awesome-sass'
 group :development, :test do

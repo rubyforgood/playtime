@@ -103,6 +103,11 @@ describe User do
     end
   end
 
+  describe "#logged_in?" do
+    subject { build(:user).logged_in? }
+    it { should be true }
+  end
+
 
   # Class Methods
 
