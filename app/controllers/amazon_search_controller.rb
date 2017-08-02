@@ -3,6 +3,7 @@ require "nested_wishlist_context"
 
 class AmazonSearchController < ApplicationController
   before_action :set_wishlist
+  before_action :filter_search, only: [:show]
 
   def show
     authorize :amazon_search, :show?
@@ -25,5 +26,11 @@ class AmazonSearchController < ApplicationController
 
     def pundit_user
       NestedWishlistContext.new(current_user, @wishlist)
+    end
+
+    def filter_search
+      if params[:query].blank?
+        redirect_to new_wishlist_amazon_search_path, notice: "query can't be blank"
+      end
     end
 end
