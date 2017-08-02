@@ -1,5 +1,4 @@
 <div class="container">
-  <p id="notice"><%= notice %></p>
   <h2 class = "purple">Pledges</h2>
 
   <table id="pledges">
@@ -18,7 +17,7 @@
           <td><%= link_to pledge.user.display_name, pledge.user %></td>
           <td><%= link_to 'Show', pledge %></td>
           <td><%= link_to 'Edit', edit_pledge_path(pledge) %></td>
-          <td><%= link_to 'Destroy', pledge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', pledge, method: :delete, data: { confirm: 'Are you sure you want to cancel this pledge?' } %></td>
         </tr>
       <% end %>
     </tbody>

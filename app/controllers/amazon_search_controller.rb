@@ -1,4 +1,5 @@
 require "amazon_product_api"
+require "nested_wishlist_context"
 
 class AmazonSearchController < ApplicationController
   before_action :set_wishlist

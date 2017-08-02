@@ -44,7 +44,7 @@
       <% if current_user.can_manage?(wishlist_item.wishlist) %>
         <div class="wishlist-item-tools">
           <%= link_to 'Edit', edit_wishlist_item_path(wishlist_item) %>
-          <%= link_to 'Remove', wishlist_item_path(wishlist_item), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Remove', wishlist_item_path(wishlist_item), method: :delete, data: { confirm: "Are you sure you want to delete this item from your list: \n #{wishlist_item.name}?" } %>
         </div>
       <% end %>
 
