@@ -19,11 +19,12 @@ class UsersController < ApplicationController
 
   def update
     authorize @user
-    if wishlist_ids = params[:user][:wishlist_ids]
+
+    if current_user.admin? && wishlist_ids = params[:user][:wishlist_ids]
       @user.wishlist_ids = wishlist_ids
     end
 
-    if @user.update(user_params)
+    if @user.update(permitted_attributes(@user))
       redirect_to @user, notice: 'User was successfully updated.'
     else
       render :edit
@@ -33,18 +34,19 @@ class UsersController < ApplicationController
   def destroy
     authorize @user
     @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+
+    if current_user == @user
+      reset_session
+      redirect_to root_url, notice: 'You have successfully deleted your account.'
+    else
+      redirect_to users_url, notice: 'User was successfully destroyed.'
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:name, :email, :admin, :site_manager)
     end
 
     def wishlists_from_params
