@@ -22,7 +22,10 @@
 }
 
 .primary-nav .navbar-text {
-  a { color: #fff; }
+  a {
+  color: #fff;
+  text-decoration: underline;
+  }
 }
 
 .dropdown-menu {
