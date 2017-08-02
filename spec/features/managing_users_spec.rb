@@ -66,6 +66,21 @@ feature "Managing Users:" do
       expect(page).to have_text "admin@example.com" # ...with user data
     end
 
+    scenario "I see user pledging history on the user page" do
+      user    = create(:user)
+      item    = create(:item)
+      pledge  = user.pledges.create!(item_id: item.id)
+      byebug
+
+      click_link "Users"
+      users = find_all(".user")
+      within(users.last) do
+        click_link "Show"
+      end
+
+      expect(page).to have_text(pledge.item.name)
+    end
+
     # scenario "I can assign a user to be Site Manager of a wishlist"
   end
 end

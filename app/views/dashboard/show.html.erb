@@ -1,45 +1,37 @@
-<h1>Welcome <%=current_user.name%></h1>
-<hr>
+<div class="container">
+  <h1>Welcome <%=current_user.name%></h1>
+  <hr>
 
-<h3> User Details</h3>
-<br>
-<div class="user-details-table">
-  <table>
-    <tr>
-      <th class="row-headers">Name: </th>
-      <td class="rows"><%=current_user.name%></td>
-    <tr>
-    <tr>
-      <th class="row-headers">Email: </th>
-      <td class="rows"><%=current_user.email%></td>
-    <tr>
-    <tr>
-      <th class="row-headers">Zipcode: </th>
-      <td class="rows"><%=current_user.zipcode%></td>
-    <tr>
-    <tr>
-      <th class="row-headers">Member Since:</th>
-      <td class="rows"><%=current_user.created_at%></td>
-    <tr>
-    <tr>
-      <td class="rows"><%= link_to "Edit Account", edit_user_path(current_user)%></td>
-    </tr>
-    <tr>
-      <td class="rows"><%= link_to "Delete Account", user_path(current_user), method: :delete%></td>
-    </tr>
-  </table>
-</div>
-<br>
-<br>
+  <h3> User Details</h3>
+  <br>
+  <div class="user-details-table">
+    <table>
+      <tr>
+        <th class="row-headers">Name: </th>
+        <td class="rows"><%=current_user.name%></td>
+      <tr>
+      <tr>
+        <th class="row-headers">Email: </th>
+        <td class="rows"><%=current_user.email%></td>
+      <tr>
+      <tr>
+        <th class="row-headers">Zipcode: </th>
+        <td class="rows"><%=current_user.zipcode%></td>
+      <tr>
+      <tr>
+        <th class="row-headers">Member Since:</th>
+        <td class="rows"><%=current_user.created_at%></td>
+      <tr>
+      <tr>
+        <td class="rows"><%= link_to "Edit Account", edit_user_path(current_user)%></td>
+      </tr>
+      <tr>
+        <td class="rows"><%= link_to "Delete Account", user_path(current_user), method: :delete%></td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <br>
 
-<h3> Current Pledges</h3>
-<hr>
-<br>
-
-<div>
-  <% @pledges.each do |pledge| %>
-    <img class="card-img-left" src="<%= pledge.item.image_url %>">
-    <h3> <%= pledge.item.name %></h3>
-    <h6><strong>Price: <%= number_to_currency(pledge.item.price_cents / 100.00) %></strong></h6>
-  <%end%>
+  <%= render partial: "partials/user_pledges" %>
 </div>

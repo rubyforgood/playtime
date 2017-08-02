@@ -1,0 +1,16 @@
+<h3> Current Pledges</h3>
+<hr>
+<br>
+
+<div>
+  <% @pledges.each do |pledge| %>
+    <h2> <%= pledge.item.wishlists.name %></h2>
+    <img class="card-img-left" src="<%= pledge.item.image_url %>">
+    <h4> <%= pledge.item.name %></h4>
+    <h6><strong>Price: <%= number_to_currency(pledge.item.price_cents / 100.00) %></strong></h6>
+    <p><strong>Pledged On: <%= pledge.created_at%></strong></p>
+    <strong>View on Amazon</strong>
+    <p><%= pledge.item.amazon_url%></p>
+    <%= link_to 'Unpledge', pledge, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary float-right"  %>
+  <%end%>
+</div>
