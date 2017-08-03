@@ -12,13 +12,6 @@ describe UsersController do
       admin: false,
     }
   }
-  let(:valid_attributes_admin) {
-    {
-      name: "Pete Conrad",
-      email: "pconrad@nasa.gov",
-      admin: true,
-    }
-  }
 
   let(:invalid_attributes) { {email: nil} }
 
