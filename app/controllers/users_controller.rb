@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def destroy
     authorize @user
-    if User.admin.count < 2
+    if User.admin.count < 2 && @user.admin?
       redirect_to users_url, notice: 'This account is the only remaining Admin user. Please assign another Admin before deleting this account'
       return
     end
