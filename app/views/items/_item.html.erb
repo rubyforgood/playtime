@@ -27,7 +27,7 @@
         <%= text_field_tag "staff_message" %>
       </td>
       <td>
-        <%= select_tag "qty", options_for_select(Array(1..20), 1) %>
+        <%= select_tag "qty", options_for_select(Array(0..20), 1) %>
       </td>
       <td>
         <%= select_tag "priority", options_for_select(WishlistItem.priorities.keys) %>
