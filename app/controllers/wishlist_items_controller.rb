@@ -23,7 +23,8 @@ class WishlistItemsController < ApplicationController
     @wishlist_item = @wishlist.wishlist_items.create!(
       item: item,
       quantity: params[:qty],
-      staff_message: params[:staff_message])
+      staff_message: params[:staff_message],
+      priority: params[:priority])
 
     redirect_to wishlist_path(@wishlist), notice: "Added #{item.name}"
   end
