@@ -1,5 +1,8 @@
 <div class="container">
-  <h2 class = "purple"><%= @wishlist.name %></h2>
+  <h2 class = "purple">
+    <%= @wishlist.name %>
+    <%= social_share_button_tag("Are you a hero of play? #{@wishlist.name} needs your help!") %>
+  </h2>
 
   <% if current_user.can_manage?(@wishlist) %>
     <div id="wishlist-actions">
