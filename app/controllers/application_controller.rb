@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   before_action :set_wishlists # required for the nav menu
 
-  after_action :verify_authorized
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  after_action :verify_authorized  #here
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized #here
 
   private
     def current_user

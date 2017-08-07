@@ -1,6 +1,5 @@
 class PledgesController < ApplicationController
   before_action :set_pledge, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin, except: :destroy
 
   def index
     authorize Pledge
@@ -44,9 +43,9 @@ class PledgesController < ApplicationController
   end
 
   def destroy
-    authorize @pledge
+    authorize @pledge #here
     @pledge.destroy
-    redirect_to pledges_url, notice: 'Pledge was successfully destroyed.'
+    redirect_to user_path(current_user), notice: 'Pledge was successfully destroyed.'
   end
 
   private

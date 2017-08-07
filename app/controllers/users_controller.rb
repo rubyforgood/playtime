@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+
   def index
     authorize User
     respond_to do |format|
@@ -11,7 +12,7 @@ class UsersController < ApplicationController
 
   def show
     @pledges = @user.pledges
-    authorize @user
+    authorize @user  #here
   end
 
   def edit
