@@ -7,12 +7,12 @@ RSpec.describe "users/show", type: :view do
       :email => "Email",
       :admin => false
     ))
-    wishlist = Wishlist.create!(name: "Charity")
-    item     = Item.create!(name: "Puppy", price_cents: 50)
-    wishlist.wishlist_items.create!(item_id: item.id)
+    wishlist      = Wishlist.create!(name: "Charity")
+    item          = Item.create!(name: "Puppy", price_cents: 50)
+    wishlist_item = wishlist.wishlist_items.create!(item_id: item.id)
 
-    @user.pledges.create!(wishlist_item_id: 1)
-    @user.pledges.create!(wishlist_item_id: 1)
+    @user.pledges.create!(wishlist_item_id: wishlist_item.id)
+    @user.pledges.create!(wishlist_item_id: wishlist_item.id)
 
     @pledges = @user.pledges
   end
@@ -20,6 +20,7 @@ RSpec.describe "users/show", type: :view do
 
 
   it "renders attributes in <p>" do
+
     render
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Email/)

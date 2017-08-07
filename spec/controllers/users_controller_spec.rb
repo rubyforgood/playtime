@@ -163,6 +163,12 @@ describe UsersController do
         delete :destroy, params: {id: user.to_param}, session: admin_session
         expect(response).to redirect_to(users_url)
       end
+
+      it "does not allow the last admin to delete their account" do
+        expect(User.admin.count).to eq 1
+        delete :destroy, params: {id: admin.to_param}, session: admin_session
+        expect(User.admin).to exist
+      end
     end
   end
 

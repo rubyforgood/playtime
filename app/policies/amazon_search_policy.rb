@@ -1,3 +1,5 @@
+require 'nested_wishlist_context'
+
 class AmazonSearchPolicy
   def initialize(context, amazon_search)
     @user = context.user

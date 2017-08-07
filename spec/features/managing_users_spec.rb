@@ -2,6 +2,38 @@ require "rails_helper"
 require "support/omniauth"
 
 feature "Managing Users:" do
+  context "As a user" do
+    before(:each) { login(as: :user, email: "user@example.com") }
+    after(:each) { reset_amazon_omniauth }
+
+    scenario "I can view my own user page" do
+      click_link "user@example.com"
+      expect(page).to have_text "Email: user@example.com"
+    end
+
+    scenario "I can edit my own identity information" do
+      click_link "user@example.com"
+      click_link "Edit"
+
+      expect(page).not_to have_text "Admin"
+
+      fill_in "Name", with: "Bill Nye"
+      click_button "Update User"
+
+      expect(page).to have_text "Name: Bill Nye"
+    end
+
+    scenario "I can delete my own account" do
+      click_link "user@example.com"
+      click_link "Edit"
+      click_link "Delete Account"
+
+      expect(current_path).to eq root_path
+      expect(page).to have_text "Log In"
+      expect(page).to have_text "You have successfully deleted your account."
+    end
+  end
+
   context "As an admin" do
     before(:each) {
       2.times { create(:user) }
@@ -67,10 +99,18 @@ feature "Managing Users:" do
     end
 
     scenario "I see user pledging history on the user page" do
-      user    = create(:user)
+      @user    = create(:user)
       item    = create(:item)
-      pledge  = user.pledges.create!(item_id: item.id)
-      byebug
+      # pledge  = user.pledges.create!(item_id: item.id)
+      wishlist      = Wishlist.create!(name: "Charity")
+      item          = Item.create!(name: "Puppy", price_cents: 50)
+      wishlist_item = wishlist.wishlist_items.create!(item_id: item.id)
+
+      pledge_one    = @user.pledges.create!(wishlist_item_id: wishlist_item.id)
+      pledge_two    = @user.pledges.create!(wishlist_item_id: wishlist_item.id)
+
+      @pledges = @user.pledges
+      #byebug
 
       click_link "Users"
       users = find_all(".user")
@@ -78,7 +118,7 @@ feature "Managing Users:" do
         click_link "Show"
       end
 
-      expect(page).to have_text(pledge.item.name)
+      expect(page).to have_text(pledge_one.wishlist_item.item.name)
     end
 
     # scenario "I can assign a user to be Site Manager of a wishlist"
