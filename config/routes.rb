@@ -11,8 +11,7 @@ Rails.application.routes.draw do
   end
 
   # Users
-  get 'users/export_csv', to: 'users#export_csv'
-  resources :users, only: [:show, :index, :edit, :update, :destroy]
+  resources :users, only: [:new, :create, :show, :index, :edit, :update, :destroy]
 
   # OAuth
   controller :sessions do

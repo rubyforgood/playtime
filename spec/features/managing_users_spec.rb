@@ -110,7 +110,6 @@ feature "Managing Users:" do
       pledge_two    = @user.pledges.create!(wishlist_item_id: wishlist_item.id)
 
       @pledges = @user.pledges
-      #byebug
 
       click_link "Users"
       users = find_all(".user")
