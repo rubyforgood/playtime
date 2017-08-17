@@ -51,7 +51,6 @@
       <p><strong>Quantity: <%= pledge.wishlist_item.quantity %></strong></p>
       <p><strong>Pledged On: <%= pledge.created_at.to_formatted_s(:long_ordinal)%></strong></p>
       <strong><%= link_to "View on Amazon", pledge.wishlist_item.item.amazon_url, class: "btn btn-primary" %></strong>
-      <!-- <p><%= pledge.wishlist_item.item.amazon_url%></p> -->
       <%= link_to 'Unpledge', pledge, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary"  %>
       <hr>
     <%end%>
