@@ -18,6 +18,7 @@ class Pledge < ApplicationRecord
 
   validates :quantity, presence: true,
                        numericality: { greater_than_or_equal_to: 1 }
+  validates :wishlist_item, uniqueness: { scope: :user }
 
   def self.generate_csv(csv_generator: ActiveRecordCSVGenerator.new(self))
     csv_generator.generate

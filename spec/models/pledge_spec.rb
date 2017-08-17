@@ -13,6 +13,9 @@
 require "rails_helper"
 
 describe Pledge do
+
+  # validations
+
   describe "without an associated wishlist item" do
     subject { build(:pledge, wishlist_item: nil) }
     it { should_not be_valid }
@@ -31,6 +34,26 @@ describe Pledge do
   describe "with a quantity of 0" do
     subject { build(:pledge, quantity: 0) }
     it { should_not be_valid }
+  end
+
+  describe "uniqueness validation" do
+    let(:initial_pledge) { create(:pledge) }
+
+    context "when the user and wishlist are duplicated" do
+      subject { build(:pledge, user: initial_pledge.user,
+                      wishlist_item: initial_pledge.wishlist_item) }
+      it { should_not be_valid }
+    end
+
+    context "when the user is duplicated but not the wishlist" do
+      subject { build(:pledge, user: initial_pledge.user) }
+      it { should be_valid }
+    end
+
+    context "when the wishlist item is duplicated but not the user" do
+      subject { build(:pledge, wishlist_item: initial_pledge.wishlist_item) }
+      it { should be_valid }
+    end
   end
 
   describe ".generate_csv" do
