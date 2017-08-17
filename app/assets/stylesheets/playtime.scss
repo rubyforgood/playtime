@@ -84,6 +84,16 @@ h3 {
   }
 }
 
+// SOCIAL SHARE //
+.social-share-button {
+  float: right;
+  .ssb-icon {
+    background-size: 32px !important;
+    height: 32px !important;
+    width: 32px !important;
+  }
+}
+
 // FORMS //
 .group-label {
   font-size: 1.25rem;
