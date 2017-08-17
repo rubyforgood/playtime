@@ -22,8 +22,13 @@ describe PledgePolicy do
       expect(subject).not_to permit(GuestUser.new, create(:pledge))
     end
 
-    it "denies access to users" do
+    it "denies access to unrelated users" do
       expect(subject).not_to permit(build(:user), create(:pledge))
+    end
+
+    it "grants access to the pledging user" do
+      pledge = create(:pledge)
+      expect(subject).to permit(pledge.user, pledge)
     end
 
     it "grants access to admins" do
@@ -32,12 +37,12 @@ describe PledgePolicy do
   end
 
   permissions :create? do
-    it "denies access to guests" do
-      expect(subject).not_to permit(GuestUser.new, Pledge)
+    it "grants access to guests" do
+      expect(subject).to permit(GuestUser.new, Pledge)
     end
 
-    it "denies access to users" do
-      expect(subject).not_to permit(build(:user), Pledge)
+    it "grants access to users" do
+      expect(subject).to permit(build(:user), Pledge)
     end
 
     it "grants access to admins" do
@@ -54,6 +59,11 @@ describe PledgePolicy do
       expect(subject).not_to permit(build(:user), build(:pledge))
     end
 
+    it "grants access to the pledging user" do
+      pledge = create(:pledge)
+      expect(subject).to permit(pledge.user, pledge)
+    end
+
     it "grants access to admins" do
       expect(subject).to permit(build(:admin), build(:pledge))
     end
@@ -64,8 +74,13 @@ describe PledgePolicy do
       expect(subject).not_to permit(GuestUser.new, build(:pledge))
     end
 
-    it "denies access to users" do
+    it "denies access to unrelated users" do
       expect(subject).not_to permit(build(:user), build(:pledge))
+    end
+
+    it "grants access to the pledging user" do
+      pledge = create(:pledge)
+      expect(subject).to permit(pledge.user, pledge)
     end
 
     it "grants access to admins" do

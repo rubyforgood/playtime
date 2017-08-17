@@ -32,6 +32,10 @@ class User < ApplicationRecord
     admin? || wishlists.exists?(wishlist.id)
   end
 
+  def pledged?(pledge)
+    pledges.include? pledge
+  end
+
   def display_name
     name || email
   end

@@ -22,4 +22,9 @@ describe GuestUser do
     subject { guest.logged_in? }
     it { should be false }
   end
+
+  describe "#pledged?" do
+    subject { guest.pledged?("anything") }
+    it { should be false }
+  end
 end

@@ -24,4 +24,8 @@ class GuestUser
   def display_name
     "Guest"
   end
+
+  def pledged?(_)
+    false
+  end
 end
