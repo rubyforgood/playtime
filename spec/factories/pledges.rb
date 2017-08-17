@@ -7,6 +7,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  wishlist_item_id :integer
+#  quantity         :integer          default(1), not null
 #
 
 FactoryGirl.define do
