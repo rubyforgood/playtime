@@ -12,16 +12,16 @@
       <%= @user.email %>
       <%= mail_to @user.email, icon('envelope-o') %>
     </p>
-
-    <p>
-      <strong>Admin:</strong>
-      <%= @user.admin? %>
-    </p>
-
-    <p>
-      <strong>Managed Wishlists:</strong>
+    <% if @user.admin?%>
+      <p>
+        <strong>Admin:</strong>
+        <%= @user.admin? %>
+      </p>
+    <% end %>
 
       <% if @user.wishlists.any? %>
+      <strong>Managed Wishlists:</strong>
+      <p>
         <ul id="user-wishlists">
           <% @user.wishlists.each do |wishlist| %>
             <li class="user-wishlist">
@@ -29,8 +29,8 @@
             </li>
           <% end %>
         </ul>
+      </p>
       <% end %>
-    </p>
   </div>
 
   <%= link_to 'Edit', edit_user_path(@user) %> |
