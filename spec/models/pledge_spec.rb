@@ -7,6 +7,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  wishlist_item_id :integer
+#  quantity         :integer          default(1), not null
 #
 
 require "rails_helper"
@@ -19,6 +20,16 @@ describe Pledge do
 
   describe "without an associated user" do
     subject { build(:pledge, user: nil) }
+    it { should_not be_valid }
+  end
+
+  describe "without a quantity" do
+    subject { build(:pledge, quantity: nil) }
+    it { should_not be_valid }
+  end
+
+  describe "with a quantity of 0" do
+    subject { build(:pledge, quantity: 0) }
     it { should_not be_valid }
   end
 
