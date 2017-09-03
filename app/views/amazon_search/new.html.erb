@@ -2,9 +2,9 @@
   <%= form_tag wishlist_amazon_search_path(wishlist: @wishlist), method: :get do %>
     <div class="form-group">
       <%= text_field_tag :query, params[:query], id: "search_field",
-                                                 class: "form-control",
+                                                 class: "form-control text-field-md",
                                                  placeholder: "type keyword(s) here" %>
     </div>
-    <%= submit_tag "Search Amazon", class: "btn form-btn" %>
+    <%= submit_tag "Search Amazon", class: "btn btn-primary" %>
   <% end %>
 </div>
