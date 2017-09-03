@@ -12,13 +12,12 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label 'Wish List Name', class: "group-label" %></br>
+    <%= form.label 'Wishlist Name', class: "group-label" %></br>
     <%= form.text_field :name, id: :wishlist_name, class: "text-field-md" %>
   </div>
 
   <%= form.fields_for :user do |user_form| %>
     <div class="form-group" id="wishlist_users">
-      <%= user_form.label 'Site Managers:', class: "group-label" %>
 
       <p>
         <strong>Admins:</strong> (can manage all wishlists)
