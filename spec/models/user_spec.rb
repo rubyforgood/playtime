@@ -108,6 +108,23 @@ describe User do
     it { should be true }
   end
 
+  describe "#made_pledge?" do
+    let(:pledge) { create(:pledge) }
+
+    context "when the user made the pledge" do
+      subject { build(:user, pledges: [pledge]).pledged?(pledge) }
+      it { should be true }
+    end
+
+    context "when the user didn't make the pledge" do
+      subject {
+        other_pledge = create(:pledge)
+        build(:user, pledges: [other_pledge]).pledged?(pledge)
+      }
+      it { should be false }
+    end
+  end
+
 
   # Class Methods
 

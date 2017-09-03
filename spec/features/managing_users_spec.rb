@@ -98,6 +98,29 @@ feature "Managing Users:" do
       expect(page).to have_text "admin@example.com" # ...with user data
     end
 
+    scenario "I see user pledging history on the user page" do
+      @user    = create(:user)
+      item    = create(:item)
+      # pledge  = user.pledges.create!(item_id: item.id)
+      wishlist      = Wishlist.create!(name: "Charity")
+      item          = Item.create!(name: "Puppy", price_cents: 50)
+      wishlist_item = wishlist.wishlist_items.create!(item_id: item.id)
+
+      pledge_one    = @user.pledges.create!(wishlist_item_id: wishlist_item.id)
+      pledge_two    = @user.pledges.create!(wishlist_item_id: wishlist_item.id)
+
+      @pledges = @user.pledges
+
+      click_link "Users"
+      users = find_all(".user")
+      within(users.last) do
+        click_link "Show"
+      end
+
+      expect(page).to have_text(pledge_one.wishlist_item.item.name)
+    end
+
+    # scenario "I can assign a user to be Site Manager of a wishlist"
     scenario "I can assign a user as an admin" do
       visit users_path
       within find_all(".user").first do

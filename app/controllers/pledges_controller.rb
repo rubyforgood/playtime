@@ -45,7 +45,7 @@ class PledgesController < ApplicationController
   def destroy
     authorize @pledge
     @pledge.destroy
-    redirect_to pledges_url, notice: 'Pledge was successfully destroyed.'
+    redirect_to user_path(current_user), notice: 'Pledge was successfully destroyed.'
   end
 
   private

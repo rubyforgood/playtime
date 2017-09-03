@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @pledges = @user.pledges
     authorize @user
   end
 

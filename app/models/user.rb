@@ -22,6 +22,7 @@ class User < ApplicationRecord
   validates :amazon_user_id, uniqueness: true,
                              allow_blank: true
 
+  has_many :pledges
   has_many :site_managers, dependent: :destroy
   has_many :wishlists, through: :site_managers
 
@@ -29,6 +30,10 @@ class User < ApplicationRecord
 
   def can_manage?(wishlist)
     admin? || wishlists.exists?(wishlist.id)
+  end
+
+  def pledged?(pledge)
+    pledges.include? pledge
   end
 
   def display_name

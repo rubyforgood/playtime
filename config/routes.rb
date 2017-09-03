@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
   # Users
-  resources :users, except: [:new, :create]
+  resources :users, only: [:new, :create, :show, :index, :edit, :update, :destroy]
 
   # OAuth
   controller :sessions do
