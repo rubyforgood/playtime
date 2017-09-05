@@ -42,17 +42,19 @@
   <hr>
   <br>
 
-  <div>
+  <div id="pledges">
     <% @pledges.each do |pledge| %>
-      <hr>
-      <img class="card-img-left" src="<%= pledge.wishlist_item.item.image_url %>">
-      <br>
-      <h4><strong><%= link_to pledge.wishlist_item.item.name, pledge.wishlist_item.item.amazon_url %></strong></h4>
-      <p><strong>Quantity: <%= pledge.wishlist_item.quantity %></strong></p>
-      <p><strong>Pledged On: <%= pledge.created_at.to_formatted_s(:long_ordinal)%></strong></p>
-      <strong><%= link_to "View on Amazon", pledge.wishlist_item.item.amazon_url, class: "btn btn-primary" %></strong>
-      <%= link_to 'Unpledge', pledge, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary"  %>
-      <hr>
-    <%end%>
+      <div class="pledge">
+        <hr>
+        <img class="card-img-left" src="<%= pledge.wishlist_item.item.image_url %>">
+        <br>
+        <h4><strong><%= link_to pledge.wishlist_item.item.name, pledge.wishlist_item.item.amazon_url %></strong></h4>
+        <p><strong>Quantity: <%= pledge.wishlist_item.quantity %></strong></p>
+        <p><strong>Pledged On: <%= pledge.created_at.to_formatted_s(:long_ordinal)%></strong></p>
+        <strong><%= link_to "View on Amazon", pledge.wishlist_item.item.amazon_url, class: "btn btn-primary" %></strong>
+        <%= link_to 'Unpledge', pledge, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary"  %>
+        <hr>
+      </div>
+    <% end %>
   </div>
 </div>
