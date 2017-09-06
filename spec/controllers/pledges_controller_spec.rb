@@ -196,6 +196,32 @@ describe PledgesController, type: :controller do
         expect(response).not_to be_success
       end
     end
+
+    context "when the pledge already exists" do
+      let(:original_pledge) { create(:pledge, user: pledging_user) }
+      let!(:repeat_attributes) {
+        valid_attributes.merge(
+          user_id: original_pledge.user.id,
+          wishlist_item_id: original_pledge.wishlist_item.id
+        )
+      }
+
+      it "DOES NOT create a new Pledge" do
+        expect {
+          post :create, params: {pledge: repeat_attributes}, session: {}
+        }.not_to change(Pledge, :count)
+      end
+
+      it "increments the existing pledge quantity" do
+        post :create, params: {pledge: repeat_attributes}, session: {}
+        expect(original_pledge.reload.quantity).to eq 2
+      end
+
+      it "redirects to the created pledge" do
+        post :create, params: {pledge: repeat_attributes}, session: {}
+        expect(response).to redirect_to(original_pledge)
+      end
+    end
   end
 
   describe "DELETE #destroy" do

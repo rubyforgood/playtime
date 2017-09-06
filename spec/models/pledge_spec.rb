@@ -65,4 +65,35 @@ describe Pledge do
       expect(csv).to include "100"
     end
   end
+
+  describe ".increment_or_new" do
+    let(:params) {
+      attributes_for(:pledge).merge(
+        # attributes_for doesn't include associations
+        user_id: create(:user).id,
+        wishlist_item_id: create(:wishlist_item).id
+      )
+    }
+
+    context "when identical pledge doesn't exist" do
+      it "should build a new pledge" do
+        pledge = Pledge.increment_or_new(params)
+        expect(pledge).to be_new_record
+      end
+    end
+
+    context "when identical pledge does exist" do
+      before { create(:pledge, params) }
+      it "should fetch an existing record" do
+        pledge = Pledge.increment_or_new(params)
+        expect(pledge).to be_persisted
+      end
+
+      it "should increment the existing pledge quantity" do
+        pledge = Pledge.increment_or_new(params)
+        expect(pledge).to be_quantity_changed
+        expect(pledge.quantity).to eq 2
+      end
+    end
+  end
 end

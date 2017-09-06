@@ -19,7 +19,8 @@ class PledgesController < ApplicationController
 
   def create
     authorize Pledge
-    @pledge = Pledge.new(pledge_params)
+    @pledge = Pledge.increment_or_new(pledge_params)
+
     if @pledge.save
       redirect_to @pledge, notice: 'Pledge was successfully created.'
     else
