@@ -16,6 +16,8 @@ class Pledge < ApplicationRecord
   belongs_to :wishlist_item
   belongs_to :user
 
+  delegate :wishlist, to: :wishlist_item
+
   validates :quantity, presence: true,
                        numericality: { greater_than_or_equal_to: 1 }
   validates :wishlist_item, uniqueness: { scope: :user }

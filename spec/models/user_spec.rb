@@ -125,6 +125,21 @@ describe User do
     end
   end
 
+  describe "#pledge_for" do
+    let(:pledge) { create(:pledge) }
+    let(:user) { pledge.user }
+
+    context "when the user pledged the item" do
+      subject { user.pledge_for(pledge.wishlist_item) }
+      it { should eq pledge }
+    end
+
+    context "when the user didn't pledge the item" do
+      subject { user.pledge_for(create(:wishlist_item)) }
+      it { should be nil }
+    end
+  end
+
 
   # Class Methods
 

@@ -28,4 +28,8 @@ class GuestUser
   def pledged?(_)
     false
   end
+
+  def pledge_for(_)
+    nil
+  end
 end

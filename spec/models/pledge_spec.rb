@@ -56,6 +56,12 @@ describe Pledge do
     end
   end
 
+  describe "#wishlist" do
+    let(:pledge) { create(:pledge) }
+    subject { pledge.wishlist }
+    it { should eq pledge.wishlist_item.wishlist }
+  end
+
   describe ".generate_csv" do
     before { create(:pledge, id: 100) }
     subject(:csv) { Pledge.generate_csv }
