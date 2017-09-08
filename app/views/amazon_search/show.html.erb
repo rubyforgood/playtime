@@ -19,9 +19,7 @@
 
   <table class="table" id="search-results">
     <tbody>
-      <% @response.items.each do |item| %>
-        <%= render 'items/item', item: item %>
-      <% end  %>
+      <%= render partial: 'items/item', collection: @response.items %>
     </tbody>
   </table>
 </div>

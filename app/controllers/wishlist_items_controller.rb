@@ -7,26 +7,11 @@ class WishlistItemsController < ApplicationController
   end
 
   def create
-    @wishlist = Wishlist.find(params[:wishlist_id])
-    authorize @wishlist.wishlist_items.build
+    wishlist = Wishlist.find(params[:wishlist_id])
+    authorize wishlist.wishlist_items.build
 
-    item =
-      Item.find_by_asin(params[:asin]) ||
-      Item.create!(
-        asin: params[:asin],
-        amazon_url: params[:amazon_url],
-        price_cents: params[:price_cents],
-        image_url: params[:image_url],
-        image_width: params[:image_width],
-        image_height: params[:image_height],
-        name: params[:name])
-    @wishlist_item = @wishlist.wishlist_items.create!(
-      item: item,
-      quantity: params[:qty],
-      staff_message: params[:staff_message],
-      priority: params[:priority])
-
-    redirect_to wishlist_path(@wishlist), notice: "Added #{item.name}"
+    @wishlist_item = wishlist.wishlist_items.create!(wishlist_item_create_params)
+    redirect_to wishlist_path(@wishlist_item.wishlist), notice: "Added #{@wishlist_item.name}."
   end
 
   def edit
@@ -60,5 +45,22 @@ class WishlistItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def wishlist_item_params
       params.require(:wishlist_item).permit(:quantity, :priority, :staff_message)
+    end
+
+    def wishlist_item_create_params
+      amazon_item = Item.find_or_create_by_asin!(amazon_item_params)
+      wishlist_item_params.merge(item: amazon_item)
+    end
+
+    def amazon_item_params
+      {
+        asin:         params[:asin],
+        amazon_url:   params[:amazon_url],
+        price_cents:  params[:price_cents],
+        image_url:    params[:image_url],
+        image_width:  params[:image_width],
+        image_height: params[:image_height],
+        name:         params[:name],
+      }
     end
 end

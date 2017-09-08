@@ -43,7 +43,7 @@
   <br>
 
   <div id="pledges">
-    <% @pledges.each do |pledge| %>
+    <% @user.pledges.each do |pledge| %>
       <div class="pledge">
         <hr>
         <img class="card-img-left" src="<%= pledge.wishlist_item.item.image_url %>">
