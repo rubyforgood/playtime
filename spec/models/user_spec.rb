@@ -10,7 +10,6 @@
 #  updated_at     :datetime         not null
 #  amazon_user_id :string
 #  zipcode        :string
-#  site_manager   :boolean
 #
 
 require 'spec_helper'
