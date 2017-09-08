@@ -1,11 +1,14 @@
 <div class="container">
-  <h2>All Pledges</h2>
+  <%= link_to 'Export CSV', pledges_path(format: :csv), class: 'btn btn-primary float-right' %>
+  <h2>Listing Pledges</h2>
 
-  <table id="pledges">
+  <table id="pledges" class="table table-striped">
     <thead>
       <tr>
         <th>Wishlist Item</th>
+        <th>Wishlist</th>
         <th>User</th>
+        <th>Quantity</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -14,16 +17,14 @@
       <% @pledges.each do |pledge| %>
         <tr class="pledge">
           <td><%= pledge.wishlist_item.name %></td>
+          <td><%= link_to pledge.wishlist.name, pledge.wishlist %></td>
           <td><%= link_to pledge.user.display_name, pledge.user %></td>
+          <td><%= pledge.quantity %></td>
           <td><%= link_to 'Show', pledge %></td>
           <td><%= link_to 'Edit', edit_pledge_path(pledge) %></td>
-          <td><%= link_to 'Destroy', pledge, method: :delete, data: { confirm: 'Are you sure you want to cancel this pledge?' } %></td>
+          <td><%= link_to 'Unpledge', pledge, method: :delete, class: 'text-danger', data: { confirm: 'Are you sure you want to cancel this pledge?' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
-  <br>
-
-  <%= link_to 'Export CSV', pledges_path(format: :csv) %>
 </div>

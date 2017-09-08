@@ -23,7 +23,7 @@ feature "Pledging an item:" do
     scenario "I can delete an existing pledge" do
       visit pledges_path
       within find_all(".pledge").first do
-        click_link "Destroy"
+        click_link "Unpledge"
       end
 
       expect(find_all(".pledge").count).to eq 0
