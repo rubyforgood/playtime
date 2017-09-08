@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Pledges
-  resources :pledges
+  resources :pledges, except: [:new]
 
   # Wishlists & Items
   resources :wishlists, except: [:index] do

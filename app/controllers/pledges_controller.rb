@@ -13,23 +13,19 @@ class PledgesController < ApplicationController
     authorize @pledge
   end
 
-  def new
-    authorize Pledge
-    @pledge = Pledge.new
-  end
-
   def edit
     authorize @pledge
   end
 
   def create
     authorize Pledge
-    @pledge = Pledge.new(pledge_params)
+    @pledge = Pledge.increment_or_new(pledge_params)
 
     if @pledge.save
       redirect_to @pledge, notice: 'Pledge was successfully created.'
     else
-      render :new
+      message = "Invalid pledge: #{@pledge.errors.full_messages.join('; ')}"
+      redirect_to :root, alert: message
     end
   end
 
@@ -44,8 +40,9 @@ class PledgesController < ApplicationController
 
   def destroy
     authorize @pledge
+    pledging_user = @pledge.user
     @pledge.destroy
-    redirect_to user_path(current_user), notice: 'Pledge was successfully destroyed.'
+    redirect_to user_path(pledging_user), notice: 'Pledge was successfully destroyed.'
   end
 
   private
@@ -56,7 +53,7 @@ class PledgesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pledge_params
-      params.require(:pledge).permit(:item_id, :user_id)
+      params.require(:pledge).permit(:wishlist_item_id, :user_id, :quantity)
     end
 
     def export_csv
