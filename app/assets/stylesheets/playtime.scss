@@ -1,4 +1,5 @@
 @import "playtime/primary-nav";
+@import "playtime/social-share";
 
 body {
   color: #333333;
@@ -7,12 +8,12 @@ body {
 }
 
 a{
+  text-decoration: underline;
   color: #0084ad;
 }
 
 h2{
   margin-top: 25px;
-  margin-bottom: 50px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
@@ -82,49 +83,4 @@ h3 {
     padding: 10px;
     text-align: center;
   }
-}
-
-// SOCIAL SHARE //
-.social-share-button {
-  float: right;
-  .ssb-icon {
-    background-size: 32px !important;
-    height: 32px !important;
-    width: 32px !important;
-  }
-}
-
-// FORMS //
-.group-label {
-  font-size: 1.25rem;
-}
-
-.text-field-md {
-  width: 50%;
-}
-
-.submit {
-  color: #fff;
-  background-color: #0084ad;
-}
-
-.row-headers {
-  width: 300px;
-  height: 30px;
-}
-
-.rows {
-  height: 30px;
-}
-
-.user-details-table {
-  background-color: lightyellow;
-}
-
-.pledges-table {
-  background-color: lightblue;
-}
-
-.form.center-form {
-  padding: 20px;
 }
