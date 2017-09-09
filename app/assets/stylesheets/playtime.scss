@@ -82,4 +82,9 @@ h3 {
   color: #fff;
   background-color: $purple;
   border-color: $purple;
+
+  &:hover {
+    background-color: $teal;
+    border-color: $teal;
+  }
 }
