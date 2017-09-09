@@ -7,10 +7,6 @@ RSpec.describe PledgesController, type: :routing do
       expect(:get => "/pledges").to route_to("pledges#index")
     end
 
-    it "routes to #new" do
-      expect(:get => "/pledges/new").to route_to("pledges#new")
-    end
-
     it "routes to #show" do
       expect(:get => "/pledges/1").to route_to("pledges#show", :id => "1")
     end
