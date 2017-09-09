@@ -9,25 +9,18 @@ body {
 
 a{
   text-decoration: underline;
-  color: #0084ad;
+  color: $teal;
 }
 
 h2{
   margin-top: 25px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  color: $purple;
 }
 
 h3 {
   margin-bottom: 20px;
-}
-
-.teal {
-  color: #0084ad;
-}
-
-.purple {
-  color: #9b347d;
 }
 
 .item_title {
@@ -57,7 +50,7 @@ h3 {
 }
 
 .card-title a{
-  color: #0084ad;
+  color: $teal;
 }
 
 .card {
@@ -83,4 +76,10 @@ h3 {
     padding: 10px;
     text-align: center;
   }
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: $purple;
+  border-color: $purple;
 }
