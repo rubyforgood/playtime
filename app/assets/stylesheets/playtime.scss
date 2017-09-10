@@ -1,4 +1,5 @@
 @import "playtime/primary-nav";
+@import "playtime/social-share";
 
 body {
   color: #333333;
@@ -7,26 +8,19 @@ body {
 }
 
 a{
-  color: #0084ad;
+  text-decoration: underline;
+  color: $teal;
 }
 
 h2{
   margin-top: 25px;
-  margin-bottom: 50px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  color: $purple;
 }
 
 h3 {
   margin-bottom: 20px;
-}
-
-.teal {
-  color: #0084ad;
-}
-
-.purple {
-  color: #9b347d;
 }
 
 .item_title {
@@ -56,7 +50,7 @@ h3 {
 }
 
 .card-title a{
-  color: #0084ad;
+  color: $teal;
 }
 
 .card {
@@ -84,47 +78,13 @@ h3 {
   }
 }
 
-// SOCIAL SHARE //
-.social-share-button {
-  float: right;
-  .ssb-icon {
-    background-size: 32px !important;
-    height: 32px !important;
-    width: 32px !important;
-  }
-}
-
-// FORMS //
-.group-label {
-  font-size: 1.25rem;
-}
-
-.text-field-md {
-  width: 50%;
-}
-
-.submit {
+.btn-primary {
   color: #fff;
-  background-color: #0084ad;
-}
+  background-color: $purple;
+  border-color: $purple;
 
-.row-headers {
-  width: 300px;
-  height: 30px;
-}
-
-.rows {
-  height: 30px;
-}
-
-.user-details-table {
-  background-color: lightyellow;
-}
-
-.pledges-table {
-  background-color: lightblue;
-}
-
-.form.center-form {
-  padding: 20px;
+  &:hover {
+    background-color: $teal;
+    border-color: $teal;
+  }
 }

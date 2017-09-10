@@ -3,7 +3,7 @@
 }
 
 .primary-nav nav {
-  background-color: #9b347d;
+  background-color: $purple;
   background-image: image-url("crayons-tips.png");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -17,24 +17,32 @@
   font-size: 18px;
 }
 
-.navbar-nav a, .navbar-text, .nav-item {
+.navbar-nav a, .user-greeting, .nav-item {
   color: #fff;
 }
 
-.primary-nav .navbar-text {
+.primary-nav .user-greeting {
   a {
   color: #fff;
   text-decoration: underline;
   }
 }
 
+a.nav-link.dropdown-toggle {
+  text-decoration: underline;
+}
+
 .dropdown-menu {
-  background-color: rgba(155, 52, 125, .75);
+  background-color: $purple-transparent;
   border-radius: 15px;
+
+  .dropdown-item {
+    text-decoration: none;
+  }
 }
 
 .dropdown-menu a:hover {
-    background-color: rgba(155, 52, 125, .75);
+    background-color: $purple-transparent;
     font-weight: bold;
 }
 
@@ -42,6 +50,6 @@
   float: right;
   font-size: 16px;
   width: 400px;
-  color: white;
+  color: #fff;
   text-align: center;
 }
