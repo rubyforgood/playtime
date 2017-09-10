@@ -17,8 +17,31 @@
   font-size: 18px;
 }
 
-.navbar-nav a, .user-greeting, .nav-item {
+.navbar .navbar-brand {
+  margin: 0 auto;
+}
+
+.navbar-nav {
+  width: 36%;
+  margin: 0 auto;
+  flex-direction: row;
+
+  .nav-item {
+    margin: 0px 5px;
+
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.user-greeting {
   color: #fff;
+  margin: 0 auto;
+  display: block;
+  width: 15%;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .primary-nav .user-greeting {
@@ -52,4 +75,21 @@ a.nav-link.dropdown-toggle {
   width: 400px;
   color: #fff;
   text-align: center;
+  display: none;
 }
+
+/* small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
+
+/* medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {}
+
+/* large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .tagline {
+    display: inline;
+  }
+}
+
+/* extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
