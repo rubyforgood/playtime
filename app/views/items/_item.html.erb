@@ -1,6 +1,6 @@
 <% if item.valid? %>
   <tr class="item">
-    <%= form_tag wishlist_wishlist_items_path(wishlist: @wishlist) do %>
+    <%= form_for @wishlist.wishlist_items.build, url: wishlist_wishlist_items_path(@wishlist) do |f| %>
       <%= hidden_field_tag 'name', item.title %>
       <%= hidden_field_tag 'amazon_url', item.detail_page_url %>
       <%= hidden_field_tag 'price_cents', item.price_cents %>
@@ -24,17 +24,17 @@
       </td>
 
       <td>
-        <%= text_field_tag "staff_message", class: "form-control text-field-md" %>
+        <%= f.text_field :staff_message, class: "form-control text-field-md" %>
       </td>
       <td>
-        <%= select_tag "qty", options_for_select(Array(0..20), 1) %>
+        <%= f.select :quantity, options_for_select(Array(0..20), 1) %>
       </td>
       <td>
-        <%= select_tag "priority", options_for_select(WishlistItem.priorities.keys) %>
+        <%= f.select :priority, options_for_select(WishlistItem.priorities.keys) %>
       </td>
 
       <td>
-        <%= submit_tag "Add" %>
+        <%= f.submit "Add", class: "btn btn-primary btn-sm" %>
       </td>
     <% end %>
   </tr>

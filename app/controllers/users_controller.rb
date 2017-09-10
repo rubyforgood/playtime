@@ -10,7 +10,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @pledges = @user.pledges
     authorize @user
   end
 
@@ -21,6 +20,7 @@ class UsersController < ApplicationController
   def update
     authorize @user
 
+    # if the user's an admin, let them assign site managers
     if current_user.admin? && wishlist_ids = params[:user][:wishlist_ids]
       @user.wishlist_ids = wishlist_ids
     end

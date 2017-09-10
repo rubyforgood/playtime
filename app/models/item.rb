@@ -20,4 +20,9 @@ class Item < ApplicationRecord
   has_many :wishlists, through: :wishlist_items
 
   validates :name, presence: true
+
+  def self.find_or_create_by_asin!(item_params)
+    asin = item_params[:asin] || item_params['asin']
+    Item.find_by_asin(asin) || Item.create!(item_params)
+  end
 end
