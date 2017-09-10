@@ -23,8 +23,8 @@ feature "Managing items and wishlists:" do
       # add new item
       within("#search-results") do
         within(find_all(".item").first) do
-          fill_in("staff_message", with: "More corgi things!")
-          select("18", from: "qty")
+          fill_in("wishlist_item_staff_message", with: "More corgi things!")
+          select("18", from: "wishlist_item_quantity")
           click_button "Add"
         end
       end
@@ -188,8 +188,8 @@ feature "Managing items and wishlists:" do
       # add new item
       within("#search-results") do
         within(find_all(".item").first) do
-          fill_in("staff_message", with: "More corgi things!")
-          select("18", from: "qty")
+          fill_in("wishlist_item_staff_message", with: "More corgi things!")
+          select("18", from: "wishlist_item_quantity")
           click_button "Add"
         end
       end
