@@ -72,7 +72,7 @@ a.nav-link.dropdown-toggle {
 .tagline {
   float: right;
   font-size: 16px;
-  width: 400px;
+  max-width: 200px;
   color: #fff;
   text-align: center;
   display: none;
@@ -86,6 +86,32 @@ a.nav-link.dropdown-toggle {
 
 /* large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+
+  /* tablet view for primary-nav */
+  .navbar .navbar-brand {
+    margin: 0px;
+  }
+
+  .navbar-header {
+    display: flex;
+  }
+
+  .navbar-nav {
+    margin: 0px;
+    flex-direction: row;
+    flex-grow: 1;
+
+    .nav-item {
+      margin: 0px 0px;
+    }
+  }
+
+  .user-greeting {
+    display: inline;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
   .tagline {
     display: inline;
   }
