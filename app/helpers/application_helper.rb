@@ -7,6 +7,10 @@ module ApplicationHelper
     current_user_pronouns(user, %w(your their), *args)
   end
 
+  def display_date(date)
+    date.to_formatted_s(:long_ordinal)
+  end
+
   private
 
   def current_user_pronouns(user, perspectives, capitalize: true)

@@ -1,20 +1,18 @@
-<% item = wishlist_item.item %>
-
 <div class="wishlist-item card">
   <div class="card-block">
     <div class="row">
       <div class="col-auto">
         <!-- Card Image -->
-        <img class="card-img-left" src="<%= item.image_url %>">
+        <img class="card-img-left" src="<%= wishlist_item.image_url %>">
       </div>
       <div class="col">
 
         <!-- Card Title -->
         <div class="row">
           <h4 class="card-title">
-            <%= item.name %>
-            <% if item.amazon_url %>
-              <small><%= link_to icon('external-link', 'Amazon'), item.amazon_url %></small>
+            <%= wishlist_item.name %>
+            <% if wishlist_item.amazon_url %>
+              <small><%= link_to icon('external-link', 'Amazon'), wishlist_item.amazon_url %></small>
             <% end %>
           </h4>
         </div>
@@ -30,26 +28,27 @@
 
           <!-- Item Details -->
           <p>
-          <strong>
-            <span class="padding-right">
-              Needed: <%= wishlist_item.quantity %>
-          </span>
-          <span class="padding-right">
-            Priority: <%= wishlist_item.priority %>
-        </span>
-        Price:
-        <% if wishlist_item.price_cents %>
-          <%= number_to_currency(item.price_cents / 100.00) %>
-        <% else %>
-          "Unknown"
-        <% end %>
-          </strong>
+            <strong>
+              <span class="padding-right">
+                Needed: <%= wishlist_item.quantity %>
+              </span>
+              <span class="padding-right">
+                Priority: <%= wishlist_item.priority %>
+              </span>
+
+              Price:
+              <% if wishlist_item.price_cents %>
+                <%= number_to_currency(wishlist_item.price_cents / 100.00) %>
+              <% else %>
+                "Unknown"
+              <% end %>
+            </strong>
           </p>
 
           <% if pledge = current_user.pledge_for(wishlist_item) %>
             <p class="text-muted">
-              You've pledged <%= pluralize(pledge.quantity, wishlist_item.name) %>
-              to <%= pledge.wishlist.name %>
+              You've pledged <%= pluralize(pledge.quantity, pledge.item_name) %>
+              to <%= pledge.wishlist_name %>
               <%= link_to '(view pledge)', pledge %>
             </p>
           <% end %>
@@ -72,7 +71,7 @@
         <div class="text-right">
 
           <!-- Pledge Actions -->
-          <%= button_to "Pledge to Donate", "#{item.amazon_url}", class:"btn btn-primary" %>
+          <%= button_to "Pledge to Donate", wishlist_item.amazon_url, class:"btn btn-primary" %>
           <small id="pledge-help" class="form-text text-muted">
             (will open new <%= icon 'amazon' %> tab)
           </small>

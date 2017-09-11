@@ -16,11 +16,19 @@ class Pledge < ApplicationRecord
   belongs_to :wishlist_item
   belongs_to :user
 
-  delegate :wishlist, to: :wishlist_item
+  delegate :wishlist, :item,        to: :wishlist_item
+  delegate :image_url, :amazon_url, to: :item
+
+  delegate :name, to: :wishlist, prefix: true
+  delegate :name, to: :item,     prefix: true
 
   validates :quantity, presence: true,
                        numericality: { greater_than_or_equal_to: 1 }
   validates :wishlist_item, uniqueness: { scope: :user }
+
+  def edited?
+    created_at != updated_at
+  end
 
   class << self
     def increment_or_new(params)

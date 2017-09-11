@@ -56,10 +56,19 @@ describe Pledge do
     end
   end
 
-  describe "#wishlist" do
+  describe "#edited?" do
     let(:pledge) { create(:pledge) }
-    subject { pledge.wishlist }
-    it { should eq pledge.wishlist_item.wishlist }
+
+    context "when it's not been updated" do
+      subject { pledge.edited? }
+      it { should be false }
+    end
+
+    context "when it has been updated" do
+      before { pledge.update!(quantity: 2) }
+      subject { pledge.edited? }
+      it { should be true }
+    end
   end
 
   describe ".generate_csv" do

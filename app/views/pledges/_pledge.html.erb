@@ -1,21 +1,18 @@
-<% wishlist_item = pledge.wishlist_item %>
-<% item = wishlist_item.item %>
-
 <div class="pledge card">
   <div class="card-block">
     <div class="row">
       <div class="col-auto">
         <!-- Card Image -->
-        <img class="card-img-left" src="<%= item.image_url %>">
+        <img class="card-img-left" src="<%= pledge.image_url %>">
       </div>
       <div class="col">
 
         <!-- Card Title -->
         <div class="row">
           <h4 class="card-title col">
-            <%= item.name %>
-            <% if item.amazon_url %>
-              <small><%= link_to icon('external-link', 'Amazon'), item.amazon_url %></small>
+            <%= pledge.item_name %>
+            <% if pledge.amazon_url %>
+              <small><%= link_to icon('external-link', 'Amazon'), pledge.amazon_url %></small>
             <% end %>
           </h4>
         </div>
@@ -24,8 +21,9 @@
         <dl class="row">
           <dt class="col-md-3">Wishlist</dt>
           <dd class="col-md-9">
-            <%= link_to wishlist_item.wishlist.name, wishlist_item.wishlist %>
+            <%= link_to pledge.wishlist_name, pledge.wishlist %>
           </dd>
+
           <dt class="col-md-3">Number pledged</dt>
           <dd class="col-md-9">
             <%= pledge.quantity %>
@@ -37,13 +35,14 @@
                 data: { confirm: 'Are you sure you want to unpledge this item?' } %>
             </small>
           </dd>
+
           <dt class="col-md-3">Pledged on</dt>
           <dd class="col-md-9">
-            <%= pledge.created_at.to_formatted_s(:long_ordinal) %>
-            <% unless pledge.created_at == pledge.updated_at %>
+            <%= display_date pledge.created_at %>
+            <% if pledge.edited? %>
               <small>
               <br />
-              <%= icon 'pencil', "last updated #{pledge.updated_at.to_formatted_s(:long_ordinal)}" %>
+              <%= icon 'pencil', "last updated #{display_date pledge.updated_at}" %>
               </small>
             <% end %>
           </dd>
