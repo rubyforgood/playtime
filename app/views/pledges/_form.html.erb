@@ -26,7 +26,9 @@
 
     <dt class="col-sm-2"><%= form.label :quantity %></dt>
     <dd class="col-sm-10">
-      <%= form.number_field :quantity, class: 'form-control', 'aria-describedby': 'quantity-help' %>
+      <%= form.number_field :quantity, id: 'pledge_quantity',
+                                       class: 'form-control',
+                                       'aria-describedby': 'quantity-help' %>
       <small id="quantity-help" class="form-text text-muted">
         Enter the number of items you're pledging to donate. Pledges need to be
         greater than zero! If you can no longer pledge this item, unpledge it below.
