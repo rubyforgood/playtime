@@ -4,8 +4,10 @@ class PledgesController < ApplicationController
   def index
     authorize Pledge
     respond_to do |format|
-      format.html { @pledges = Pledge.all }
       format.csv  { export_csv }
+      format.html do
+        @pledges = Pledge.includes(:user, wishlist_item: [:item, :wishlist])
+      end
     end
   end
 

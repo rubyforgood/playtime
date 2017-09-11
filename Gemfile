@@ -73,6 +73,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Implements the `rspec` command for Spring, allowing for faster test loading
   gem 'spring-commands-rspec', '~> 1.0'
+  # Helps detect N+1 queries and unused eager loading
+  gem 'bullet'
 end
 
 group :test do

@@ -1,8 +1,9 @@
 class WishlistsController < ApplicationController
-  before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
+  before_action :set_wishlist, only: [:edit, :update, :destroy]
 
   def show
     skip_authorization
+    @wishlist = Wishlist.includes(wishlist_items: :item).find(params[:id])
     @site_managers = @wishlist.users
     @wishlist_items = @wishlist.wishlist_items
   end
