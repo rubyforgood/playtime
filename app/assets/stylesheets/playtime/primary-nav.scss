@@ -78,12 +78,6 @@ a.nav-link.dropdown-toggle {
   display: none;
 }
 
-/* small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {}
-
-/* medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {}
-
 /* large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 
@@ -108,14 +102,13 @@ a.nav-link.dropdown-toggle {
 
   .user-greeting {
     display: inline;
-    margin-top: 0px;
+    margin-top: 10px;
     margin-bottom: 0px;
+    margin-right: 80px;
+    white-space: nowrap;
   }
 
   .tagline {
     display: inline;
   }
 }
-
-/* extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {}
