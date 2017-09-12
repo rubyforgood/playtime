@@ -1,17 +1,14 @@
 <div class="container-fluid">
-  <nav class="navbar bg-faded rounded navbar-toggleable-md primary-nav">
+  <nav class="navbar primary-nav d-flex flex-sm-column flex-md-row">
 
     <!-- Logo -->
-
-    <a class="navbar-brand" href="/">
+    <a href="/" class="d-flex justify-content-center">
       <%= image_tag "HCPP_white_logo.png", class: "primary-nav-logo" %>
     </a>
 
-
     <!-- Primary Nav Bar -->
-
-    <div class="navbar-header primary-nav-links" id="containerNavbar">
-      <ul class="navbar-nav mr-auto">
+    <div class="primary-nav-links d-flex flex-sm-column flex-md-row justify-content-center mr-auto" id="containerNavbar">
+      <ul class="navbar-nav d-flex flex-sm-column flex-md-row justify-content-center">
         <li class="nav-item active">
           <a class="nav-link" href="/">
             Home<span class="sr-only">(current)</span>
@@ -19,7 +16,6 @@
         </li>
 
         <!-- Wishlists Dropdown -->
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"
              data-toggle="dropdown"
@@ -35,7 +31,6 @@
         </li>
 
         <!-- Admin Submenu -->
-
         <% if current_user.admin? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle"
@@ -51,8 +46,16 @@
           </li>
         <% end %>
 
-        <!-- Log In/Out -->
+        <!-- Logged-In User Greeting -->
+        <li class="nav-item">
+          <% if current_user.logged_in? %>
+            <span class="user-greeting">
+              Hello, <%= link_to current_user.display_name, current_user %>
+            </span>
+          <% end %>
+        </li>
 
+        <!-- Log In/Out -->
         <li class="nav-item">
           <% if current_user.logged_in? %>
             <%= link_to "Log Out", signout_path, class: "nav-link" %>
@@ -61,22 +64,6 @@
           <% end %>
         </li>
       </ul>
-
-      <!-- Logged-In User Greeting -->
-
-      <% if current_user.logged_in? %>
-        <span class="user-greeting">
-          Hello, <%= link_to current_user.display_name, current_user %>
-        </span>
-      <% end %>
-    </div>
-    <!-- //END NAV BAR -->
-
-
-    <!-- Tagline -->
-
-    <div class="tagline">
-      <p>Families Deserve Housing. Children Deserve Play.</p>
     </div>
   </nav>
 </div>

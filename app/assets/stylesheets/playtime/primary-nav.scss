@@ -5,7 +5,7 @@
 .primary-nav nav {
   background-color: $purple;
   background-image: image-url("crayons-tips.png");
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -15,44 +15,29 @@
 
 .primary-nav-links {
   font-size: 18px;
-}
-
-.navbar .navbar-brand {
   margin: 0 auto;
 }
 
 .navbar-nav {
-  width: 36%;
-  margin: 0 auto;
-  flex-direction: row;
-
-  .nav-item {
-    margin: 0px 5px;
-
-    a {
-      color: #fff;
-    }
-  }
+  padding-left: 10px;
+  align-items: center;
+  white-space: nowrap;
 }
 
-.user-greeting {
+.navbar-nav a, .user-greeting, .nav-item {
   color: #fff;
-  margin: 0 auto;
-  display: block;
-  width: 15%;
-  margin-top: 10px;
-  margin-bottom: 5px;
 }
 
 .primary-nav .user-greeting {
   a {
-  color: #fff;
-  text-decoration: underline;
+    color: #fff;
+    text-decoration: underline;
   }
 }
 
-a.nav-link.dropdown-toggle {
-  text-decoration: underline;
+a.nav-link, a.navlink.dropdown-toggle {
+  // !important to override a very specific bootstrap default
+  text-decoration: underline!important;
 }
 
 .dropdown-menu {
@@ -70,45 +55,29 @@ a.nav-link.dropdown-toggle {
 }
 
 .tagline {
-  float: right;
   font-size: 16px;
-  max-width: 200px;
   color: #fff;
   text-align: center;
-  display: none;
 }
 
-/* large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-
-  /* tablet view for primary-nav */
-  .navbar .navbar-brand {
-    margin: 0px;
-  }
-
-  .navbar-header {
-    display: flex;
-  }
+@media (min-width: $md) {
 
   .navbar-nav {
-    margin: 0px;
-    flex-direction: row;
-    flex-grow: 1;
+    padding-left: 0px;
+    align-items: start;
+  }
 
-    .nav-item {
-      margin: 0px 0px;
+  .nav-item {
+    margin: 100px 7px 0px 7px;
+
+    &:nth-child(4) {
+      margin: 110px 7px 0px 7px;
     }
   }
+}
 
-  .user-greeting {
-    display: inline;
-    margin-top: 10px;
-    margin-bottom: 0px;
-    margin-right: 80px;
-    white-space: nowrap;
-  }
-
+@media (min-width: $xl) {
   .tagline {
-    display: inline;
+    display: none;
   }
 }
