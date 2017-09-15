@@ -5,7 +5,7 @@
 .primary-nav nav {
   background-color: $purple;
   background-image: image-url("crayons-tips.png");
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -15,6 +15,15 @@
 
 .primary-nav-links {
   font-size: 18px;
+  @media(max-width: $md) {
+    margin: 0 auto;
+  }
+}
+
+.navbar-nav {
+  padding-left: 10px;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .navbar-nav a, .user-greeting, .nav-item {
@@ -23,13 +32,14 @@
 
 .primary-nav .user-greeting {
   a {
-  color: #fff;
-  text-decoration: underline;
+    color: #fff;
+    text-decoration: underline;
   }
 }
 
-a.nav-link.dropdown-toggle {
-  text-decoration: underline;
+a.nav-link, a.navlink.dropdown-toggle {
+  // !important to override a very specific bootstrap default
+  text-decoration: underline!important;
 }
 
 .dropdown-menu {
@@ -47,9 +57,29 @@ a.nav-link.dropdown-toggle {
 }
 
 .tagline {
-  float: right;
   font-size: 16px;
-  width: 400px;
   color: #fff;
   text-align: center;
+}
+
+@media (min-width: $md) {
+
+  .navbar-nav {
+    padding-left: 0px;
+    align-items: start;
+  }
+
+  .nav-item {
+    margin: 100px 7px 0px 7px;
+
+    &.nav-item--greeting {
+      margin: 110px 7px 0px 7px;
+    }
+  }
+}
+
+@media (min-width: $xl) {
+  .tagline {
+    display: none;
+  }
 }
