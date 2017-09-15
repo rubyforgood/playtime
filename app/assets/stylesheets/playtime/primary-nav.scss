@@ -15,7 +15,9 @@
 
 .primary-nav-links {
   font-size: 18px;
-  margin: 0 auto;
+  @media(max-width: $md) {
+    margin: 0 auto;
+  }
 }
 
 .navbar-nav {
@@ -70,7 +72,7 @@ a.nav-link, a.navlink.dropdown-toggle {
   .nav-item {
     margin: 100px 7px 0px 7px;
 
-    &:nth-child(4) {
+    &.nav-item--greeting {
       margin: 110px 7px 0px 7px;
     }
   }
