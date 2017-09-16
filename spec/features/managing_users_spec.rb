@@ -20,7 +20,7 @@ feature "Managing Users:" do
       fill_in "Name", with: "Bill Nye"
       click_button "Update User"
 
-      expect(page).to have_text "Name: Bill Nye"
+      expect(page).to have_text "Bill Nye"
     end
 
     scenario "I can delete my own account" do
@@ -56,7 +56,7 @@ feature "Managing Users:" do
       end
 
       expect(page).to have_css "#user-details"
-      expect(page).to have_text "Name"
+      expect(page).to have_text "Email"
       expect(page).to have_text "Email"
     end
 
@@ -114,7 +114,7 @@ feature "Managing Users:" do
       check "user_admin"
       click_button "Update User"
 
-      expect(page).to have_text "Admin: true"
+      expect(page).to have_text "Admin"
     end
 
     scenario "I can assign a user as a site manager for a wishlist" do

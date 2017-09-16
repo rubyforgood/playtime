@@ -30,7 +30,7 @@ feature "Managing items and wishlists:" do
       end
 
       expect(page).to have_text "More corgi things!"
-      expect(page).to have_text "Quantity: 18"
+      expect(page).to have_text "Needed: 18"
     end
 
     scenario "My search can't be blank", :external do
@@ -195,7 +195,7 @@ feature "Managing items and wishlists:" do
       end
 
       expect(page).to have_text "More corgi things!"
-      expect(page).to have_text "Quantity: 18"
+      expect(page).to have_text "Needed: 18"
     end
     # context "when the Amazon service is down"
 

@@ -1,0 +1,53 @@
+<div class="pledge card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-auto">
+        <!-- Card Image -->
+        <img class="card-img-left" src="<%= pledge.image_url %>">
+      </div>
+      <div class="col">
+
+        <!-- Card Title -->
+        <div class="row">
+          <h4 class="card-title col">
+            <%= pledge.item_name %>
+            <% if pledge.amazon_url %>
+              <small><%= link_to icon('external-link', 'Amazon'), pledge.amazon_url %></small>
+            <% end %>
+          </h4>
+        </div>
+
+        <!-- Item Details -->
+        <dl class="row">
+          <dt class="col-md-3">Wishlist</dt>
+          <dd class="col-md-9">
+            <%= link_to pledge.wishlist_name, pledge.wishlist %>
+          </dd>
+
+          <dt class="col-md-3">Number pledged</dt>
+          <dd class="col-md-9">
+            <%= pledge.quantity %>
+            <small><%= link_to '(Edit)', edit_pledge_path(pledge) %></small>
+            <small>
+              <%= link_to '(Unpledge)', pledge_path(pledge),
+                method: :delete,
+                class: 'text-danger',
+                data: { confirm: 'Are you sure you want to unpledge this item?' } %>
+            </small>
+          </dd>
+
+          <dt class="col-md-3">Pledged on</dt>
+          <dd class="col-md-9">
+            <%= display_date pledge.created_at %>
+            <% if pledge.edited? %>
+              <small>
+              <br />
+              <%= icon 'pencil', "last updated #{display_date pledge.updated_at}" %>
+              </small>
+            <% end %>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>

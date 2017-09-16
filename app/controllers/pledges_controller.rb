@@ -19,7 +19,7 @@ class PledgesController < ApplicationController
 
   def create
     authorize Pledge
-    @pledge = Pledge.increment_or_new(pledge_params)
+    @pledge = Pledge.increment_or_new(pledge_create_params)
 
     if @pledge.save
       redirect_to @pledge, notice: 'Pledge was successfully created.'
@@ -31,7 +31,7 @@ class PledgesController < ApplicationController
 
   def update
     authorize @pledge
-    if @pledge.update(pledge_params)
+    if @pledge.update(pledge_update_params)
       redirect_to @pledge, notice: 'Pledge was successfully updated.'
     else
       render :edit
@@ -52,8 +52,12 @@ class PledgesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def pledge_params
+    def pledge_create_params
       params.require(:pledge).permit(:wishlist_item_id, :user_id, :quantity)
+    end
+
+    def pledge_update_params
+      params.require(:pledge).permit(:quantity)
     end
 
     def export_csv

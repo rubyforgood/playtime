@@ -10,7 +10,6 @@
 #  updated_at     :datetime         not null
 #  amazon_user_id :string
 #  zipcode        :string
-#  site_manager   :boolean
 #
 
 require "amazon_oauth_info"
@@ -23,10 +22,15 @@ class User < ApplicationRecord
                              allow_blank: true
 
   has_many :pledges
+  has_many :wishlist_items, through: :pledges
   has_many :site_managers, dependent: :destroy
   has_many :wishlists, through: :site_managers
 
   scope :admin, -> { where(admin: true) }
+
+  def pledge_for(wishlist_item)
+    pledges.find_by(wishlist_item_id: wishlist_item.id)
+  end
 
   def can_manage?(wishlist)
     admin? || wishlists.exists?(wishlist.id)

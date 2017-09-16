@@ -1,6 +1,12 @@
-<h1>Editing Pledge</h1>
+<div class="container">
+  <h2>Editing Pledge</h2>
 
-<%= render 'form', pledge: @pledge %>
+  <%= render 'form', pledge: @pledge %>
 
-<%= link_to 'Show', @pledge %> |
-<%= link_to 'Back', pledges_path %>
+  <br />
+  <%= link_to 'Show Pledge', @pledge %> |
+  <%= link_to 'Unpledge item', pledge_path(@pledge),
+    method: :delete,
+    class: 'text-danger',
+    data: { confirm: 'Are you sure you want to unpledge this item?' } %>
+</div>

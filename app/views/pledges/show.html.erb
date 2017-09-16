@@ -1,12 +1,32 @@
-<p>
-  <strong>Wishlist Item:</strong>
-  <%= @pledge.wishlist_item_id %>
-</p>
+<div class="container">
+  <h2>
+    <%= pronoun(@pledge.user) %> pledged to donate
+    "<%= @pledge.wishlist_item.name %>"
+  </h2>
 
-<p>
-  <strong>User:</strong>
-  <%= @pledge.user_id %>
-</p>
+  <p class="lead">Thanks for being a Hero of Play! On behalf of the children and families we serve, thank you! ♥</p>
 
-<%= link_to 'Edit', edit_pledge_path(@pledge) %> |
-<%= link_to 'Back', pledges_path %>
+  <%= render @pledge %>
+
+  <br /><br />
+
+  <div class="row align-items-center unpledge">
+    <div class="col">
+      <h4>Didn't mean to pledge?
+      <%= link_to 'Unpledge item', pledge_path(@pledge),
+        method: :delete,
+        class: 'btn btn-danger btn-sm text-right',
+        data: { confirm: 'Are you sure you want to unpledge this item?' } %>
+      </h4>
+    </div>
+  </div>
+
+  <p>
+    Manage <%= posessive_pronoun(@pledge.user, capitalize: false) %> pledge here
+    or on <%= posessive_pronoun(@pledge.user, capitalize: false) %>
+    <%= link_to 'user page', @pledge.user %>.
+  </p>
+
+  <%= link_to "Back to #{@pledge.wishlist.name}", @pledge.wishlist %> |
+  <%= link_to "Back to user page", @pledge.user %>
+</div>

@@ -1,13 +1,13 @@
 <div class="container">
-  <h2>All Registered Users</h2>
+  <%= link_to 'Export CSV', users_path(format: :csv), class: 'btn btn-primary float-right' %>
+  <h2>Listing Users</h2>
 
-  <table id="users">
+  <table id="users" class="table table-striped">
     <thead>
       <tr>
         <th>Name</th>
         <th>Email</th>
         <th>Admin</th>
-        <th>Site Manager</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -16,17 +16,13 @@
       <% @users.each do |user| %>
         <tr class="user" id="user-<%= user.id %>">
           <td><%= user.name %></td>
-          <td><%= user.email %><%= mail_to user.email, icon('envelope-o') %></td>
-          <td><%= user.admin? %></td>
-          <td><%= user.site_manager? %></td>
+          <td><%= user.email %> <%= mail_to user.email, icon('envelope-o') %></td>
+          <td><%= icon('check-circle-o', class: 'text-success') if user.admin? %></td>
           <td><%= link_to 'Show', user %></td>
           <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure you want to delete this user?' } %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, class: 'text-danger', data: { confirm: 'Are you sure you want to delete this user?' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
-  <%= link_to 'Export CSV', users_path(format: :csv) %>
-  <br>
 </div>

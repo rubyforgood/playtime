@@ -10,7 +10,6 @@
 #  updated_at     :datetime         not null
 #  amazon_user_id :string
 #  zipcode        :string
-#  site_manager   :boolean
 #
 
 require 'spec_helper'
@@ -122,6 +121,21 @@ describe User do
         build(:user, pledges: [other_pledge]).pledged?(pledge)
       }
       it { should be false }
+    end
+  end
+
+  describe "#pledge_for" do
+    let(:pledge) { create(:pledge) }
+    let(:user) { pledge.user }
+
+    context "when the user pledged the item" do
+      subject { user.pledge_for(pledge.wishlist_item) }
+      it { should eq pledge }
+    end
+
+    context "when the user didn't pledge the item" do
+      subject { user.pledge_for(create(:wishlist_item)) }
+      it { should be nil }
     end
   end
 

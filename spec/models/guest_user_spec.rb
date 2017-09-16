@@ -27,4 +27,9 @@ describe GuestUser do
     subject { guest.pledged?("anything") }
     it { should be false }
   end
+
+  describe "#pledge_for" do
+    subject { guest.pledge_for("anything") }
+    it { should be nil }
+  end
 end

@@ -1,0 +1,82 @@
+<div class="wishlist-item card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-auto">
+        <!-- Card Image -->
+        <img class="card-img-left" src="<%= wishlist_item.image_url %>">
+      </div>
+      <div class="col">
+
+        <!-- Card Title -->
+        <div class="row">
+          <h4 class="card-title">
+            <%= wishlist_item.name %>
+            <% if wishlist_item.amazon_url %>
+              <small><%= link_to icon('external-link', 'Amazon'), wishlist_item.amazon_url %></small>
+            <% end %>
+          </h4>
+        </div>
+
+        <div class="row">
+          <!-- Staff Message -->
+          <% if wishlist_item.staff_message %>
+            <p>
+            <strong>Staff Message:</strong>
+            <span class="card-text"><%= wishlist_item.staff_message %></span>
+            </p>
+          <% end %>
+
+          <!-- Item Details -->
+          <p>
+            <strong>
+              <span class="padding-right">
+                Needed: <%= wishlist_item.quantity %>
+              </span>
+              <span class="padding-right">
+                Priority: <%= wishlist_item.priority %>
+              </span>
+
+              Price:
+              <% if wishlist_item.price_cents %>
+                <%= number_to_currency(wishlist_item.price_cents / 100.00) %>
+              <% else %>
+                "Unknown"
+              <% end %>
+            </strong>
+          </p>
+
+          <% if pledge = current_user.pledge_for(wishlist_item) %>
+            <p class="text-muted">
+              You've pledged <%= pluralize(pledge.quantity, pledge.item_name) %>
+              to <%= pledge.wishlist_name %>
+              <%= link_to '(view pledge)', pledge %>
+            </p>
+          <% end %>
+
+          <!-- Wishlist Item Actions -->
+          <% if current_user.can_manage?(wishlist_item.wishlist) %>
+            <p class="wishlist-item-tools">
+              <strong>Manage wishlist item:</strong>
+              <%= link_to 'Edit', edit_wishlist_item_path(wishlist_item) %> |
+              <%= link_to 'Remove', wishlist_item_path(wishlist_item),
+                          method: :delete,
+                          class: 'text-danger',
+                          data: { confirm: "Are you sure you want to delete this item from your list: \n #{wishlist_item.name}?" } %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-lg-3 align-self-center">
+        <div class="text-right">
+
+          <!-- Pledge Actions -->
+          <%= button_to "Pledge to Donate", wishlist_item.amazon_url, class:"btn btn-primary" %>
+          <small id="pledge-help" class="form-text text-muted">
+            (will open new <%= icon 'amazon' %> tab)
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

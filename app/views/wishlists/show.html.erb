@@ -10,7 +10,7 @@
       <% if current_user.admin? %>
         | <%= link_to 'Edit Wishlist', edit_wishlist_path(@wishlist) %>
         | <%= link_to 'Destroy', @wishlist, method: :delete,
-                                          data: { confirm: 'Are you sure you want to delete this wishlist?' } %>
+                                          data: { confirm: 'Are you sure you want to delete " this wishlist?' } %>
       <% end %>
     </div>
   <% end %>
@@ -20,7 +20,7 @@
     <%= @wishlist.users.map(&:display_name).join(", ") %>
   </p>
 
-  <%= render "partials/wishlist_items" %>
+  <%= render @wishlist.wishlist_items %>
 
   <%= link_to 'Back', root_path %>
 </div>

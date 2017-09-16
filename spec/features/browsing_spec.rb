@@ -33,7 +33,7 @@ feature "Browsing the site:" do
 
         expect(page).to have_text "BatCorgi!"
         expect(page).to have_text "Puzzles"
-        expect(page).to have_button "Purchase Item"
+        expect(page).to have_button "Pledge to Donate"
       end
 
       scenario "I can see a list of items for a given wishlist" do

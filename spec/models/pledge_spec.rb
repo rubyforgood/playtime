@@ -56,6 +56,21 @@ describe Pledge do
     end
   end
 
+  describe "#edited?" do
+    let(:pledge) { create(:pledge) }
+
+    context "when it's not been updated" do
+      subject { pledge.edited? }
+      it { should be false }
+    end
+
+    context "when it has been updated" do
+      before { pledge.update!(quantity: 2) }
+      subject { pledge.edited? }
+      it { should be true }
+    end
+  end
+
   describe ".generate_csv" do
     before { create(:pledge, id: 100) }
     subject(:csv) { Pledge.generate_csv }

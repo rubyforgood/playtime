@@ -11,17 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :wishlist_item_id %>
-    <%= form.number_field :wishlist_item_id, id: :pledge_wishlist_item_id %>
-  </div>
+  <dl class="row">
+    <dt class="col-sm-2">Wishlist item</dt>
+    <dd class="col-sm-10"><%= pledge.wishlist_item.name %></dd>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :pledge_user_id %>
-  </div>
+    <dt class="col-sm-2">Wishlist</dt>
+    <dd class="col-sm-10"><%= link_to pledge.wishlist.name, pledge.wishlist %></dd>
+
+    <dt class="col-sm-2">Pledging user</dt>
+    <dd class="col-sm-10">
+      <%= link_to pledge.user.display_name, pledge.user %>
+      <%= "(You!)" if current_user == pledge.user %>
+    </dd>
+
+    <dt class="col-sm-2"><%= form.label :quantity %></dt>
+    <dd class="col-sm-10">
+      <%= form.number_field :quantity, id: 'pledge_quantity',
+                                       class: 'form-control',
+                                       'aria-describedby': 'quantity-help' %>
+      <small id="quantity-help" class="form-text text-muted">
+        Enter the number of items you're pledging to donate. Pledges need to be
+        greater than zero! If you can no longer pledge this item, unpledge it below.
+      </small>
+    </dd>
+  </dl>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

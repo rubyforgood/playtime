@@ -1,7 +1,12 @@
 <div class="container">
   <div class="header">
     <h2>Are you a hero of play?</h2>
-    <p>We believe that play is a human right that all children deserve, regardless of housing status. Become a hero of play and combine your powers with Playtime's healing programs!</p>
+    <p class="lead">
+    We believe that play is a human right that all children deserve, regardless
+    of housing status. Become a hero of play and combine your powers with
+    Playtime's healing programs!
+    </p>
   </div>
-  <%= render "partials/wishlist_items" %>
+
+  <%= render @wishlist_items %>
 </div>
