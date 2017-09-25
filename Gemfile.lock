@@ -62,13 +62,6 @@ GEM
     childprocess (0.7.0)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
-    coffee-rails (4.2.1)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.2.x)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -217,8 +210,6 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     slop (3.6.0)
-    social-share-button (0.10.0)
-      coffee-rails
     spring (2.0.1)
       activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
@@ -286,7 +277,6 @@ DEPENDENCIES
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   selenium-webdriver
-  social-share-button
   spring
   spring-commands-rspec (~> 1.0)
   spring-watcher-listen (~> 2.0.0)
@@ -300,4 +290,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.15.3
+   1.15.4

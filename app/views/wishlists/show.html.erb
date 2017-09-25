@@ -1,7 +1,7 @@
 <div class="container">
   <h2>
     <%= @wishlist.name %>
-    <%= social_share_button_tag("Are you a hero of play? #{@wishlist.name} needs your help!") %>
+    Are you a hero of play? <%=  @wishlist.name %> needs your help!
   </h2>
 
   <% if current_user.can_manage?(@wishlist) %>
