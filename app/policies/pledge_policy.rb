@@ -21,7 +21,7 @@ class PledgePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin? || user.pledged?(pledge)
+    user.admin? || user.pledged?(pledge) || pledge.anonymous?
   end
 
   private

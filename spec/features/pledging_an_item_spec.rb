@@ -13,6 +13,13 @@ feature "Pledging an item:" do
       expect(page).to have_text "You pledged to donate"
       # TODO: expect a new tab to open to Amazon
     end
+
+    scenario "I can unpledge an anonymous pledge" do
+      pledge = create(:anonymous_pledge)
+      visit pledge_path(pledge)
+      within(".pledge") { click_link "Unpledge" }
+      expect(page).to have_text "Pledge was successfully destroyed"
+    end
   end
 
   context "As a user" do
