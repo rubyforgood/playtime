@@ -9,6 +9,10 @@
 #   https://en.wikipedia.org/wiki/Null_Object_pattern
 #
 class GuestUser
+  def id
+    nil
+  end
+
   def logged_in?
     false
   end
