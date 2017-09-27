@@ -9,7 +9,7 @@ class PledgePolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.pledged?(pledge)
+    user.admin? || user.pledged?(pledge) || pledge.anonymous?
   end
 
   def create?

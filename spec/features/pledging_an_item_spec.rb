@@ -6,10 +6,14 @@ feature "Pledging an item:" do
     create(:pledge, id: 100)
   end
 
-  # context "As a guest" do
-    # scenario "I can purchase a wish list item"
-    # scenario "I can confirm that an item was purchased"
-  # end
+  context "As a guest" do
+    scenario "I can pledge an item" do
+      visit root_path
+      click_button "Pledge to Donate"
+      expect(page).to have_text "You pledged to donate"
+      # TODO: expect a new tab to open to Amazon
+    end
+  end
 
   context "As a user" do
     before { login(as: :user) }

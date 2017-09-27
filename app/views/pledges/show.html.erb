@@ -4,7 +4,17 @@
     "<%= @pledge.wishlist_item.name %>"
   </h2>
 
-  <p class="lead">Thanks for being a Hero of Play! On behalf of the children and families we serve, thank you! ♥</p>
+  <p class="lead">
+    <% if @pledge.anonymous? %>
+      Thank you for being a Hero of Play! ♥
+  </p>
+  <p class="lead">
+      But wait, we don't know who you are! By logging in, you make it much
+      easier for us to track donations. Sign up/log in with Amazon <%= link_to "here", signin_path %>.
+    <% else %>
+      Thanks for being a Hero of Play! On behalf of the children and families we serve, thank you! ♥
+    <% end %>
+  </p>
 
   <%= render @pledge %>
 

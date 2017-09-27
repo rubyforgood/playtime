@@ -14,7 +14,7 @@ require "active_record_csv_generator"
 
 class Pledge < ApplicationRecord
   belongs_to :wishlist_item
-  belongs_to :user
+  belongs_to :user, optional: true
 
   delegate :wishlist, :item,        to: :wishlist_item
   delegate :image_url, :amazon_url, to: :item
@@ -24,7 +24,11 @@ class Pledge < ApplicationRecord
 
   validates :quantity, presence: true,
                        numericality: { greater_than_or_equal_to: 1 }
-  validates :wishlist_item, uniqueness: { scope: :user }
+  validates :wishlist_item, uniqueness: { scope: :user }, unless: :anonymous?
+
+  def anonymous?
+    !user_id
+  end
 
   def edited?
     created_at != updated_at

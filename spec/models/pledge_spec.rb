@@ -23,7 +23,7 @@ describe Pledge do
 
   describe "without an associated user" do
     subject { build(:pledge, user: nil) }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe "without a quantity" do
@@ -54,6 +54,16 @@ describe Pledge do
       subject { build(:pledge, wishlist_item: initial_pledge.wishlist_item) }
       it { should be_valid }
     end
+
+    context "when the user is nil" do
+      it 'should allow for "duplicate" pledges' do
+        wishlist_item = create(:wishlist_item)
+        create(:anonymous_pledge, wishlist_item: wishlist_item)
+        anon_pledge = build(:anonymous_pledge, wishlist_item: wishlist_item)
+
+        expect(anon_pledge).to be_valid
+      end
+    end
   end
 
   describe "#edited?" do
@@ -67,6 +77,18 @@ describe Pledge do
     context "when it has been updated" do
       before { pledge.update!(quantity: 2) }
       subject { pledge.edited? }
+      it { should be true }
+    end
+  end
+
+  describe "#anonymous?" do
+    context "when it's owned by a user" do
+      subject { create(:pledge).anonymous? }
+      it { should be false }
+    end
+
+    context "when it's not owned by a user" do
+      subject { create(:anonymous_pledge).anonymous? }
       it { should be true }
     end
   end
