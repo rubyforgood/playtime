@@ -20,6 +20,16 @@ feature "Pledging an item:" do
       within(".pledge") { click_link "Unpledge" }
       expect(page).to have_text "Pledge was successfully destroyed"
     end
+
+    scenario "I can update the quantity of an anonymous pledge" do
+      pledge = create(:anonymous_pledge)
+      visit edit_pledge_path(pledge)
+      fill_in "pledge_quantity", with: "3"
+      click_button "Update Pledge"
+
+      expect(page).to have_text "Pledge was successfully updated"
+      expect(page).to have_text "Number pledged 3"
+    end
   end
 
   context "As a user" do
