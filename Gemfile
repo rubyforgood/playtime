@@ -28,6 +28,11 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # A gem to automate using jQuery with Rails
 gem 'jquery-rails', '~> 4.3.1'
+
+# required for Bootstrap tooltips
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3'
+end
 # The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web.
 gem 'bootstrap', '~> 4.0.0.alpha6'
 # Login with Amazon OAuth2 strategy for OmniAuth 1.0
