@@ -3,7 +3,7 @@ require "support/omniauth"
 
 feature "Pledging an item:" do
   before do
-    create(:pledge, id: 100)
+    create(:pledge, :with_user, id: 100)
   end
 
   context "As a guest" do
@@ -15,14 +15,14 @@ feature "Pledging an item:" do
     end
 
     scenario "I can unpledge an anonymous pledge" do
-      pledge = create(:anonymous_pledge)
+      pledge = create(:pledge, user: nil)
       visit pledge_path(pledge)
       within(".pledge") { click_link "Unpledge" }
       expect(page).to have_text "Pledge was successfully destroyed"
     end
 
     scenario "I can update the quantity of an anonymous pledge" do
-      pledge = create(:anonymous_pledge)
+      pledge = create(:pledge, user: nil)
       visit edit_pledge_path(pledge)
       fill_in "pledge_quantity", with: "3"
       click_button "Update Pledge"
@@ -44,7 +44,7 @@ feature "Pledging an item:" do
     end
 
     scenario "I can claim an anonymous item" do
-      pledge = create(:anonymous_pledge)
+      pledge = create(:pledge, user: nil)
       visit pledge_path(pledge)
       click_link "Claim pledge"
       expect(page).to have_text "You have claimed this pledge"

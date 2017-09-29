@@ -13,10 +13,9 @@
 FactoryGirl.define do
   factory :pledge do
     wishlist_item
-    user
 
-    factory :anonymous_pledge do
-      user nil
+    trait :with_user do
+      user
     end
   end
 end

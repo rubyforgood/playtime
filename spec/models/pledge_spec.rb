@@ -37,7 +37,7 @@ describe Pledge do
   end
 
   describe "uniqueness validation" do
-    let(:initial_pledge) { create(:pledge) }
+    let(:initial_pledge) { create(:pledge, :with_user) }
 
     context "when the user and wishlist are duplicated" do
       subject { build(:pledge, user: initial_pledge.user,
@@ -58,8 +58,8 @@ describe Pledge do
     context "when the user is nil" do
       it 'should allow for "duplicate" pledges' do
         wishlist_item = create(:wishlist_item)
-        create(:anonymous_pledge, wishlist_item: wishlist_item)
-        anon_pledge = build(:anonymous_pledge, wishlist_item: wishlist_item)
+        create(:pledge, user: nil, wishlist_item: wishlist_item)
+        anon_pledge = build(:pledge, wishlist_item: wishlist_item)
 
         expect(anon_pledge).to be_valid
       end
@@ -83,12 +83,12 @@ describe Pledge do
 
   describe "#anonymous?" do
     context "when it's owned by a user" do
-      subject { create(:pledge).anonymous? }
+      subject { create(:pledge, :with_user).anonymous? }
       it { should be false }
     end
 
     context "when it's not owned by a user" do
-      subject { create(:anonymous_pledge).anonymous? }
+      subject { create(:pledge, user: nil).anonymous? }
       it { should be true }
     end
   end

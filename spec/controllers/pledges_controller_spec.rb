@@ -22,7 +22,7 @@ describe PledgesController, type: :controller do
   describe "GET #index" do
     context "as a normal user" do
       it "DOES NOT return a success response" do
-        pledge = create(:pledge)
+        pledge = create(:pledge, :with_user)
         get :index, params: {}, session: user_session
         expect(response).not_to be_success
       end
@@ -30,7 +30,7 @@ describe PledgesController, type: :controller do
 
     context "as an admin" do
       it "returns a success response" do
-        pledge = create(:pledge)
+        pledge = create(:pledge, :with_user)
         get :index, params: {}, session: admin_session
         expect(response).to be_success
       end
@@ -41,12 +41,12 @@ describe PledgesController, type: :controller do
   describe "GET #show" do
     context "as a normal user" do
       it "DOES NOT return a success response" do
-        pledge = create(:pledge)
+        pledge = create(:pledge, :with_user)
         get :show, params: {id: pledge.id}, session: user_session
         expect(response).not_to be_success
       end
       it "redirects to the root url" do
-        pledge = create(:pledge)
+        pledge = create(:pledge, :with_user)
         get :show, params: {id: pledge.id}, session: user_session
         expect(response).to redirect_to(root_url)
       end
@@ -62,7 +62,7 @@ describe PledgesController, type: :controller do
 
     context "as an admin" do
       it "returns a success response" do
-        pledge = create(:pledge)
+        pledge = create(:pledge, :with_user)
         get :show, params: {id: pledge.id}, session: admin_session
         expect(response).to be_success
       end
@@ -73,12 +73,12 @@ describe PledgesController, type: :controller do
   describe "GET #edit" do
     context "as a normal user" do
       it "DOES NOT return a success response" do
-        pledge = create(:pledge)
+        pledge = create(:pledge, :with_user)
         get :edit, params: {id: pledge.id}, session: user_session
         expect(response).not_to be_success
       end
       it "redirects to the root url" do
-        pledge = create(:pledge)
+        pledge = create(:pledge, :with_user)
         get :edit, params: {id: pledge.id}, session: user_session
         expect(response).to redirect_to(root_url)
       end
@@ -94,7 +94,7 @@ describe PledgesController, type: :controller do
 
     context "as an admin" do
       it "returns a success response" do
-        pledge = create(:pledge)
+        pledge = create(:pledge, :with_user)
         get :edit, params: {id: pledge.id}, session: admin_session
         expect(response).to be_success
       end
@@ -107,7 +107,7 @@ describe PledgesController, type: :controller do
       let(:new_attributes) { {quantity: 2} }
 
       it "DOES NOT update the requested pledge" do
-        pledge = create(:pledge, quantity: 1)
+        pledge = create(:pledge, :with_user, quantity: 1)
         put :update, params: {id: pledge.id, pledge: new_attributes},
                      session: user_session
         pledge.reload
@@ -150,7 +150,7 @@ describe PledgesController, type: :controller do
         let(:new_attributes) { {quantity: 2} }
 
         it "updates the requested pledge" do
-          pledge = create(:pledge, quantity: 1)
+          pledge = create(:pledge, :with_user, quantity: 1)
           put :update, params: {id: pledge.id, pledge: new_attributes},
                        session: admin_session
           pledge.reload
@@ -158,7 +158,7 @@ describe PledgesController, type: :controller do
         end
 
         it "redirects to the pledge" do
-          pledge = create(:pledge)
+          pledge = create(:pledge, :with_user)
           put :update, params: {id: pledge.id, pledge: new_attributes},
                        session: admin_session
           expect(response).to redirect_to(pledge)
@@ -167,7 +167,7 @@ describe PledgesController, type: :controller do
 
       context "with invalid params" do
         it "returns a success response (i.e. to display the 'edit' template)" do
-          pledge = create(:pledge)
+          pledge = create(:pledge, :with_user)
           put :update, params: {id: pledge.id, pledge: invalid_attributes},
                       session: admin_session
           expect(response).to be_success
@@ -227,7 +227,7 @@ describe PledgesController, type: :controller do
   describe "DELETE #destroy" do
     context "as a normal user" do
       it "DOES NOT destroy the requested pledge" do
-        pledge = create(:pledge)
+        pledge = create(:pledge, :with_user)
         expect {
           delete :destroy, params: {id: pledge.to_param}, session: user_session
         }.not_to change(Pledge, :count)
@@ -251,7 +251,7 @@ describe PledgesController, type: :controller do
 
     context "as an admin" do
       it "destroys the requested pledge" do
-        pledge = create(:pledge)
+        pledge = create(:pledge, :with_user)
         expect {
           delete :destroy, params: {id: pledge.to_param}, session: admin_session
         }.to change(Pledge, :count).by(-1)

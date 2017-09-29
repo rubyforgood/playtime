@@ -18,25 +18,25 @@ describe PledgePolicy do
   end
 
   permissions :show? do
-    it "denies access to guests" do
-      expect(subject).not_to permit(GuestUser.new, create(:pledge))
+    it "grants access to anyone (if anonymous)" do
+      expect(subject).to permit(GuestUser.new, create(:pledge, user: nil))
     end
 
-    it "grants access to anyone (if anonymous)" do
-      expect(subject).to permit(GuestUser.new, create(:anonymous_pledge))
+    it "denies access to guests (if owned)" do
+      expect(subject).not_to permit(GuestUser.new, create(:pledge, :with_user))
     end
 
     it "denies access to unrelated users (if owned)" do
-      expect(subject).not_to permit(build(:user), create(:pledge))
+      expect(subject).not_to permit(build(:user), create(:pledge, :with_user))
     end
 
     it "grants access to the pledging user" do
-      pledge = create(:pledge)
+      pledge = create(:pledge, :with_user)
       expect(subject).to permit(pledge.user, pledge)
     end
 
     it "grants access to admins" do
-      expect(subject).to permit(build(:admin), create(:pledge))
+      expect(subject).to permit(build(:admin), create(:pledge, :with_user))
     end
   end
 
@@ -55,62 +55,62 @@ describe PledgePolicy do
   end
 
   permissions :update? do
-    it "denies access to guests" do
-      expect(subject).not_to permit(GuestUser.new, build(:pledge))
+    it "grants access to anyone (if anonymous)" do
+      expect(subject).to permit(GuestUser.new, build(:pledge, user: nil))
     end
 
-    it "grants access to anyone (if anonymous)" do
-      expect(subject).to permit(GuestUser.new, create(:anonymous_pledge))
+    it "denies access to guests (if owned)" do
+      expect(subject).not_to permit(GuestUser.new, build(:pledge, :with_user))
     end
 
     it "denies access to users (if owned)" do
-      expect(subject).not_to permit(build(:user), build(:pledge))
+      expect(subject).not_to permit(build(:user), build(:pledge, :with_user))
     end
 
     it "grants access to the pledging user" do
-      pledge = create(:pledge)
+      pledge = create(:pledge, :with_user)
       expect(subject).to permit(pledge.user, pledge)
     end
 
     it "grants access to admins" do
-      expect(subject).to permit(build(:admin), build(:pledge))
+      expect(subject).to permit(build(:admin), build(:pledge, :with_user))
     end
   end
 
   permissions :claim? do
     it "denies access to guests" do
-      expect(subject).not_to permit(GuestUser.new, build(:anonymous_pledge))
+      expect(subject).not_to permit(GuestUser.new, build(:pledge))
     end
 
     it "grants access to users (if anonymous)" do
-      expect(subject).to permit(build(:user), create(:anonymous_pledge))
+      expect(subject).to permit(build(:user), create(:pledge, user: nil))
     end
 
     it "denies access to users (if owned)" do
-      expect(subject).not_to permit(build(:user), build(:pledge))
+      expect(subject).not_to permit(build(:user), build(:pledge, :with_user))
     end
   end
 
   permissions :destroy? do
-    it "denies access to guests" do
-      expect(subject).not_to permit(GuestUser.new, build(:pledge))
+    it "denies access to guests (if owned)" do
+      expect(subject).not_to permit(GuestUser.new, build(:pledge, :with_user))
     end
 
     it "grants access to anyone (if anonymous)" do
-      expect(subject).to permit(GuestUser.new, create(:anonymous_pledge))
+      expect(subject).to permit(GuestUser.new, build(:pledge, user: nil))
     end
 
     it "denies access to unrelated users (if owned)" do
-      expect(subject).not_to permit(build(:user), build(:pledge))
+      expect(subject).not_to permit(build(:user), build(:pledge, :with_user))
     end
 
     it "grants access to the pledging user" do
-      pledge = create(:pledge)
+      pledge = create(:pledge, :with_user)
       expect(subject).to permit(pledge.user, pledge)
     end
 
     it "grants access to admins" do
-      expect(subject).to permit(build(:admin), build(:pledge))
+      expect(subject).to permit(build(:admin), build(:pledge, :with_user))
     end
   end
 end
