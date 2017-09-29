@@ -37,9 +37,10 @@ class Pledge < ApplicationRecord
 
     def generate_csv(csv_generator: ActiveRecordCSVGenerator.new(self))
       csv_generator.generate(columns: [
-        ['pledged item',  ->(r) { r.item_name }],
-        ['wishlist',      ->(r) { r.wishlist_name }],
-        ['pledging user', ->(r) { r.user_display_name }],
+        ['pledged item',  ->(p) { p.item_name }],
+        ['wishlist',      ->(p) { p.wishlist_name }],
+        ['pledging user', ->(p) { p.user_display_name }],
+        ['email',         ->(p) { p.user_email }],
         :quantity,
         ['created at', ->(p) { p.created_at }],
         ['updated at', ->(p) { p.updated_at }],
@@ -63,9 +64,17 @@ class Pledge < ApplicationRecord
     created_at != updated_at
   end
 
+  def user_email
+    anonymous? ? nil : user.email
+  end
+
   def user_display_name
     anonymous? ? 'Anonymous' : user.display_name
   end
+  def user_email
+    anonymous? ? nil : user.email
+  end
+
 
   def claim_or_increment(user_id:)
     existing_pledge = Pledge.find_by(user_id: user_id,
