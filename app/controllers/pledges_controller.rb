@@ -40,6 +40,16 @@ class PledgesController < ApplicationController
     end
   end
 
+  def claim
+    @pledge = Pledge.find(params[:pledge_id])
+    authorize @pledge
+    if @pledge.update(user_id: current_user.id)
+      redirect_to @pledge, notice: 'You have claimed this pledge.'
+    else
+      render :edit
+    end
+  end
+
   def destroy
     authorize @pledge
     redirect_path = @pledge.anonymous? ? root_path : user_path(@pledge.user)

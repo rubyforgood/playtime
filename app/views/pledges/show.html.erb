@@ -20,6 +20,18 @@
 
   <br /><br />
 
+  <% if @pledge.anonymous? && current_user.logged_in? %>
+    <div class="row align-items-center unpledge">
+      <div class="col">
+        <h4>Did you make this pledge?
+        <%= link_to 'Claim pledge', pledge_claim_path(@pledge),
+          method: :patch,
+          class: 'btn btn-primary btn-sm text-right' %>
+        </h4>
+      </div>
+    </div>
+  <% end %>
+
   <div class="row align-items-center unpledge">
     <div class="col">
       <h4>Didn't mean to pledge?

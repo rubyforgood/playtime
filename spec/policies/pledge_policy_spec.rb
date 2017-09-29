@@ -77,6 +77,20 @@ describe PledgePolicy do
     end
   end
 
+  permissions :claim? do
+    it "denies access to guests" do
+      expect(subject).not_to permit(GuestUser.new, build(:anonymous_pledge))
+    end
+
+    it "grants access to users (if anonymous)" do
+      expect(subject).to permit(build(:user), create(:anonymous_pledge))
+    end
+
+    it "denies access to users (if owned)" do
+      expect(subject).not_to permit(build(:user), build(:pledge))
+    end
+  end
+
   permissions :destroy? do
     it "denies access to guests" do
       expect(subject).not_to permit(GuestUser.new, build(:pledge))

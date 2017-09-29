@@ -42,6 +42,13 @@ feature "Pledging an item:" do
       expect(page).to have_text "You pledged to donate"
       # TODO: expect a new tab to open to Amazon
     end
+
+    scenario "I can claim an anonymous item" do
+      pledge = create(:anonymous_pledge)
+      visit pledge_path(pledge)
+      click_link "Claim pledge"
+      expect(page).to have_text "You have claimed this pledge"
+    end
   end
 
   context "As the pledging user" do
@@ -75,7 +82,11 @@ feature "Pledging an item:" do
       expect(page).to have_text "Number pledged 3"
     end
 
-    # scenario "I can re-pledge an item to increment its quantity" do
+    scenario "I can re-pledge an item to increment its quantity" do
+      visit wishlist_path(pledge.wishlist)
+      click_button "Pledge to Donate"
+      expect(page).to have_text "Number pledged 2"
+    end
   end
 
   context "As an admin" do

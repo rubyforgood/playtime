@@ -20,6 +20,10 @@ class PledgePolicy < ApplicationPolicy
     user.admin? || user.pledged?(pledge) || pledge.anonymous?
   end
 
+  def claim?
+    pledge.anonymous? && user.logged_in?
+  end
+
   def destroy?
     user.admin? || user.pledged?(pledge) || pledge.anonymous?
   end
