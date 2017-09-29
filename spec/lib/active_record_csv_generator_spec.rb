@@ -3,25 +3,16 @@ require "active_record_csv_generator"
 describe ActiveRecordCSVGenerator do
   describe ".generate" do
     context "with a resource that adheres to the ActiveRecord interface" do
-      FakeUser = Struct.new(:name)
-      let(:ar_resource) do
-        db = { headers: ["id", "name", "user_id"],
-               values:  [   1, "DC General", "1"] }
-
-        # double of a wishlist instance
-        record = instance_double "Wishlist"
-        allow(record).to receive("attributes") do
-          db[:headers].zip(db[:values]).to_h
-        end
-        users = [FakeUser.new("Jason"), FakeUser.new("Polly")]
-        allow(record).to receive_message_chain("users") { users }
-
-        # double of the Wishlist model
-        double "Wishlist", column_names: db[:headers],
-                           all: [record]
+      # Set an initial db state of one wishlist with two site managers.
+      before do
+        create(:wishlist, name: 'DC General', id: 1, users: [
+          create(:user, name: 'Jason'),
+          create(:user, name: 'Polly')
+        ])
       end
+      let(:ar_resource) { Wishlist }
+      let(:generator)   { ActiveRecordCSVGenerator.new(ar_resource) }
 
-      let(:generator) { ActiveRecordCSVGenerator.new(ar_resource) }
 
       it "generates a csv" do
         csv = generator.generate(columns: [:id, :name])
