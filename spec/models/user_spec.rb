@@ -107,6 +107,15 @@ describe User do
     it { should be true }
   end
 
+  describe "#pledge_count" do
+    subject {
+      user = create(:user, pledges: [create(:pledge, user: nil, quantity: 2),
+                                     create(:pledge, user: nil)])
+      user.pledge_count
+    }
+    it { should eq 3 }
+  end
+
   describe "#made_pledge?" do
     let(:pledge) { create(:pledge) }
 
@@ -117,7 +126,7 @@ describe User do
 
     context "when the user didn't make the pledge" do
       subject {
-        other_pledge = create(:pledge)
+        other_pledge = create(:pledge, :with_user)
         build(:user, pledges: [other_pledge]).pledged?(pledge)
       }
       it { should be false }

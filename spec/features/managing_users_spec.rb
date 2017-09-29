@@ -94,7 +94,7 @@ feature "Managing Users:" do
       click_link "Users"
       click_link "Export CSV"
 
-      expect(page).to have_text "id,"               # should be a csv...
+      expect(page).to have_text "name,email,"       # should be a csv...
       expect(page).to have_text "admin@example.com" # ...with user data
     end
 

@@ -18,7 +18,13 @@
         <tr class="pledge">
           <td><%= pledge.wishlist_item.name %></td>
           <td><%= link_to pledge.wishlist.name, pledge.wishlist %></td>
-          <td><%= link_to pledge.user_display_name, pledge.user %></td>
+          <td>
+            <% if pledge.anonymous? %>
+              Anonymous
+            <% else %>
+              <%=link_to pledge.user_display_name, pledge.user %>
+            <% end %>
+          </td>
           <td><%= pledge.quantity %></td>
           <td><%= link_to 'Show', pledge %></td>
           <td><%= link_to 'Edit', edit_pledge_path(pledge) %></td>

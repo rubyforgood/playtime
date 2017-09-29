@@ -127,12 +127,12 @@ describe Pledge do
   end
 
   describe ".generate_csv" do
-    before { create(:pledge, id: 100) }
+    before { create(:pledge, user: create(:user, name: "Tony Stark")) }
     subject(:csv) { Pledge.generate_csv }
 
     it "should generate a csv" do
-      expect(csv).to include "id"
-      expect(csv).to include "100"
+      expect(csv).to include "user,"
+      expect(csv).to include "Tony Stark"
     end
   end
 
