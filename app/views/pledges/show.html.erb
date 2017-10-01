@@ -43,11 +43,11 @@
     </div>
   </div>
 
-  <p>
-    Manage <%= posessive_pronoun(@pledge.user, capitalize: false) %> pledge here
-    or on <%= posessive_pronoun(@pledge.user, capitalize: false) %>
-    <%= link_to 'user page', @pledge.user %>.
-  </p>
+  <% if current_user.pledged? @pledge %>
+    <p>
+      Manage your pledge here or on your <%= link_to 'user page', @pledge.user %>.
+    </p>
+  <% end %>
 
   <%= link_to "Back to #{@pledge.wishlist.name}", @pledge.wishlist %> |
   <%= link_to "Back to user page", @pledge.user %>
