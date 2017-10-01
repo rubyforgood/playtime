@@ -43,7 +43,8 @@ class PledgesController < ApplicationController
   def claim
     @pledge = Pledge.find(params[:pledge_id])
     authorize @pledge
-    if @pledge.update(user_id: current_user.id)
+
+    if @pledge.claim_or_increment(user_id: current_user.id)
       redirect_to @pledge, notice: 'You have claimed this pledge.'
     else
       render :edit

@@ -26,18 +26,6 @@ class Pledge < ApplicationRecord
                        numericality: { greater_than_or_equal_to: 1 }
   validates :wishlist_item, uniqueness: { scope: :user }, unless: :anonymous?
 
-  def anonymous?
-    !user_id
-  end
-
-  def edited?
-    created_at != updated_at
-  end
-
-  def user_display_name
-    anonymous? ? 'Anonymous' : user.display_name
-  end
-
   class << self
     def increment_or_new(params)
       if (pledge = find_duplicate(params))
@@ -57,6 +45,37 @@ class Pledge < ApplicationRecord
       uniq_keys = %w[user_id wishlist_item_id]
       uniq_params = params.keep_if { |key, _| key.to_s.in? uniq_keys }
       find_by(uniq_params)
+    end
+  end
+
+  def anonymous?
+    !user_id
+  end
+
+  def edited?
+    created_at != updated_at
+  end
+
+  def user_display_name
+    anonymous? ? 'Anonymous' : user.display_name
+  end
+
+  def claim_or_increment(user_id:)
+    existing_pledge = Pledge.find_by(user_id: user_id,
+                                     wishlist_item_id: wishlist_item.id)
+
+    transaction do
+      merge!(existing_pledge) if existing_pledge
+      update(user_id: user_id)
+    end
+  end
+
+  private
+
+  def merge!(old_pledge)
+    transaction do
+      increment(:quantity, old_pledge.quantity)
+      old_pledge.destroy
     end
   end
 end

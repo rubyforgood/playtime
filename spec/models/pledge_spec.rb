@@ -93,6 +93,39 @@ describe Pledge do
     end
   end
 
+  describe "#claim_or_increment" do
+    context "when another pledge with those attributes exists" do
+      let(:user) { create(:user) }
+      let(:existing_pledge) { create(:pledge, user: user) }
+      let(:pledge) { create(:pledge, user: nil, wishlist_item: existing_pledge.wishlist_item) }
+
+      it "should belong to user" do
+        pledge.claim_or_increment(user_id: user.id)
+        expect(pledge.reload.user).to eq user
+      end
+
+      it "should delete the previous pledge" do
+        expect {
+          pledge.claim_or_increment(user_id: user.id)
+        }.to change(Pledge, :count).by(1)
+      end
+
+      it "should increment the quantity" do
+        pledge.claim_or_increment(user_id: user.id)
+        expect(pledge.reload.quantity).to eq 2
+      end
+    end
+
+    context "when it's a unique pledge" do
+      it "should belong to the user" do
+        user = create(:user)
+        pledge = create(:pledge, user: nil)
+        pledge.claim_or_increment(user_id: user.id)
+        expect(pledge.reload.user).to eq user
+      end
+    end
+  end
+
   describe ".generate_csv" do
     before { create(:pledge, id: 100) }
     subject(:csv) { Pledge.generate_csv }

@@ -49,6 +49,17 @@ feature "Pledging an item:" do
       click_link "Claim pledge"
       expect(page).to have_text "You have claimed this pledge"
     end
+
+    scenario "I can claim a duplicate anonymous item" do
+      current_user = User.last
+      wishlist_item = create(:wishlist_item)
+      create(:pledge, wishlist_item: wishlist_item, user: current_user)
+      pledge = create(:pledge, wishlist_item: wishlist_item)
+
+      visit pledge_path(pledge)
+      click_link "Claim pledge"
+      expect(page).to have_text "You have claimed this pledge"
+    end
   end
 
   context "As the pledging user" do
