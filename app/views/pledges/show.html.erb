@@ -4,11 +4,33 @@
     "<%= @pledge.wishlist_item.name %>"
   </h2>
 
-  <p class="lead">Thanks for being a Hero of Play! On behalf of the children and families we serve, thank you! ♥</p>
+  <p class="lead">
+    <% if @pledge.anonymous? %>
+      Thank you for being a Hero of Play! ♥
+  </p>
+  <p class="lead">
+      But wait, we don't know who you are! By logging in, you make it much
+      easier for us to track donations. Sign up/log in with Amazon <%= link_to "here", signin_path %>.
+    <% else %>
+      Thanks for being a Hero of Play! On behalf of the children and families we serve, thank you! ♥
+    <% end %>
+  </p>
 
   <%= render @pledge %>
 
   <br /><br />
+
+  <% if @pledge.anonymous? && current_user.logged_in? %>
+    <div class="row align-items-center unpledge">
+      <div class="col">
+        <h4>Did you make this pledge?
+        <%= link_to 'Claim pledge', pledge_claim_path(@pledge),
+          method: :patch,
+          class: 'btn btn-primary btn-sm text-right' %>
+        </h4>
+      </div>
+    </div>
+  <% end %>
 
   <div class="row align-items-center unpledge">
     <div class="col">
@@ -21,11 +43,11 @@
     </div>
   </div>
 
-  <p>
-    Manage <%= posessive_pronoun(@pledge.user, capitalize: false) %> pledge here
-    or on <%= posessive_pronoun(@pledge.user, capitalize: false) %>
-    <%= link_to 'user page', @pledge.user %>.
-  </p>
+  <% if current_user.pledged? @pledge %>
+    <p>
+      Manage your pledge here or on your <%= link_to 'user page', @pledge.user %>.
+    </p>
+  <% end %>
 
   <%= link_to "Back to #{@pledge.wishlist.name}", @pledge.wishlist %> |
   <%= link_to "Back to user page", @pledge.user %>

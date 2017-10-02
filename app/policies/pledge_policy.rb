@@ -9,7 +9,7 @@ class PledgePolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.pledged?(pledge)
+    user.admin? || user.pledged?(pledge) || pledge.anonymous?
   end
 
   def create?
@@ -17,11 +17,15 @@ class PledgePolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || user.pledged?(pledge)
+    user.admin? || user.pledged?(pledge) || pledge.anonymous?
+  end
+
+  def claim?
+    pledge.anonymous? && user.logged_in?
   end
 
   def destroy?
-    user.admin? || user.pledged?(pledge)
+    user.admin? || user.pledged?(pledge) || pledge.anonymous?
   end
 
   private

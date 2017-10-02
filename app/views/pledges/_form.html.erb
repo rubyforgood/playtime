@@ -20,8 +20,11 @@
 
     <dt class="col-sm-2">Pledging user</dt>
     <dd class="col-sm-10">
-      <%= link_to pledge.user.display_name, pledge.user %>
-      <%= "(You!)" if current_user == pledge.user %>
+      <% if pledge.anonymous? %>
+        Anonymous
+      <% else %>
+        <%= link_to pledge.user_display_name, pledge.user %>
+      <% end %>
     </dd>
 
     <dt class="col-sm-2"><%= form.label :quantity %></dt>

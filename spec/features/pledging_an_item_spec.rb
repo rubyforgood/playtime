@@ -3,13 +3,34 @@ require "support/omniauth"
 
 feature "Pledging an item:" do
   before do
-    create(:pledge, id: 100)
+    create(:pledge, :with_user, id: 100)
   end
 
-  # context "As a guest" do
-    # scenario "I can purchase a wish list item"
-    # scenario "I can confirm that an item was purchased"
-  # end
+  context "As a guest" do
+    scenario "I can pledge an item" do
+      visit root_path
+      click_button "Pledge to Donate"
+      expect(page).to have_text "You pledged to donate"
+      # TODO: expect a new tab to open to Amazon
+    end
+
+    scenario "I can unpledge an anonymous pledge" do
+      pledge = create(:pledge, user: nil)
+      visit pledge_path(pledge)
+      within(".pledge") { click_link "Unpledge" }
+      expect(page).to have_text "Pledge was successfully destroyed"
+    end
+
+    scenario "I can update the quantity of an anonymous pledge" do
+      pledge = create(:pledge, user: nil)
+      visit edit_pledge_path(pledge)
+      fill_in "pledge_quantity", with: "3"
+      click_button "Update Pledge"
+
+      expect(page).to have_text "Pledge was successfully updated"
+      expect(page).to have_text "Number pledged 3"
+    end
+  end
 
   context "As a user" do
     before { login(as: :user) }
@@ -20,6 +41,24 @@ feature "Pledging an item:" do
       click_button "Pledge to Donate"
       expect(page).to have_text "You pledged to donate"
       # TODO: expect a new tab to open to Amazon
+    end
+
+    scenario "I can claim an anonymous item" do
+      pledge = create(:pledge, user: nil)
+      visit pledge_path(pledge)
+      click_link "Claim pledge"
+      expect(page).to have_text "You have claimed this pledge"
+    end
+
+    scenario "I can claim a duplicate anonymous item" do
+      current_user = User.last
+      wishlist_item = create(:wishlist_item)
+      create(:pledge, wishlist_item: wishlist_item, user: current_user)
+      pledge = create(:pledge, wishlist_item: wishlist_item)
+
+      visit pledge_path(pledge)
+      click_link "Claim pledge"
+      expect(page).to have_text "You have claimed this pledge"
     end
   end
 
@@ -54,7 +93,11 @@ feature "Pledging an item:" do
       expect(page).to have_text "Number pledged 3"
     end
 
-    # scenario "I can re-pledge an item to increment its quantity" do
+    scenario "I can re-pledge an item to increment its quantity" do
+      visit wishlist_path(pledge.wishlist)
+      click_button "Pledge to Donate"
+      expect(page).to have_text "Number pledged 2"
+    end
   end
 
   context "As an admin" do

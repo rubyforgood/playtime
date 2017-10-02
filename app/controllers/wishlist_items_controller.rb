@@ -3,7 +3,7 @@ class WishlistItemsController < ApplicationController
 
   def index
     skip_authorization
-    @wishlist_items = WishlistItem.all
+    @wishlist_items = WishlistItem.includes(:item, :wishlist)
   end
 
   def create

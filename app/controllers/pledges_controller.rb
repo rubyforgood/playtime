@@ -4,8 +4,10 @@ class PledgesController < ApplicationController
   def index
     authorize Pledge
     respond_to do |format|
-      format.html { @pledges = Pledge.all }
       format.csv  { export_csv }
+      format.html do
+        @pledges = Pledge.includes(:user, wishlist_item: [:item, :wishlist])
+      end
     end
   end
 
@@ -38,11 +40,23 @@ class PledgesController < ApplicationController
     end
   end
 
+  def claim
+    @pledge = Pledge.find(params[:pledge_id])
+    authorize @pledge
+
+    if @pledge.claim_or_increment(user_id: current_user.id)
+      redirect_to @pledge, notice: 'You have claimed this pledge.'
+    else
+      render :edit
+    end
+  end
+
   def destroy
     authorize @pledge
-    pledging_user = @pledge.user
+    redirect_path = @pledge.anonymous? ? root_path : user_path(@pledge.user)
     @pledge.destroy
-    redirect_to user_path(pledging_user), notice: 'Pledge was successfully destroyed.'
+
+    redirect_to redirect_path, notice: 'Pledge was successfully destroyed.'
   end
 
   private

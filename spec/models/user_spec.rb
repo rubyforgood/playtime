@@ -125,8 +125,8 @@ describe User do
   end
 
   describe "#pledge_for" do
-    let(:pledge) { create(:pledge) }
-    let(:user) { pledge.user }
+    let(:user) { create(:user) }
+    let(:pledge) { create(:pledge, user: user) }
 
     context "when the user pledged the item" do
       subject { user.pledge_for(pledge.wishlist_item) }

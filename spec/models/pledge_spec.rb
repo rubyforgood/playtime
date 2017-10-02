@@ -23,7 +23,7 @@ describe Pledge do
 
   describe "without an associated user" do
     subject { build(:pledge, user: nil) }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe "without a quantity" do
@@ -37,7 +37,7 @@ describe Pledge do
   end
 
   describe "uniqueness validation" do
-    let(:initial_pledge) { create(:pledge) }
+    let(:initial_pledge) { create(:pledge, :with_user) }
 
     context "when the user and wishlist are duplicated" do
       subject { build(:pledge, user: initial_pledge.user,
@@ -54,6 +54,16 @@ describe Pledge do
       subject { build(:pledge, wishlist_item: initial_pledge.wishlist_item) }
       it { should be_valid }
     end
+
+    context "when the user is nil" do
+      it 'should allow for "duplicate" pledges' do
+        wishlist_item = create(:wishlist_item)
+        create(:pledge, user: nil, wishlist_item: wishlist_item)
+        anon_pledge = build(:pledge, wishlist_item: wishlist_item)
+
+        expect(anon_pledge).to be_valid
+      end
+    end
   end
 
   describe "#edited?" do
@@ -68,6 +78,51 @@ describe Pledge do
       before { pledge.update!(quantity: 2) }
       subject { pledge.edited? }
       it { should be true }
+    end
+  end
+
+  describe "#anonymous?" do
+    context "when it's owned by a user" do
+      subject { create(:pledge, :with_user).anonymous? }
+      it { should be false }
+    end
+
+    context "when it's not owned by a user" do
+      subject { create(:pledge, user: nil).anonymous? }
+      it { should be true }
+    end
+  end
+
+  describe "#claim_or_increment" do
+    context "when another pledge with those attributes exists" do
+      let(:user) { create(:user) }
+      let(:existing_pledge) { create(:pledge, user: user) }
+      let(:pledge) { create(:pledge, user: nil, wishlist_item: existing_pledge.wishlist_item) }
+
+      it "should belong to user" do
+        pledge.claim_or_increment(user_id: user.id)
+        expect(pledge.reload.user).to eq user
+      end
+
+      it "should delete the previous pledge" do
+        expect {
+          pledge.claim_or_increment(user_id: user.id)
+        }.to change(Pledge, :count).by(1)
+      end
+
+      it "should increment the quantity" do
+        pledge.claim_or_increment(user_id: user.id)
+        expect(pledge.reload.quantity).to eq 2
+      end
+    end
+
+    context "when it's a unique pledge" do
+      it "should belong to the user" do
+        user = create(:user)
+        pledge = create(:pledge, user: nil)
+        pledge.claim_or_increment(user_id: user.id)
+        expect(pledge.reload.user).to eq user
+      end
     end
   end
 

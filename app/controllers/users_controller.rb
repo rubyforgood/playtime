@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.includes(pledges: [wishlist_item: [:item, :wishlist]])
+                .find(params[:id])
     authorize @user
   end
 
