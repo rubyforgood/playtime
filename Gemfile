@@ -40,7 +40,7 @@ gem 'omniauth-amazon'
 # Makes http fun again! http://jnunemaker.github.com/httparty
 gem 'httparty'
 # Helper for add social share feature in your Rails app. Twitter, Facebook, Weibo, Douban
-gem 'social-share-button'
+gem 'social-share-button', '~> 1.0.0'
 # most important gem for awesome debugging and awesome consoles
 gem 'pry-rails'
 # Authorizaton library
