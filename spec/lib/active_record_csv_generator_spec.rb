@@ -3,23 +3,39 @@ require "active_record_csv_generator"
 describe ActiveRecordCSVGenerator do
   describe ".generate" do
     context "with a resource that adheres to the ActiveRecord interface" do
-      let(:ar_resource) do
-        db = { headers: ["id", "name"],
-               values:  [   1, "DC General"] }
-
-        # double of a wishlist instance
-        record = instance_double "Wishlist"
-        allow(record).to receive_message_chain("attributes.values") { db[:values] }
-
-        # double of the Wishlist model
-        double "Wishlist", column_names: db[:headers],
-                           all: [record]
+      # Set an initial db state of one wishlist with two site managers.
+      before do
+        create(:wishlist, name: 'DC General', id: 1, users: [
+          create(:user, name: 'Jason'),
+          create(:user, name: 'Polly')
+        ])
       end
+      let(:ar_resource) { Wishlist }
+      let(:generator)   { ActiveRecordCSVGenerator.new(ar_resource) }
 
-      subject(:csv) { ActiveRecordCSVGenerator.new(ar_resource).generate }
 
       it "generates a csv" do
+        csv = generator.generate(columns: [:id, :name])
         expect(csv).to eq "id,name\n1,DC General\n"
+      end
+
+      context "when a value is an association" do
+        it "should return the association value" do
+          site_managers_string = ->(record) { record.users.map(&:name).join(" ")}
+          csv = generator.generate(columns: [
+              :id,
+              :name,
+              [:site_managers, site_managers_string]
+          ])
+          expect(csv).to eq "id,name,site_managers\n1,DC General,Jason Polly\n"
+        end
+      end
+
+      context "when a value is an arbitrary lambda" do
+        it "should include key as the col name and result as value" do
+          csv = generator.generate(columns: [:name, [:age, ->(_) { 10 }]])
+          expect(csv).to eq "name,age\nDC General,10\n"
+        end
       end
     end
   end

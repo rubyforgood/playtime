@@ -3,7 +3,7 @@ require "support/omniauth"
 
 feature "Pledging an item:" do
   before do
-    create(:pledge, :with_user, id: 100)
+    create(:pledge, user: create(:user, name: 'Bill Gates'))
   end
 
   context "As a guest" do
@@ -139,8 +139,8 @@ feature "Pledging an item:" do
       visit pledges_path
       click_link "Export CSV"
 
-      expect(page).to have_text "id," # should be a csv...
-      expect(page).to have_text "100" # ...with pledge data
+      expect(page).to have_text "user,"      # should be a csv...
+      expect(page).to have_text "Bill Gates" # ...with pledge data
     end
   end
 end
