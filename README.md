@@ -121,7 +121,7 @@ Navigate to your desired working directory. Then from a command prompt:
 
 Then navigate to `http://localhost:3000` in your browser to view the app.
 
-#### Getting Amazon OAuth Working Locally
+#### Getting Amazon OAuth Working Locally (Optional)
 
 By the end of this section, you should be able to create an account/login to
 the app on your local machine.
@@ -255,6 +255,10 @@ For changes to `.env` to take effect, you'll need to restart your server.
   # Advertisement API Working Locally"
   AWS_ACCESS_KEY="your aws access key"
   AWS_SECRET_KEY="your aws secret key"
+
+  # If you want to force Amazon login instead of developer in development environment
+  # set it to true.
+  FORCE_AMAZON_LOGIN=false
 
   # Code for generating affiliate links from search (same for everyone)
   AWS_ASSOCIATES_TAG="playtim009-20"
