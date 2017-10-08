@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # OAuth
   controller :sessions do
     get '/auth/:provider/callback', action: :create
+    post '/auth/:provider/callback', action: :create
     get '/auth/failure', action: :failure
 
     get '/signin', action: :new, as: :signin
