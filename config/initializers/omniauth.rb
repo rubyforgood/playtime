@@ -3,4 +3,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     {
       :scope => 'profile postal_code' # default scope
     }
+
+  provider :developer if Rails.env.development?
 end
