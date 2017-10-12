@@ -59,7 +59,7 @@ on Slack ([get an invite][slack-invite]).
 [@micahbales]: https://github.com/micahbales
 [slack-channel]: https://rubyforgood.slack.com/messages/playtime
 [slack-invite]: https://rubyforgood.herokuapp.com/
-[CONTRIBUTING]: CONTRIBUTING.md
+[CONTRIBUTING]: .github/CONTRIBUTING.md
 
 ### Getting Started
 
