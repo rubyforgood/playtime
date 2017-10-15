@@ -2,17 +2,17 @@
 @import "playtime/social-share";
 
 body {
-  color: #333333;
+  color: $light-gray;
   font-family: 'PT Sans', Helvetica, Arial, Lucida, sans-serif;
   line-height: 1.25rem;
 }
 
-a{
+a {
   text-decoration: underline;
   color: $teal;
 }
 
-h2{
+h2 {
   margin-top: 25px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
@@ -27,7 +27,7 @@ h3 {
   font-size: 1.25em;
 }
 .item_title a {
-  color: #fff;
+  color: $white;
 }
 
 .container {
@@ -79,7 +79,7 @@ h3 {
 }
 
 .btn-primary {
-  color: #fff;
+  color: $white;
   background-color: $purple;
   border-color: $purple;
 

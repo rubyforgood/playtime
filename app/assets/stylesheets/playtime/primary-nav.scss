@@ -27,12 +27,12 @@
 }
 
 .navbar-nav a, .user-greeting, .nav-item {
-  color: #fff;
+  color: $white;
 }
 
 .primary-nav .user-greeting {
   a {
-    color: #fff;
+    color: $white;
     text-decoration: underline;
   }
 }
@@ -58,7 +58,7 @@ a.nav-link, a.navlink.dropdown-toggle {
 
 .tagline {
   font-size: 16px;
-  color: #fff;
+  color: $white;
   text-align: center;
 }
 
