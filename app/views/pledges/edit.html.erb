@@ -3,10 +3,12 @@
 
   <%= render 'form', pledge: @pledge %>
 
-  <br />
-  <%= link_to 'Show Pledge', @pledge %> |
-  <%= link_to 'Unpledge item', pledge_path(@pledge),
-    method: :delete,
-    class: 'text-danger',
-    data: { confirm: 'Are you sure you want to unpledge this item?' } %>
+  <div class="my-4">
+    <%= link_to 'Show Pledge', @pledge %> |
+    <%= link_to 'Unpledge item', pledge_path(@pledge),
+      method: :delete,
+      class: 'text-danger',
+        data: { confirm: 'Are you sure you want to unpledge this item?' } %>
+  </div>
+
 </div>

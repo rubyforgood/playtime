@@ -17,8 +17,8 @@
 }
 
 .submit {
-  color: #fff;
-  background-color: #0084ad;
+  color: $white;
+  background-color: $teal;
 }
 
 .row-headers {
@@ -31,11 +31,11 @@
 }
 
 .user-details-table {
-  background-color: lightyellow;
+  background-color: $light-yellow;
 }
 
 .pledges-table {
-  background-color: lightblue;
+  background-color: $light-blue;
 }
 
 .form.center-form {

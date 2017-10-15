@@ -44,10 +44,11 @@
           <dd class="col-md-9">
             <%= display_date pledge.created_at %>
             <% if pledge.edited? %>
-              <small>
-              <br />
-              <%= icon 'pencil', "last updated #{display_date pledge.updated_at}" %>
-              </small>
+              <div>
+                <small>
+                  <%= icon 'pencil', "last updated #{display_date pledge.updated_at}" %>
+                </small>
+              </div>
             <% end %>
           </dd>
         </dl>
