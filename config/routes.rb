@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+ # Error Pages
+  get '/404', :to => 'errors#not_found'
+  get '/500', :to => 'errors#internal_server_error'
+  get '/422', :to => 'errors#unprocessable_entity'
+
   # Pledges
   resources :pledges, except: [:new] do
     patch :claim
