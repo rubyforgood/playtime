@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   # Users
-  resources :users, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :users
 
   # OAuth
   controller :sessions do
