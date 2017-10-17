@@ -17,25 +17,27 @@
   </div>
 
   <%= form.fields_for :user do |user_form| %>
-    <div class="form-group" id="wishlist_users">
-
-      <p>
-        <strong>Admins:</strong> (can manage all wishlists)
+    <div class="form-group" id="wishlist-admins">
+      <strong>Admins:</strong> (can manage all wishlists)
+      <div>
         <% User.admin.each do |admin| %>
           <input type="checkbox" checked disabled readonly />
           <%= admin.display_name %>
         <% end %>
-      </p>
+      </div>
+    </div>
 
-      <p>
-        <strong>Site Managers:</strong><br />
-          <%= form.collection_check_boxes :user_ids, User.all, :id, :display_name do |b|
+    <div class="form-group" id="wishlist-site-managers">
+      <strong>Site Managers:</strong>
+      <div>
+        <%=
+          form.collection_check_boxes :user_ids, User.all, :id, :display_name do |b|
             b.label(class: "checkbox-inline") {
               b.check_box(id: "user-#{b.object.id}") + b.text
             }
           end
-          %>
-        <br />
+        %>
+      </div>
       </p>
     </div>
   <% end %>
