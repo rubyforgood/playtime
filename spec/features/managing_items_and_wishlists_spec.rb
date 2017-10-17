@@ -136,7 +136,7 @@ feature "Managing items and wishlists:" do
       visit new_wishlist_path
 
       fill_in "wishlist_name", with: "VA General"
-      within "#wishlist_users" do
+      within "#wishlist-site-managers" do
         check "user-#{u.id}"
       end
       click_button "Create Wishlist"
@@ -151,7 +151,7 @@ feature "Managing items and wishlists:" do
       click_link "DC General"
       click_link "Edit Wishlist"
 
-      within "#wishlist_users" do
+      within "#wishlist-site-managers" do
         check "user-#{u.id}"
       end
       click_button "Update Wishlist"
