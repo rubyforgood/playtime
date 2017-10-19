@@ -22,7 +22,7 @@ throughout DC. This application will allow donors to view the organization's
 Amazon wish lists, add items, track contributions, and aid staff in following
 up with donors.
 
-*We don't have a live site yet. Stay tuned!*
+![Playtime Project App](doc/playtime_app.png)
 
 ### About Ruby for Good
 
