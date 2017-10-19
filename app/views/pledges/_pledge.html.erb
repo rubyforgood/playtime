@@ -11,8 +11,12 @@
         <div class="row">
           <h4 class="card-title col">
             <%= pledge.item_name %>
+
             <% if pledge.amazon_url %>
-              <small><%= link_to icon('external-link', 'Amazon'), pledge.amazon_url %></small>
+              <small>
+                <%= link_to icon('external-link', 'Amazon'), pledge.amazon_url,
+                  target: '_blank' %>
+              </small>
             <% end %>
           </h4>
         </div>
