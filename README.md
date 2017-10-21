@@ -222,7 +222,7 @@ checks can be run with
 Specs can be found in the `spec` folder, and they follow the typical `rspec`
 directory structure. Some notes:
 
-  - We're using FactoryGirl to generate objects, and those files can be found
+  - We're using FactoryBot to generate objects, and those files can be found
     in `spec/factories/<plural_model_name>.rb`.
 
   - Support files, including helper methods, gem initialization/configuration,

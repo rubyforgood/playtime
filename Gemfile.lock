@@ -84,10 +84,10 @@ GEM
       railties (>= 3.2, < 5.2)
     erubi (1.6.0)
     execjs (2.7.0)
-    factory_girl (4.8.0)
+    factory_bot (4.8.2)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.8.0)
-      factory_girl (~> 4.8.0)
+    factory_bot_rails (4.8.2)
+      factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
@@ -276,7 +276,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   database_cleaner (~> 1.6.1)
   dotenv-rails
-  factory_girl_rails (~> 4.8)
+  factory_bot_rails
   font-awesome-sass
   httparty
   jbuilder (~> 2.5)

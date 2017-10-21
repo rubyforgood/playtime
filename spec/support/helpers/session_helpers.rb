@@ -1,4 +1,4 @@
-require 'support/factory_girl'
+require 'support/factory_bot'
 
 module Helpers
   module SessionHelpers

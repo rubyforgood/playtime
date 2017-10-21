@@ -56,8 +56,8 @@ group :development, :test do
   gem 'selenium-webdriver'
   # rspec-rails is a testing framework for Rails 3+.
   gem 'rspec-rails', '~> 3.5'
-  # Fixtures replacement. Read more: http://www.rubydoc.info/gems/factory_girl/
-  gem 'factory_girl_rails', '~> 4.8'
+  # Fixtures replacement. Read more: http://www.rubydoc.info/gems/factory_bot/
+  gem 'factory_bot_rails'
 end
 
 group :development do
