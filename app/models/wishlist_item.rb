@@ -26,4 +26,6 @@ class WishlistItem < ApplicationRecord
   validates :priority, presence: true
   validates :quantity, presence: true,
                        numericality: { greater_than_or_equal_to: 0 }
+
+  scope :priority_order, -> { order(priority: :desc) }
 end

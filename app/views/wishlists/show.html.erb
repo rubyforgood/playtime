@@ -20,7 +20,7 @@
     <%= @wishlist.users.map(&:display_name).join(", ") %>
   </p>
 
-  <%= render @wishlist.wishlist_items %>
+  <%= render @wishlist_items %>
 
   <%= link_to 'Back', root_path %>
 </div>

@@ -37,4 +37,15 @@ describe WishlistItem do
     subject { build(:wishlist_item, quantity: -10) }
     it { should_not be_valid }
   end
+
+  describe '#priority_order' do
+    let! :item_1 { create(:wishlist_item, priority: :medium) }
+    let! :item_2 { create(:wishlist_item, priority: :high) }
+    let! :item_3 { create(:wishlist_item, priority: :low) }
+
+    it 'with returns the items ordered by priority' do
+      expect(WishlistItem.all.priority_order.pluck(:id))
+        .to match_array([item_2.id, item_1.id, item_3.id])
+    end
+  end
 end

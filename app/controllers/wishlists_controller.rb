@@ -5,7 +5,7 @@ class WishlistsController < ApplicationController
     skip_authorization
     @wishlist = Wishlist.includes(wishlist_items: :item).find(params[:id])
     @site_managers = @wishlist.users
-    @wishlist_items = @wishlist.wishlist_items
+    @wishlist_items = @wishlist.wishlist_items.priority_order
   end
 
   def new
