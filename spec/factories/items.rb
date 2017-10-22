@@ -15,7 +15,7 @@
 #  name          :text             not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :item do
     name "Louis the Corgi"
 

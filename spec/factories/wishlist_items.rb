@@ -12,7 +12,7 @@
 #  priority      :integer          default("low"), not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :wishlist_item do
     wishlist
     item
