@@ -1,0 +1,119 @@
+- name: Louis the Corgi
+  amazon_url: https://www.amazon.com/Douglas-1713-Toys-Louie-Corgi/dp/B00TFT77ZS
+  price_cents: 1345
+  image_url: https://images-na.ssl-images-amazon.com/images/I/71u1YGcc-FL._SL1500_.jpg
+  asin: B00TFT77ZS
+
+- name: BRIO Monorail Airport Set
+  amazon_url: https://www.amazon.com/dp/B00B0IE3RW
+  price_cents: 10890
+  image_url: https://images-na.ssl-images-amazon.com/images/I/51vWDVHdiVL._SL1000_.jpg
+  asin: B00B0IE3RW
+
+- name: Tommee Tippee Closer To Nature Newborn Starter Gift Set, Blue
+  amazon_url: https://www.amazon.com/dp/B01GG2C9Z4
+  price_cents: 3579
+  image_url: https://images-na.ssl-images-amazon.com/images/I/81nb4LzA-zL._SL1500_.jpg
+  asin: B01GG2C9Z4
+
+- name: Burt's Bees Baby Bee 100% Natural Diaper Rash Ointment, 3 Ounces
+  amazon_url: https://www.amazon.com/dp/B00YRKV1U2
+  price_cents: 778
+  image_url: https://images-na.ssl-images-amazon.com/images/I/61Z-sDUNwPL._SL1300_.jpg
+  asin: B00YRKV1U2
+
+- name: Amazon Elements Baby Wipes, Unscented, 720 Count, Resealable Packs with Tub
+  amazon_url: https://www.amazon.com/dp/B00M4M2ZSC
+  price_cents: 1614
+  image_url: https://images-na.ssl-images-amazon.com/images/I/814UrY9LP9L._SL1500_.jpg
+  asin: B00M4M2ZSC
+
+- name: Big Bug
+  amazon_url: https://www.amazon.com/dp/1442498978
+  price_cents: 989
+  image_url: https://images-na.ssl-images-amazon.com/images/I/51hu-vdgcTL._SY498_BO1,204,203,200_.jpg
+  asin: 1442498978
+
+- name: Summer Infant Lil' Loo Potty, White and Teal
+  amazon_url: https://www.amazon.com/dp/B00A0ID90A
+  price_cents: 923
+  image_url: https://images-na.ssl-images-amazon.com/images/I/81usMG68MeL._SX522_.jpg
+  asin: B00A0ID90A
+
+- name: Yellow Ball
+  amazon_url: https://www.amazon.com/dp/1930900791
+  price_cents: 1893
+  image_url: https://images-na.ssl-images-amazon.com/images/I/51ueH65wM5L.jpg
+  asin: 1930900791
+
+- name: Summer Infant 3Dlite Convenience Stroller, Citrus
+  amazon_url: https://www.amazon.com/dp/B00O20NX30
+  price_cents: 6300
+  image_url: https://images-na.ssl-images-amazon.com/images/I/91m%2BP9gryyL._SX522_.jpg
+  asin: B00O20NX30
+
+- name: Pull-Ups Learning Designs Training Pants for Girls, 2T-3T, 74 Count
+  amazon_url: https://www.amazon.com/dp/B01B649P3G
+  price_cents: 2374
+  image_url: https://images-na.ssl-images-amazon.com/images/I/91EGkpUWd3L._SX522_.jpg
+  asin: B01B649P3G
+
+- name: Philips AVENT BPA Free Night Time Pacifier, 6-18 Months, 2 Count Pack
+  amazon_url: https://www.amazon.com/dp/B001L2SA3A
+  price_cents: 398
+  image_url: https://images-na.ssl-images-amazon.com/images/I/915lXaqQX9L._SX522_.jpg
+  asin: B001L2SA3A
+
+- name: Philips Avent BPA Free Contemporary Freeflow Pacifier, 0-6 Months, 2 Count
+  amazon_url: https://www.amazon.com/dp/B001L2SA6M
+  price_cents: 554
+  image_url: https://images-na.ssl-images-amazon.com/images/I/71OhSyR0qAL._SX522_.jpg
+  asin: B001L2SA6M
+
+- name: LeapFrog Shapes And Sharing Picnic Basket
+  amazon_url: https://www.amazon.com/LeapFrog-Shapes-Sharing-Picnic-Basket/dp/B004560BPY
+  price_cents: 1520
+  image_url: https://images-na.ssl-images-amazon.com/images/I/81UGxtwm1YL._SL1500_.jpg
+  asin: B004560BPY
+
+- name: Graco SnugRide Click Connect 35 Infant Car Seat, Gotham
+  amazon_url: https://www.amazon.com/dp/B00H8MQ4US
+  price_cents: 12869
+  image_url: https://images-na.ssl-images-amazon.com/images/I/61klvwBSdAL._SX522_.jpg
+  asin: B00H8MQ4US
+
+- name: Graco Snugrider Elite Stroller and Car Seat Carrier, Black
+  amazon_url: https://www.amazon.com/dp/B00UVW3WHK
+  price_cents: 5544
+  image_url: https://images-na.ssl-images-amazon.com/images/I/518QkoPoGyL._SX522_.jpg
+  asin: B00UVW3WHK
+
+- name: Pull-Ups Hug Learning, 4t-5t Boy, 18 Count
+  amazon_url: https://www.amazon.com/dp/B01B649SZ6
+  price_cents: 1506
+  image_url: https://images-na.ssl-images-amazon.com/images/I/91ylbSUpy3L._SX522_.jpg
+  asin: B01B649SZ6
+
+- name: Baby Teething Toys - Tinabless Teething Keys Set Soft Silicone BPA-Free Baby Fruit Teethers Toys with Pacifier Clip/Holder for Infant and Toddler (4 pack)
+  amazon_url: https://www.amazon.com/dp/B01MSRC4WJ
+  price_cents: 1423
+  image_url: https://images-na.ssl-images-amazon.com/images/I/61dEUOKA-dL._SL1100_.jpg
+  asin: B01MSRC4WJ
+
+- name: Fisher-Price My First Thomas & Friends Rail Rollers Spiral Station
+  amazon_url: https://www.amazon.com/Fisher-Price-Thomas-Friends-Rollers-Station/dp/B00VJKT8CG
+  price_cents: 2895
+  image_url: https://images-na.ssl-images-amazon.com/images/I/815ITgK8dCL._SL1500_.jpg
+  asin: B00VJKT8CG
+
+- name: Cra-Z-Art Peppa Pig Travel Magna Doodle - Magnetic Screen Drawing Toy
+  amazon_url: https://www.amazon.com/Cra-Z-Art-Peppa-Travel-Magna-Doodle/dp/B019DQFZLU
+  price_cents: 899
+  image_url: https://images-na.ssl-images-amazon.com/images/I/81geXlY7xVL._SL1500_.jpg
+  asin: B019DQFZLU
+
+- name: My Little Pony - Rainbow Dash 8"
+  amazon_url: https://www.amazon.com/My-Little-Pony-Rainbow-Dash/dp/B00EIFS8AC
+  price_cents: 677
+  image_url: https://images-na.ssl-images-amazon.com/images/I/51XirJp%2BfmL.jpg
+  asin: B00EIFS8AC

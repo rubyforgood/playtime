@@ -1,34 +1,51 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Read the seed data into memory. Do this before deleting data to be sure there isn't a problem
+seed_data = Dir.glob(Rails.root.join('db', 'seed', '**', '*.yml')).reduce({}) { |collection, file|
+  collection[File.basename(file, '.yml')] = YAML::load_file(Rails.root.join('db', 'seed', file))
+  collection
+}
 
-admin = User.create!(
-  name: "Rebecca Staples",
-  email: "rebecca@playtime.org",
+# Remove all seeded data.
+Pledge.delete_all
+WishlistItem.delete_all
+SiteManager.delete_all
+Wishlist.delete_all
+User.delete_all
+Item.delete_all
+
+# First create the admin
+User.create(
+  name: 'Sally Ride',
+  email: 'ride@example.com',
   admin: true
 )
 
-user = User.create!(name: "Micah Bales", email: "micahbales@gmail.com")
+wishlists = Wishlist.create!(seed_data['wishlists'])
+users = User.create(seed_data['users'])
+items = Item.create(seed_data['items'])
 
-wishlist = Wishlist.create!(name: "DC General")
+# Associate users with wishlists in order
+site_managers = (0..5).collect { |index|
+  SiteManager.create!(user: users[index], wishlist: wishlists[index])
+}
 
-SiteManager.create!(user: user, wishlist: wishlist)
+# Randomly assign several items to a wishlist
+wishlist_items = items.map { |item|
+  wishlist_sample = wishlists.shuffle.take(Random.rand(3))
+  wishlist_sample.map { |wishlist|
+    WishlistItem.create!(
+      quantity: 1,
+      wishlist: wishlist,
+      item: item
+    )
+  }
+}.flatten
 
-item = Item.create!(
-  amazon_url: "https://www.amazon.com/Douglas-1713-Toys-Louie-Corgi/dp/B00TFT77ZS/ref=sr_1_1?ie=UTF8&qid=1495377177&sr=8-1&keywords=corgi+toy",
-  price_cents: 1320,
-  asin: "B00TFT77ZS",
-  image_url: "https://images-na.ssl-images-amazon.com/images/I/71u1YGcc-FL._SL1500_.jpg",
-  name: "Louis the Corgi"
-)
+# Owned pledges
+Pledge.create!(user: users.first, wishlist_item: wishlist_items.first)
+Pledge.create!(user: users.second, wishlist_item: wishlist_items.second)
+Pledge.create!(user: users.last, wishlist_item: wishlist_items.last)
 
-WishlistItem.create!(
-  quantity: 1,
-  wishlist: wishlist,
-  item: item,
-  staff_message: "Item for the 3-10 age group. Our shelter cannot support pets, we find these stuffed doggos to be therapeutic for the children."
-)
+# Anonymous pledges
+Pledge.create!(wishlist_item: wishlist_items[10])
+Pledge.create!(wishlist_item: wishlist_items[11])
+Pledge.create!(wishlist_item: wishlist_items[12])

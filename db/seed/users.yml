@@ -1,0 +1,18 @@
+
+- name: Gus Grissom
+  email: grissom@example.com
+
+- name: Ed White
+  name: white@example.com
+
+- name: Roger Chafee
+  email: chafee@example.com
+
+- name: Neil Armstrong
+  email: armstrong@example.com
+
+- name: Michael Collins
+  email: collins@example.com
+
+- name: Buzz Aldrin
+  email: aldrin@example.com
