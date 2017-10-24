@@ -4,6 +4,7 @@
     "postdeploy": "bin/review_app_setup"
   },
   "env": {
+    "NEW_RELIC_ENV": "review",
     "ADMIN_AMAZON_EMAIL": {
       "required": true
     },
