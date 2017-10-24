@@ -31,7 +31,7 @@ module AmazonProductAPI
       price != "$0.00"
     end
 
-    def has_valid_image?
+    def valid_image?
       image.valid?
     end
 
