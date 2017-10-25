@@ -10,7 +10,7 @@
       <%= hidden_field_tag 'image_height', item.image_height %>
 
       <td>
-        <% if item.has_valid_image? %>
+        <% if item.valid_image? %>
           <%= image_tag item.image_url, width: item.image_width,
                                         height: item.image_height %>
         <% end %>
