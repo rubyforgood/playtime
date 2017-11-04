@@ -1,15 +1,5 @@
 <%= form_with(model: wishlist_item, local: true) do |form| %>
-  <% if wishlist_item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(wishlist_item.errors.count, "error") %> prohibited this wishlist_item from being saved:</h2>
-
-      <ul>
-      <% wishlist_item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'shared/error_messages', locals: { submission: wishlist_item }%>
 
   <div class="field">
     <%= form.label :quantity %>

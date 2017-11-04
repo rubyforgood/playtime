@@ -1,15 +1,5 @@
 <%= form_with(model: pledge, local: true) do |form| %>
-  <% if pledge.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(pledge.errors.count, "error") %> prohibited this pledge from being saved:</h2>
-
-      <ul>
-      <% pledge.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'shared/error_messages', locals: { submission: pledge } %>
 
   <dl class="row">
     <dt class="col-sm-2">Wishlist item</dt>
