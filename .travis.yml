@@ -1,19 +1,15 @@
 language: ruby
 before_script:
-  - cp config/database.yml.travis config/database.yml
+- cp config/database.yml.travis config/database.yml
 script:
 - export RAILS_ENV=test
 - bundle exec rake db:setup db:migrate
 - bundle exec rake spec
 after_success:
-- if [ $TRAVIS_PULL_REQUEST == false ] && [ $TRAVIS_BRANCH == "master" ]; then
-      openssl aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out config/deploy_id_rsa;
-      chmod 600 config/deploy_id_rsa;
-      eval `ssh-agent -s`;
-      ssh-add config/deploy_id_rsa;
-      bundle exec cap production deploy;
-      ssh-agent -k;
-  fi
+- if [ $TRAVIS_PULL_REQUEST == false ] && [ $TRAVIS_BRANCH == "master" ]; then openssl
+  aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out config/deploy_id_rsa;
+  chmod 600 config/deploy_id_rsa; eval `ssh-agent -s`; ssh-add config/deploy_id_rsa;
+  bundle exec cap production deploy; ssh-agent -k; fi
 env:
   global:
-  - secure: NYmv5Fq28AE/vX/p4EJ6B13XRhdBcoUO7EySsZrucOxnIYTBLod4izZZtKJy/qkle2jE/ROGloiJwsi3xdW+hifP4Hb4aPPHRaN2kwNLmbdjKIgUDI3SsdBCzLmhuplTUOs2J/qxWMBzGLtelQT4ED7akaVLovc1trngHaDM0Jl84FzqW5yboJVGK0mxAczMo2vVSZMH6HmGl/aXUS0BHuL3K5c4S28U5jMYB1Wpy4B7vSQY8ok57ixBFqWXCOYaeaLocDN7HVGIK+Pf2AoNvZpXHo0FFmP+t+NcUTDZUpUrOIm1p7YX3M8kazEmWcIsOKy6w1eAFoW9VvQV3K9xxMx3AQVwEk0B4zJbdT2ZqT3dIafmGB6f8U0aC+j2t5NVsGPRQYIYHXG/WCRRqKs9kuh8nOEWsFC/4LictpufKXrS6R15uwhNpdn5jyJ4BXyX3A8SjuINm/IWx5SNb88LAHNbqomf1n8vYhdF/ika4zGVo0uNvAR0H9QulScXmuzl0FCHigQqDinT5lYDFi8ExXE1H4MAKR/axM2H5Ssc0owhBAcSfThGLkseQ3+RtO/ZB0pCuTLT4j4CoLyvxbIg5xZo06qPo4atde55WvAx4ZuhcikZOJXWWb/G7i3LCiS5GvzlFoNq0DGCPULxZ0qQEp8cqa4xAbG5l6j6FLXI9ks=
+  - secure: dwsFBQy3zOEzR82UdDcVnKx7DkmFcDF5uJDlIJPwbbMZKizfYqzdCkLvmNEYIXBSaZrJT0UD2OgGn0f/I4Sl3Xrgujq7CjEvhFKcLMpd1vLZ83LXDXNadOMsr4F/bd6nS7C3EiUcgrdLspv7VaDGjF4FqmkmxpiCBj+FVStkm5kLvgTxwMv3qT7JakshFWgO3G0OHmC+S6KNTP6admGiQzIBKJu5vQuiXWPaYvDuUs9firJjJZ+/IP+441Osx2CbvUFn11IQsFjH3A1mxQB3IH8ydkOhyRgwAgj5I/Zbf2YVupxP/sv7RliukPPgKEjRpKWH3ErQAjrqG8ylkspl1TkbSxAZ0hPYZ3Mg1bujbEZAv/s6R4g2KoOqKvAiRiKOQ6w7Lsn3qvr1s4oQJvIFMSC3L0J3L0U3cKwegSIJ+v1vYq5pp/tNO7Z4r2iPU1BQcboMBMPpRy3/7T0ACSZ5pF6Wy8IsLalQhLzASR0Qc9K0AIggKQVqzRJH6Rh7XQ/KAJWQYyT1y6Ktiee9QDTmDLRTXMOk3IQDvrs8fQ+mU0/ptQ6aEJaQx2TrI5xXUaD7tOxKiKByh13E1VZzqT5iQKxOlIRRh9te0C7FQ37Co4FqRyc2IhvPaXna8nMYN+BGJKYcjg0kGTu77j9z3Bym4zFZ9d3hrd+4jNZVVcbLImI=
