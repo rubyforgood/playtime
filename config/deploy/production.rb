@@ -39,7 +39,7 @@ server '13.84.34.79', roles: %w{web app db}, primary: true,
 # Feel free to add new variables to customise your setup.
 
 set :rbenv_type, :user
-set :rbenv_ruby, '2.4.2'
+set :rbenv_ruby, '2.4.1'
 
 # Custom SSH Options
 # ==================
