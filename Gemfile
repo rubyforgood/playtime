@@ -77,6 +77,13 @@ group :development do
   gem 'spring-commands-rspec', '~> 1.0'
   # Helps detect N+1 queries and unused eager loading
   gem 'bullet'
+  gem 'binding_of_caller', '~> 0.7'
+  gem 'better_errors', '~> 2.1'
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano-rbenv', '~> 2.1'
+  gem 'capistrano-bundler', '~> 1.2'
+  gem 'capistrano3-puma', '~> 3.1'
+  gem 'capistrano-rails-console', require: false
 end
 
 group :test do
