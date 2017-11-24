@@ -1,3 +1,3 @@
-if defined?(PryRails::RAILS_PROMPT)
-  Pry.config.prompt = PryRails::RAILS_PROMPT
-end
+# frozen_string_literal: true
+
+Pry.config.prompt = PryRails::RAILS_PROMPT if defined?(PryRails::RAILS_PROMPT)

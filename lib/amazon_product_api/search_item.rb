@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AmazonProductAPI
   # Represents an individual Amazon item listing
   class SearchItem
@@ -28,7 +30,7 @@ module AmazonProductAPI
     end
 
     def valid?
-      price != "$0.00"
+      price != '$0.00'
     end
 
     def valid_image?

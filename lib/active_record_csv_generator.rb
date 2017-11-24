@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Generates CSV from ActiveRecord model attributes
 #
@@ -79,7 +81,7 @@ class ActiveRecordCSVGenerator
   #     }
   #
   def evaluate_columns(columns)
-    columns.reduce({headers:[], fields:[]}) do |acc, column|
+    columns.each_with_object(headers: [], fields: []) do |column, acc|
       if column.is_a? Array
         acc[:headers] << column[0].to_s
         acc[:fields]  << column[1]
@@ -87,7 +89,6 @@ class ActiveRecordCSVGenerator
         acc[:headers] << column.to_s
         acc[:fields]  << ->(record) { record.attributes[column.to_s] }
       end
-      acc
     end
   end
 end

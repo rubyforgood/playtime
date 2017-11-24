@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: wishlists
@@ -14,7 +16,7 @@ FactoryBot.define do
 
     trait :with_item do
       transient do
-        item_name "Item on Wishlist"
+        item_name 'Item on Wishlist'
 
         after(:create) do |wishlist, evaluator|
           wishlist.items << create(:item, name: evaluator.item_name)

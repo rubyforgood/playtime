@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: wishlist_items
@@ -13,27 +15,27 @@
 #
 
 describe WishlistItem do
-  describe "without an associated wishlist" do
+  describe 'without an associated wishlist' do
     subject { build(:wishlist_item, wishlist: nil) }
     it { should_not be_valid }
   end
 
-  describe "without an associated item" do
+  describe 'without an associated item' do
     subject { build(:wishlist_item, item: nil) }
     it { should_not be_valid }
   end
 
-  describe "without a priority" do
+  describe 'without a priority' do
     subject { build(:wishlist_item, priority: nil) }
     it { should_not be_valid }
   end
 
-  describe "without a quantity" do
+  describe 'without a quantity' do
     subject { build(:wishlist_item, quantity: nil) }
     it { should_not be_valid }
   end
 
-  describe "with a negative quantity" do
+  describe 'with a negative quantity' do
     subject { build(:wishlist_item, quantity: -10) }
     it { should_not be_valid }
   end

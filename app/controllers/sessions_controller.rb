@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   before_action :skip_authorization
   skip_before_action :verify_authenticity_token, if: :should_skip_csrf_check?
@@ -32,15 +34,16 @@ class SessionsController < ApplicationController
   end
 
   private
-    def auth_hash
-      request.env['omniauth.auth']
-    end
 
-    def should_skip_csrf_check?
-      Rails.env.development? && params[:provider] == 'developer'
-    end
+  def auth_hash
+    request.env['omniauth.auth']
+  end
 
-    def development_login_enabled?
-      Rails.env.development? && ENV['FORCE_AMAZON_LOGIN'] != 'true'
-    end
+  def should_skip_csrf_check?
+    Rails.env.development? && params[:provider] == 'developer'
+  end
+
+  def development_login_enabled?
+    Rails.env.development? && ENV['FORCE_AMAZON_LOGIN'] != 'true'
+  end
 end

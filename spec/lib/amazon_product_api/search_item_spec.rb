@@ -1,14 +1,16 @@
-require "amazon_product_api/search_item"
+# frozen_string_literal: true
+
+require 'amazon_product_api/search_item'
 
 describe AmazonProductAPI::SearchItem do
-  describe "#valid?" do
-    context "when all attributes are valid" do
+  describe '#valid?' do
+    context 'when all attributes are valid' do
       subject { AmazonProductAPI::SearchItem.new } # minimal valid state
       it { should be_valid }
     end
 
-    context "when the price is $0.00" do
-      subject { AmazonProductAPI::SearchItem.new(price: "$0.00") }
+    context 'when the price is $0.00' do
+      subject { AmazonProductAPI::SearchItem.new(price: '$0.00') }
       it { should_not be_valid }
     end
   end

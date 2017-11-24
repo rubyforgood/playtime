@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: wishlist_items
@@ -21,7 +23,7 @@ class WishlistItem < ApplicationRecord
            :image_url, :image_width, :image_height,
            to: :item
 
-  enum priority: [:low, :medium, :high]
+  enum priority: %i[low medium high]
 
   validates :priority, presence: true
   validates :quantity, presence: true,

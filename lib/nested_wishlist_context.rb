@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Required for AmazonSearchPolicy
 #
 # The AmazonSearchController is a modelless, nested controller under Wishlist.
@@ -14,5 +16,5 @@ class NestedWishlistContext
     @wishlist = wishlist
   end
 
- attr_reader :user, :wishlist
+  attr_reader :user, :wishlist
 end

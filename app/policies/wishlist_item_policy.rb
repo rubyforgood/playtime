@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WishlistItemPolicy < ApplicationPolicy
   def initialize(user, wishlist_item)
     @user = user

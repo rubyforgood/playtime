@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -12,8 +14,8 @@
 #  zipcode        :string
 #
 
-require "amazon_oauth_info"
-require "active_record_csv_generator"
+require 'amazon_oauth_info'
+require 'active_record_csv_generator'
 
 class User < ApplicationRecord
   validates :email,          uniqueness: true,
@@ -58,14 +60,14 @@ class User < ApplicationRecord
 
   def self.generate_csv(csv_generator: ActiveRecordCSVGenerator.new(self))
     csv_generator.generate(columns: [
-      :name,
-      :email,
-      :zipcode,
-      ['admin?', ->(u) { u.admin }],
-      ['site manager?', ->(u) { u.site_manager? }],
-      ['pledge count', ->(u) { u.pledge_count }],
-      ['created at', ->(u) { u.created_at }],
-    ])
+                             :name,
+                             :email,
+                             :zipcode,
+                             ['admin?', ->(u) { u.admin }],
+                             ['site manager?', ->(u) { u.site_manager? }],
+                             ['pledge count', ->(u) { u.pledge_count }],
+                             ['created at', ->(u) { u.created_at }]
+                           ])
   end
 
   def self.find_or_create_from_amazon_hash!(hash)

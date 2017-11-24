@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: pledges
@@ -10,7 +12,7 @@
 #  quantity         :integer          default(1), not null
 #
 
-require "active_record_csv_generator"
+require 'active_record_csv_generator'
 
 class Pledge < ApplicationRecord
   belongs_to :wishlist_item
@@ -37,14 +39,14 @@ class Pledge < ApplicationRecord
 
     def generate_csv(csv_generator: ActiveRecordCSVGenerator.new(self))
       csv_generator.generate(columns: [
-        ['pledged item',  ->(p) { p.item_name }],
-        ['wishlist',      ->(p) { p.wishlist_name }],
-        ['pledging user', ->(p) { p.user_display_name }],
-        ['email',         ->(p) { p.user_email }],
-        :quantity,
-        ['created at', ->(p) { p.created_at }],
-        ['updated at', ->(p) { p.updated_at }],
-      ])
+                               ['pledged item', ->(p) { p.item_name }],
+                               ['wishlist',      ->(p) { p.wishlist_name }],
+                               ['pledging user', ->(p) { p.user_display_name }],
+                               ['email',         ->(p) { p.user_email }],
+                               :quantity,
+                               ['created at', ->(p) { p.created_at }],
+                               ['updated at', ->(p) { p.updated_at }]
+                             ])
     end
 
     private
@@ -71,10 +73,6 @@ class Pledge < ApplicationRecord
   def user_display_name
     anonymous? ? 'Anonymous' : user.display_name
   end
-  def user_email
-    anonymous? ? nil : user.email
-  end
-
 
   def claim_or_increment(user_id:)
     existing_pledge = Pledge.find_by(user_id: user_id,

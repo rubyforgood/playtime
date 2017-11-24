@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PledgePolicy < ApplicationPolicy
   def initialize(user, pledge)
     @user = user

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserPolicy < ApplicationPolicy
   def initialize(user, record_user)
     @user = user
@@ -17,12 +19,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    base_attrs = [:name, :email]
-    if user.admin?
-      base_attrs += [:admin]
-    else
-      base_attrs
-    end
+    user.admin? ? %i[name email admin] : %i[name email]
   end
 
   private

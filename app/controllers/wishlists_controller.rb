@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class WishlistsController < ApplicationController
-  before_action :set_wishlist, only: [:edit, :update, :destroy]
+  before_action :set_wishlist, only: %i[edit update destroy]
 
   def show
     skip_authorization
@@ -48,18 +50,20 @@ class WishlistsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_wishlist
-      @wishlist = Wishlist.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def wishlist_params
-      params.require(:wishlist).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_wishlist
+    @wishlist = Wishlist.find(params[:id])
+  end
 
-    def attach_site_managers
-      return unless user_ids = params['wishlist']['user_ids']
-      @wishlist.user_ids = user_ids.delete_if(&:blank?).map(&:to_i)
-    end
+  # Never trust parameters from the scary internet,
+  # only allow the white list through.
+  def wishlist_params
+    params.require(:wishlist).permit(:name)
+  end
+
+  def attach_site_managers
+    return unless (user_ids = params['wishlist']['user_ids'])
+    @wishlist.user_ids = user_ids.delete_if(&:blank?).map(&:to_i)
+  end
 end

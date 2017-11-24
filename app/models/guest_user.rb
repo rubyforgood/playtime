@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Represents a logged-out (guest) User
 #
@@ -26,7 +28,7 @@ class GuestUser
   end
 
   def display_name
-    "Guest"
+    'Guest'
   end
 
   def pledged?(_)

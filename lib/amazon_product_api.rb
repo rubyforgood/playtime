@@ -1,4 +1,6 @@
-require "amazon_product_api/http_client"
+# frozen_string_literal: true
+
+require 'amazon_product_api/http_client'
 
 module AmazonProductAPI
   # Contains all code for interacting with the Amazon Product API
