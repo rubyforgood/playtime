@@ -17,6 +17,17 @@ module AmazonProductAPI
                             attrs[:image_height])
     end
 
+    def update_hash
+      {
+        name: title,
+        price_cents: price_cents,
+        amazon_url: detail_page_url,
+        image_url: image_url,
+        image_height: image_height,
+        image_width: image_width
+      }
+    end
+
     def image_url
       image.url
     end

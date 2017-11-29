@@ -3,34 +3,29 @@
 require 'amazon_product_api/search_item'
 
 module AmazonProductAPI
-  # Parses the Amazon Product API search response
+  # Parses the Amazon Product API item lookup response
   #
   # Any logic that involves digging through the response hash should live in
   # this class. By isolating it from the rest of the codebase, we only have one
   # file to touch if the API response changes.
-  class SearchResponse
+  class LookupResponse
     def initialize(response_hash)
-      @response_hash = response_hash
+      @hash = item_hash_for response_hash
     end
 
-    def num_pages
-      (response_hash.dig('ItemSearchResponse', 'Items', 'TotalPages') || 1).to_i
-    end
-
-    def items(item_class: SearchItem)
-      item_hashes.map { |hash| item_class.new(**item_attrs_from(hash)) }
+    def item(item_class: SearchItem)
+      item_class.new(**item_attrs)
     end
 
     private
 
-    attr_reader :response_hash
+    attr_reader :hash
 
-    def item_attrs_from(hash)
+    def item_attrs
       {
         asin: hash['ASIN'],
 
         price_cents: hash.dig('ItemAttributes', 'ListPrice', 'Amount').to_i,
-        price: hash.dig('OfferSummary', 'LowestNewPrice', 'FormattedPrice') || '$0.00',
 
         image_url:    hash.dig('SmallImage', 'URL') || '',
         image_width:  hash.dig('SmallImage', 'Width') || '',
@@ -41,8 +36,8 @@ module AmazonProductAPI
       }
     end
 
-    def item_hashes
-      response_hash.dig('ItemSearchResponse', 'Items', 'Item') || []
+    def item_hash_for(response_hash)
+      response_hash.dig('ItemLookupResponse', 'Items', 'Item') || []
     end
   end
 end

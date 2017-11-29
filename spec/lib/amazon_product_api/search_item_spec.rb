@@ -15,15 +15,15 @@ describe AmazonProductAPI::SearchItem do
     end
   end
 
-  describe "#valid_image?" do
-    it "returns true for valid data" do
-      item = AmazonProductAPI::SearchItem.new(image_url: "image url",
+  describe '#valid_image?' do
+    it 'returns true for valid data' do
+      item = AmazonProductAPI::SearchItem.new(image_url: 'image url',
                                               image_height: 600,
                                               image_width: 800)
       expect(item.valid_image?).to eq true
     end
 
-    it "returns false for invalid data" do
+    it 'returns false for invalid data' do
       item = AmazonProductAPI::SearchItem.new(image_url: nil,
                                               image_height: 600,
                                               image_width: 800)

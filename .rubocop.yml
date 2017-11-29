@@ -5,6 +5,7 @@ AllCops:
   # directories or files.
   Exclude:
     - db/**/*
+    - vendor/**/*
   TargetRubyVersion: 2.4.1
   # Cop names are not displayed in offense messages by default. Change behavior
   # by overriding DisplayCopNames, or by giving the `-D/--display-cop-names`
@@ -17,3 +18,7 @@ AllCops:
 
 Style/NumericLiterals:
   Enabled: false
+
+Style/BlockDelimiters:
+  Exclude:
+    - spec/**/*

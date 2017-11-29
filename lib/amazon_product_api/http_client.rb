@@ -1,56 +1,31 @@
 # frozen_string_literal: true
 
-require 'amazon_product_api/search_response'
+require 'amazon_product_api/item_search_endpoint'
+require 'amazon_product_api/item_lookup_endpoint'
 
 module AmazonProductAPI
-  # Responsible for building and executing the query to the Amazon Product API.
+  # Responsible for managing all Amazon Product API queries.
   #
-  # Any logic relating to endpoints, building the query string, authentication
-  # signatures, etc. should live in this class.
+  # All endpoints (returning query objects) should live in this class.
   class HTTPClient
-    require 'httparty'
-    require 'time'
-    require 'uri'
-    require 'openssl'
-    require 'base64'
+    attr_reader :env # injectable credentials
 
-    # The region you are interested in
-    ENDPOINT = 'webservices.amazon.com'
-    REQUEST_URI = '/onca/xml'
-
-    attr_reader :env
-    attr_writer :query, :page_num
-
-    def initialize(query:, page_num: 1, env: ENV)
-      @query = query
-      @page_num = page_num
+    def initialize(env: ENV)
       @env = env
       assign_env_vars
     end
 
-    # Generate the signed URL
-    def url
-      raise InvalidQueryError unless query && page_num
-
-      "http://#{ENDPOINT}#{REQUEST_URI}" +    # base
-        "?#{canonical_query_string}" +        # query
-        "&Signature=#{uri_escape(signature)}" # signature
+    def item_search(query:, page: 1)
+      ItemSearchEndpoint.new(query, page, aws_credentials)
     end
 
-    # Performs the search query and returns the resulting SearchResponse
-    def search_response(http: HTTParty)
-      response = get(http: http)
-      SearchResponse.new parse_response(response)
-    end
-
-    # Send the HTTP request
-    def get(http: HTTParty)
-      http.get(url)
+    def item_lookup(asin)
+      ItemLookupEndpoint.new(asin, aws_credentials)
     end
 
     private
 
-    attr_reader :query, :page_num, :aws_credentials
+    attr_reader :aws_credentials
 
     def assign_env_vars
       @aws_credentials = AWSCredentials.new(env['AWS_ACCESS_KEY'],
@@ -60,54 +35,6 @@ module AmazonProductAPI
               'AWS_ASSOCIATES_TAG are required values. Please make sure ' \
               "they're set."
       raise InvalidQueryError, msg unless @aws_credentials.present?
-    end
-
-    def parse_response(response)
-      Hash.from_xml(response.body)
-    end
-
-    def uri_escape(phrase)
-      URI.encode_www_form_component(phrase.to_s)
-    end
-
-    def params
-      params = {
-        'Service'         => 'AWSECommerceService',
-        'Operation'       => 'ItemSearch',
-        'AWSAccessKeyId'  => aws_credentials.access_key,
-        'AssociateTag'    => aws_credentials.associate_tag,
-        'SearchIndex'     => 'All',
-        'Keywords'        => query.to_s,
-        'ResponseGroup'   => 'ItemAttributes,Offers,Images',
-        'ItemPage'        => page_num.to_s
-      }
-
-      # Set current timestamp if not set
-      params['Timestamp'] ||= Time.now.gmtime.iso8601
-      params
-    end
-
-    # Generate the canonical query
-    def canonical_query_string
-      params.sort
-            .map { |key, value| "#{uri_escape(key)}=#{uri_escape(value)}" }
-            .join('&')
-    end
-
-    # Generate the string to be signed
-    def string_to_sign
-      "GET\n#{ENDPOINT}\n#{REQUEST_URI}\n#{canonical_query_string}"
-    end
-
-    # Generate the signature required by the Product Advertising API
-    def signature
-      Base64.encode64(digest_with_key(string_to_sign)).strip
-    end
-
-    def digest_with_key(string)
-      OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'),
-                           aws_credentials.secret_key,
-                           string)
     end
   end
 

@@ -9,7 +9,7 @@ class AmazonSearchController < ApplicationController
 
   def show
     authorize :amazon_search, :show?
-    @response = amazon_client.search_response
+    @response = amazon_search_response
   end
 
   def new
@@ -18,9 +18,11 @@ class AmazonSearchController < ApplicationController
 
   private
 
-  def amazon_client
-    AmazonProductAPI::HTTPClient.new(query: params[:query],
-                                     page_num: params[:page_num] || 1)
+  def amazon_search_response
+    client = AmazonProductAPI::HTTPClient.new
+    query  = client.item_search(query: params[:query],
+                                page: params[:page_num] || 1)
+    query.response
   end
 
   def set_wishlist
