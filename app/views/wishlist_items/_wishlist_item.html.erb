@@ -23,11 +23,11 @@
 
         <div class="row">
           <!-- Staff Message -->
-          <% if wishlist_item.staff_message %>
-          <p class="staff-message">
-            <strong>Staff Message:</strong>
-            <span class="card-text"><%= wishlist_item.staff_message %></span>
-          </p>
+          <% if wishlist_item.staff_message && wishlist_item.staff_message.length > 0 %>
+            <p class="staff-message">
+              <strong>Staff Message:</strong>
+              <span class="card-text"><%= wishlist_item.staff_message %></span>
+            </p>
           <% end %>
 
           <!-- Item Details -->
