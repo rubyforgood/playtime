@@ -24,14 +24,14 @@
         <div class="row">
           <!-- Staff Message -->
           <% if wishlist_item.staff_message %>
-            <p>
+          <p class="staff-message">
             <strong>Staff Message:</strong>
             <span class="card-text"><%= wishlist_item.staff_message %></span>
-            </p>
+          </p>
           <% end %>
 
           <!-- Item Details -->
-          <p>
+          <p class="tem-details">
             <strong>
               <span class="padding-right">
                 Needed: <%= wishlist_item.quantity %>
