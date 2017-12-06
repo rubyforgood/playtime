@@ -23,15 +23,15 @@
 
         <div class="row">
           <!-- Staff Message -->
-          <% if wishlist_item.staff_message %>
-            <p>
-            <strong>Staff Message:</strong>
-            <span class="card-text"><%= wishlist_item.staff_message %></span>
+          <% if wishlist_item.staff_message.present? %>
+            <p class="staff-message">
+              <strong>Staff Message:</strong>
+              <span class="card-text"><%= wishlist_item.staff_message %></span>
             </p>
           <% end %>
 
           <!-- Item Details -->
-          <p>
+          <p class="item-details">
             <strong>
               <span class="padding-right">
                 Needed: <%= wishlist_item.quantity %>
