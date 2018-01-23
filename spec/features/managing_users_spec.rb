@@ -78,14 +78,14 @@ feature 'Managing Users:' do
       expect(page).to have_text 'Gus Grissom'
     end
 
-    scenario "I can delete a user account" do
+    scenario 'I can delete a user account' do
       user = create(:user) # so we're not deleting our own account
 
-      click_link "Users"
-      users = find_all(".user")
+      click_link 'Users'
+      users = find_all('.user')
       target_user_node = users.find { |user_element| user_element.text.include?(user.email) }
       within(target_user_node) do
-        click_link "Destroy"
+        click_link 'Destroy'
       end
 
       expect(page).to have_text 'User was successfully destroyed.'

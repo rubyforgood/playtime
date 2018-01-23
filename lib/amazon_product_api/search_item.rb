@@ -28,17 +28,11 @@ module AmazonProductAPI
       }
     end
 
-    def image_url
-      image.url
-    end
+    delegate :url, to: :image, prefix: true
 
-    def image_width
-      image.width
-    end
+    delegate :width, to: :image, prefix: true
 
-    def image_height
-      image.height
-    end
+    delegate :height, to: :image, prefix: true
 
     def valid?
       price != '$0.00'

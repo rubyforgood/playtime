@@ -5,14 +5,14 @@ require 'amazon_product_api/item_search_endpoint'
 describe AmazonProductAPI::ItemSearchEndpoint do
   AWSTestCredentials = Struct.new(:access_key, :secret_key, :associate_tag)
 
-  let(:aws_credentials) {
+  let(:aws_credentials) do
     AWSTestCredentials.new('aws_access_key',
                            'aws_secret_key',
                            'aws_associates_tag')
-  }
-  let(:query) {
+  end
+  let(:query) do
     AmazonProductAPI::ItemSearchEndpoint.new('corgi', 5, aws_credentials)
-  }
+  end
 
   describe '#url' do
     subject(:url) { query.url }
@@ -40,11 +40,11 @@ describe AmazonProductAPI::ItemSearchEndpoint do
   end
 
   describe '#response', :external do
-    subject {
+    subject do
       query = AmazonProductAPI::ItemSearchEndpoint.new('corgi', 1,
                                                        aws_credentials)
       query.response
-    }
+    end
     it { should respond_to :items }
   end
 end

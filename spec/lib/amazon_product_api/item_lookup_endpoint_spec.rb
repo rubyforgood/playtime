@@ -5,14 +5,14 @@ require 'amazon_product_api/item_lookup_endpoint'
 describe AmazonProductAPI::ItemLookupEndpoint do
   AWSTestCredentials = Struct.new(:access_key, :secret_key, :associate_tag)
 
-  let(:aws_credentials) {
+  let(:aws_credentials) do
     AWSTestCredentials.new('aws_access_key',
                            'aws_secret_key',
                            'aws_associates_tag')
-  }
-  let(:query) {
+  end
+  let(:query) do
     AmazonProductAPI::ItemLookupEndpoint.new('corgi_asin', aws_credentials)
-  }
+  end
 
   describe '#url' do
     subject(:url) { query.url }

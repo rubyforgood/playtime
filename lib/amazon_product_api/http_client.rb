@@ -27,15 +27,17 @@ module AmazonProductAPI
 
     attr_reader :aws_credentials
 
+    # rubocop:disable UnneededDisable, Blank
     def assign_env_vars
       @aws_credentials = AWSCredentials.new(env['AWS_ACCESS_KEY'],
                                             env['AWS_SECRET_KEY'],
                                             env['AWS_ASSOCIATES_TAG'])
       msg = 'Environment variables AWS_ACCESS_KEY, AWS_SECRET_KEY, and ' \
               'AWS_ASSOCIATES_TAG are required values. Please make sure ' \
-              "they're set."
+              'they\'re set.'
       raise InvalidQueryError, msg unless @aws_credentials.present?
     end
+    # rubocop:enable UnneededDisable, Blank
   end
 
   # Wrapper object to store/verify AWS credentials
