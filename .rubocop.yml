@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   # Use the following Exclude to prevent Rubocop from linting specific
   # directories or files.
@@ -26,6 +24,9 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*
     - config/**/*
+
+Metrics/LineLength:
+  Enabled: False
 
 Metrics/MethodLength:
   Max: 12

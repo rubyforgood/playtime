@@ -44,14 +44,12 @@ module AmazonProductAPI
 
     # Performs the search query and returns the resulting SearchResponse
     def response(http: HTTParty, logger: Rails.logger)
-      begin
-        response = get(http: http)
-        logger.debug response
-        SearchResponse.new(parse_response(response), response.code)
-      rescue StandardError => e
-        Rollbar.error(e, "Failed to connect to Amazon. Reqeust: #{http}")
-        SearchResponse.new({}, 500)
-      end
+      response = get(http: http)
+      logger.debug response
+      SearchResponse.new(parse_response(response), response.code)
+    rescue StandardError => e
+      Rollbar.error(e, "Failed to connect to Amazon. Reqeust: #{http}")
+      SearchResponse.new({}, 500)
     end
 
     private

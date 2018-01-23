@@ -10,9 +10,7 @@ class AmazonSearchController < ApplicationController
   def show
     authorize :amazon_search, :show?
     @response = amazon_search_response
-    if @response.error?
-      redirect_to new_wishlist_amazon_search_path(params[:wishlist_id]), notice: 'Could not connect to Amazon. Please try again later or contact the website adminitrator.'
-    end
+    redirect_to new_wishlist_amazon_search_path(params[:wishlist_id]), notice: 'Could not connect to Amazon. Please try again later or contact the website adminitrator.' if @response.error?
   end
 
   def new

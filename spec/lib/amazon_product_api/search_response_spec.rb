@@ -15,8 +15,8 @@ describe AmazonProductAPI::SearchResponse do
   end
   let(:blank_response) { AmazonProductAPI::SearchResponse.new({}, 200) }
   let(:full_response)  { AmazonProductAPI::SearchResponse.new(response_hash, 200) }
-  let(:success_codes) { [ 200, 204, 302, 304 ] }
-  let(:failure_codes) { [ 400, 500 ] }
+  let(:success_codes) { [200, 204, 302, 304] }
+  let(:failure_codes) { [400, 500] }
 
   describe '#num_pages' do
     context 'no page number is present' do

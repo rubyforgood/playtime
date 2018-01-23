@@ -9,7 +9,6 @@ module AmazonProductAPI
   # this class. By isolating it from the rest of the codebase, we only have one
   # file to touch if the API response changes.
   class SearchResponse
-
     SUCCESS_CODE_RANGE = (200..299)
     FOUND_CODE = 302
     NOT_MODIFIED = 304
