@@ -13,8 +13,10 @@ describe AmazonProductAPI::SearchResponse do
       }
     }
   end
-  let(:blank_response) { AmazonProductAPI::SearchResponse.new({}) }
-  let(:full_response)  { AmazonProductAPI::SearchResponse.new(response_hash) }
+  let(:blank_response) { AmazonProductAPI::SearchResponse.new({}, 200) }
+  let(:full_response)  { AmazonProductAPI::SearchResponse.new(response_hash, 200) }
+  let(:success_codes) { [ 200, 204, 302, 304 ] }
+  let(:failure_codes) { [ 400, 500 ] }
 
   describe '#num_pages' do
     context 'no page number is present' do
@@ -42,6 +44,42 @@ describe AmazonProductAPI::SearchResponse do
       it 'should create the correct number of new items' do
         expect(mock_item_class).to receive(:new).exactly(3).times
         items
+      end
+    end
+  end
+
+  describe '#success' do
+    context 'a successfull response' do
+      it 'should return true for success codes' do
+        success_codes.each do |code|
+          response = AmazonProductAPI::SearchResponse.new({}, code)
+          expect(response.success?).to be(true), "expected true, got #{response.success?} for code #{code}"
+        end
+      end
+
+      it 'should return false for non-success codes' do
+        failure_codes.each do |code|
+          response = AmazonProductAPI::SearchResponse.new({}, code)
+          expect(response.success?).to be(false), "expected false, got #{response.success?} for code #{code}"
+        end
+      end
+    end
+  end
+
+  describe '#error' do
+    context 'a successfull response' do
+      it 'should return false for success codes' do
+        success_codes.each do |code|
+          response = AmazonProductAPI::SearchResponse.new({}, code)
+          expect(response.error?).to be(false), "expected false, got #{response.success?} for code #{code}"
+        end
+      end
+
+      it 'should return true for non-success codes' do
+        failure_codes.each do |code|
+          response = AmazonProductAPI::SearchResponse.new({}, code)
+          expect(response.error?).to be(true), "expected true, got #{response.success?} for code #{code}"
+        end
       end
     end
   end

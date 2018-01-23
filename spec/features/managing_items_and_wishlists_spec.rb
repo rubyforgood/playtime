@@ -35,6 +35,25 @@ feature 'Managing items and wishlists:' do
       expect(page).to have_text 'Needed: 18'
     end
 
+    scenario "I get redirected to the search page when Amazon returns an error code.", :external do
+      visit wishlist_path(wishlist)
+      click_link "Add to Wishlist"
+      fill_in "search_field", with: "return an error" # Triggers webmock to return 500
+      click_button "Search Amazon"
+
+      expect(page).to have_text 'Could not connect to Amazon'
+    end
+
+    scenario "I get redirected to the search page when the call to Amazon to connect.", :external do
+      allow(HTTParty).to receive(:get).and_raise(HTTParty::Error)
+      visit wishlist_path(wishlist)
+      click_link "Add to Wishlist"
+      fill_in "search_field", with: "corgi"
+      click_button "Search Amazon"
+
+      expect(page).to have_text 'Could not connect to Amazon'
+    end
+
     scenario "My search can't be blank", :external do
       visit wishlist_path(wishlist)
       click_link 'Add to Wishlist'

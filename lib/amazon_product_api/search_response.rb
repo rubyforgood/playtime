@@ -9,8 +9,15 @@ module AmazonProductAPI
   # this class. By isolating it from the rest of the codebase, we only have one
   # file to touch if the API response changes.
   class SearchResponse
-    def initialize(response_hash)
+
+    SUCCESS_CODE_RANGE = (200..299)
+    FOUND_CODE = 302
+    NOT_MODIFIED = 304
+    SUCCESS_CODES = SUCCESS_CODE_RANGE.to_a + [FOUND_CODE, NOT_MODIFIED]
+
+    def initialize(response_hash, code)
       @response_hash = response_hash
+      @code = code
     end
 
     def num_pages
@@ -21,9 +28,17 @@ module AmazonProductAPI
       item_hashes.map { |hash| item_class.new(**item_attrs_from(hash)) }
     end
 
+    def success?
+      SUCCESS_CODES.include?(code)
+    end
+
+    def error?
+      !success?
+    end
+
     private
 
-    attr_reader :response_hash
+    attr_reader :response_hash, :code
 
     def item_attrs_from(hash)
       {
