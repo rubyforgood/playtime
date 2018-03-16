@@ -9,9 +9,9 @@
 set :production
 set :rails_env, :production
 
-role :app, "deploy@13.84.34.79"
+role :app, "deploy@52.168.72.226"
 
-server '13.84.34.79', roles: %w{web app db}, primary: true,
+server '52.168.72.226', roles: %w{web app db}, primary: true,
   ssh_options: {
   	forward_agent: true,
   	keys: ["~/.ssh/id_rsa"],
