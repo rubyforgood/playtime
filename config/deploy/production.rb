@@ -11,14 +11,13 @@
 set :production
 set :rails_env, :production
 
-role :app, "deploy@52.168.72.226"
+role :app, 'deploy@52.168.72.226'
 
-server '52.168.72.226', roles: %w{web app db}, primary: true,
-  ssh_options: {
-  	forward_agent: true,
-  	keys: ["~/.ssh/id_rsa"],
-  }
-
+server '52.168.72.226', roles: %w[web app db], primary: true,
+                        ssh_options: {
+                          forward_agent: true,
+                          keys: ['~/.ssh/id_rsa']
+                        }
 
 # role-based syntax
 # ==================
