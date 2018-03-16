@@ -79,6 +79,17 @@ h3 {
   }
 }
 
+.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 5px;
+  color: #ddd;
+  background-color: #9b347d;
+  text-align: center;
+}
+
 .btn-primary {
   color: $white;
   background-color: $purple;
@@ -90,6 +101,9 @@ h3 {
   }
 }
 
+.current-view {
+  margin-bottom: 15px;
+}
 #error_explanation {
   color: red;
   ul {
