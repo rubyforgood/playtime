@@ -23,11 +23,11 @@ describe AmazonProductAPI::HTTPClient do
   end
 
   describe '#env' do
-    before {
+    before do
       allow(ENV).to receive(:[]).with('AWS_ACCESS_KEY') { '' }
       allow(ENV).to receive(:[]).with('AWS_SECRET_KEY') { '' }
       allow(ENV).to receive(:[]).with('AWS_ASSOCIATES_TAG') { '' }
-    }
+    end
     subject { AmazonProductAPI::HTTPClient.new.env }
 
     it 'defaults to the ENV object' do
@@ -56,9 +56,9 @@ describe AmazonProductAPI::HTTPClient do
 
     context 'when the page number is set to nil' do
       it 'should raise an InvalidQueryError' do
-        expect {
+        expect do
           client.item_search(query: 'anything', page: nil).url
-        }.to raise_error AmazonProductAPI::InvalidQueryError
+        end.to raise_error AmazonProductAPI::InvalidQueryError
       end
     end
   end

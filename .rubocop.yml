@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   # Use the following Exclude to prevent Rubocop from linting specific
   # directories or files.
@@ -16,9 +14,31 @@ AllCops:
   # `-S/--display-style-guide` option.
   DisplayStyleGuide: true
 
+# Numbers shouldn't have to be formatted with underscores
 Style/NumericLiterals:
   Enabled: false
 
-Style/BlockDelimiters:
+# The excluded files below can create some pretty big blocks which are needed
+Metrics/BlockLength:
+  CountComments: false
   Exclude:
     - spec/**/*
+    - config/**/*
+
+Metrics/LineLength:
+  Enabled: False
+
+Metrics/MethodLength:
+  Max: 12
+
+# This gives us some breathing room
+Metrics/AbcSize:
+  Max: 20
+
+# If code isn't self-documenting then we should add documentation, otherwise
+# forcing documentation isn't needed.
+Style/Documentation:
+  Enabled: false
+
+Style/MixinUsage:
+  Enabled: false

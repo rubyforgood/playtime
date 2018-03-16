@@ -23,7 +23,7 @@ class User < ApplicationRecord
   validates :amazon_user_id, uniqueness: true,
                              allow_blank: true
 
-  has_many :pledges
+  has_many :pledges, dependent: :nullify
   has_many :wishlist_items, through: :pledges
   has_many :site_managers, dependent: :destroy
   has_many :wishlists, through: :site_managers
@@ -73,8 +73,8 @@ class User < ApplicationRecord
   def self.find_or_create_from_amazon_hash!(hash)
     oauth_info = AmazonOAuthInfo.new(hash)
 
-    find_by_amazon_user_id(oauth_info.amazon_user_id) ||
-      find_by_email(oauth_info.email) ||
+    find_by(amazon_user_id: oauth_info.amazon_user_id) ||
+      find_by(email: oauth_info.email) ||
       create!(
         name:           oauth_info.name,
         email:          oauth_info.email,

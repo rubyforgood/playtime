@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
@@ -17,6 +19,7 @@ server '52.168.72.226', roles: %w{web app db}, primary: true,
   	keys: ["~/.ssh/id_rsa"],
   }
 
+
 # role-based syntax
 # ==================
 
@@ -28,7 +31,6 @@ server '52.168.72.226', roles: %w{web app db}, primary: true,
 # role :app, %w{deploy@example.com}, my_property: :my_value
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
-
 
 # Configuration
 # =============
@@ -70,4 +72,3 @@ set :pty, true
 #     auth_methods: %w(publickey password)
 #     # password: 'please use keys'
 #   }
-

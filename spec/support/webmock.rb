@@ -19,5 +19,9 @@ RSpec.configure do |config|
       .with(query: hash_including('Operation' => 'ItemLookup',
                                   'ItemId' => 'corgi_asin'))
       .to_return(body: lookup_response)
+
+    stub_request(:get, 'webservices.amazon.com/onca/xml')
+      .with(query: hash_including('Keywords' => 'return an error'))
+      .to_return(status: 500)
   end
 end

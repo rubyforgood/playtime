@@ -5,6 +5,7 @@ script:
 - export RAILS_ENV=test
 - bundle exec rake db:setup db:migrate
 - bundle exec rake spec
+- bundle exec rubocop
 after_success:
 - if [ $TRAVIS_PULL_REQUEST == false ] && [ $TRAVIS_BRANCH == "master" ]; then openssl
   aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out config/deploy_id_rsa;

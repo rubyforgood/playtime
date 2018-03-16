@@ -53,11 +53,11 @@ describe WishlistItem do
 
   describe 'When a WishlistItem with pledges is deleted' do
     it 'Destroys the pledges too' do
-    wishlist_item = create(:wishlist_item)
-    pledge        = create(:pledge)
+      wishlist_item = create(:wishlist_item)
+      pledge        = create(:pledge)
 
-    wishlist_item.pledges << pledge
-    expect { wishlist_item.destroy }.to change(Pledge, :count).by(-1)
+      wishlist_item.pledges << pledge
+      expect { wishlist_item.destroy }.to change(Pledge, :count).by(-1)
     end
   end
 end
