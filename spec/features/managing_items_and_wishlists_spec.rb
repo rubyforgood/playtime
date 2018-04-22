@@ -35,6 +35,15 @@ feature 'Managing items and wishlists:' do
       expect(page).to have_text 'Needed: 18'
     end
 
+    scenario 'I can search for items with spaces', :external do
+      visit wishlist_path(wishlist)
+      click_link 'Add to Wishlist'
+      fill_in 'search_field', with: 'corgi pillow'
+      click_button 'Search Amazon'
+
+      expect(page).to_not have_text 'Could not connect to Amazon.'
+    end
+
     scenario 'I get redirected to the search page when Amazon returns an error code.', :external do
       visit wishlist_path(wishlist)
       click_link 'Add to Wishlist'

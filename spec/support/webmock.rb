@@ -13,6 +13,13 @@ RSpec.configure do |config|
                                   'Keywords'  => 'corgi'))
       .to_return(body: search_response)
 
+    # Item Search with Spaces
+    search_response = file_fixture('amazon_corgi_pillow_search_response.xml').read
+    stub_request(:get, 'webservices.amazon.com/onca/xml')
+      .with(query: hash_including('Operation' => 'ItemSearch',
+                                  'Keywords'  => 'corgi_pillow'))
+      .to_return(body: search_response)
+
     # Item Lookup
     lookup_response = file_fixture('amazon_corgi_lookup_response.xml').read
     stub_request(:get, 'webservices.amazon.com/onca/xml')
@@ -21,7 +28,7 @@ RSpec.configure do |config|
       .to_return(body: lookup_response)
 
     stub_request(:get, 'webservices.amazon.com/onca/xml')
-      .with(query: hash_including('Keywords' => 'return an error'))
+      .with(query: hash_including('Keywords' => 'return_an_error'))
       .to_return(status: 500)
   end
 end
