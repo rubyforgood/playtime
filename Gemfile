@@ -26,6 +26,7 @@ gem 'newrelic_rpm'
 gem 'dotenv-rails'
 # Logs production errors to an external service
 gem 'rollbar'
+gem 'skylight'
 # Turbolinks makes navigating your web application faster.
 # Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'

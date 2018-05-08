@@ -271,6 +271,10 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    skylight (2.0.1)
+      skylight-core (= 2.0.1)
+    skylight-core (2.0.1)
+      activesupport (>= 4.2.0)
     slop (3.6.0)
     social-share-button (1.0.0)
       coffee-rails
@@ -359,6 +363,7 @@ DEPENDENCIES
   rubocop (~> 0.52.1)
   sass-rails (~> 5.0)
   selenium-webdriver
+  skylight
   social-share-button (~> 1.0.0)
   spring
   spring-commands-rspec (~> 1.0)
