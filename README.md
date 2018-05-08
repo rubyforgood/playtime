@@ -1,7 +1,7 @@
 [![Playtime Project Logo](doc/logo.png)][HCPP]
 
 # Homeless Children's Playtime Project
-[![Build Status](https://api.travis-ci.org/rubyforgood/playtime.svg?branch=master)](https://travis-ci.org/rubyforgood/playtime)
+[![Build Status](https://api.travis-ci.org/rubyforgood/playtime.svg?branch=master)](https://travis-ci.org/rubyforgood/playtime) [![View performance data on Skylight](https://badges.skylight.io/status/vXHx56uMnWP7.svg)](https://oss.skylight.io/app/applications/vXHx56uMnWP7)
 
 *The mission of the [Homeless Children's Playtime Project][HCPP] is to nurture
 healthy child development and reduce the effects of trauma among children
