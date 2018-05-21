@@ -15,5 +15,5 @@ ready = function() {
     });
 };
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+// starts event listener on turbolinks load
+$(document).on('turbolinks:load', ready);
