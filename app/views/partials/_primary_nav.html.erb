@@ -60,9 +60,9 @@
           <% if current_user.logged_in? %>
             <%= link_to "Log Out", signout_path, class: "nav-link" %>
           <% elsif Rails.env.development? && ENV['FORCE_AMAZON_LOGIN'] != 'true' %>
-            <%= link_to "Log In (Development)", signin_path, class: "nav-link" %>
+            <%= link_to "Donor Log In (Development)", signin_path, class: "nav-link" %>
           <% else %>
-            <%= link_to "Log In", signin_path, class: "nav-link" %>
+            <%= link_to "Donor Log In", signin_path, class: "nav-link" %>
           <% end %>
         </li>
       </ul>
