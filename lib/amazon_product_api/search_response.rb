@@ -46,9 +46,9 @@ module AmazonProductAPI
         price_cents: hash.dig('ItemAttributes', 'ListPrice', 'Amount').to_i,
         price: hash.dig('OfferSummary', 'LowestNewPrice', 'FormattedPrice') || '$0.00',
 
-        image_url:    hash.dig('SmallImage', 'URL') || '',
-        image_width:  hash.dig('SmallImage', 'Width') || '',
-        image_height: hash.dig('SmallImage', 'Height') || '',
+        image_url:    hash.dig('LargeImage', 'URL') || '',
+        image_width:  hash.dig('LargeImage', 'Width') || '',
+        image_height: hash.dig('LargeImage', 'Height') || '',
 
         title:              hash.dig('ItemAttributes', 'Title'),
         detail_page_url:    hash['DetailPageURL']
