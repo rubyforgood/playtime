@@ -1,4 +1,4 @@
-[![Playtime Project Logo](doc/logo.png)][HCPP]
+<img src="https://github.com/teneresa/playtime/blob/master/new_logo_files/PNG/Playtime_logo_low_res.png"/>
 
 # Homeless Children's Playtime Project
 [![Build Status](https://api.travis-ci.org/rubyforgood/playtime.svg?branch=master)](https://travis-ci.org/rubyforgood/playtime) [![View performance data on Skylight](https://badges.skylight.io/status/vXHx56uMnWP7.svg)](https://oss.skylight.io/app/applications/vXHx56uMnWP7)
@@ -22,7 +22,7 @@ throughout DC. This application will allow donors to view the organization's
 Amazon wish lists, add items, track contributions, and aid staff in following
 up with donors.
 
-![Playtime Project App](doc/playtime_app.png)
+<img src="https://github.com/teneresa/playtime/blob/master/new_logo_files/playtime_app.png"/>
 
 ### About Ruby for Good
 
